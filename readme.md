@@ -1,3 +1,4 @@
+[![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo.png)](https://cosmicjs.com/)
 ##Cosmic JS Driver for Node
 
 ###Getting started
