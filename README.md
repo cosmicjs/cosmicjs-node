@@ -9,7 +9,7 @@ Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup 
 npm install cosmicjs
 ```
 
-Check out the examples folder for the following express / hogan example:
+#### Usage
 
 ```javascript
 /* !!!! CONFIGURE !!!!
