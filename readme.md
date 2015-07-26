@@ -4,6 +4,11 @@
 ###Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
 
+Install the module
+```
+npm install cosmicjs
+```
+
 Check out the examples folder for the following express / hogan example:
 
 ```javascript
