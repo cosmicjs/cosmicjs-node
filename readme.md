@@ -4,7 +4,7 @@
 ###Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
 
-Install the module
+Install the module:
 ```
 npm install cosmicjs
 ```
