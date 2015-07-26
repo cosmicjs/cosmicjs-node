@@ -1,6 +1,6 @@
 {
   "name": "cosmicjs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "The official driver module for Cosmic JS. This module will help you to easily add dynamic content to your website or application.",
   "main": "index.js",
   "dependencies": {
