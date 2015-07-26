@@ -11,21 +11,9 @@ Check out the examples folder for the following express / hogan example:
 var config = {};
 config.bucket = {
 	slug : 'driver-example',
-	read_key : '',
-	write_key : ''
+	read_key : '', // add read_key if added to your Cosmic JS bucket settings
+	write_key : '' // add write_key if added to your Cosmic JS bucket settings
 };
-
-config.url = 'https://api.cosmicjs.com/v1/' + config.bucket.slug;
-
-config.api_url = {
-	objects : config.url + '/objects?read_key=' + config.bucket.read_key,
-	media : config.url + '/media?read_key=' + config.bucket.read_key,
-	add_object : config.url + '/add-object',
-	edit_object : config.url + '/edit-object',
-	delete_object : config.url + '/delete-object'
-};
-
-// Visit https://api.cosmicjs.com/v1/driver-example/objects?pretty=true in the browser to see raw data
 
 /* Modules
 ================================ */
