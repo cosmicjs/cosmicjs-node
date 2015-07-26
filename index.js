@@ -1,11 +1,15 @@
 var request = require('request');
 var	_ = require('lodash');
 
+var api_url = 'https://api.cosmicjs.com';
+var api_version = 'v1';
+
 module.exports = {
 
 	getObjects : function(config, callback){
 
-		request.get(config.api_url.objects, function (error, response, body) {
+		var objects_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
+		request.get(objects_url, function (error, response, body) {
 	 		
 	 		if (!error && response.statusCode == 200) {
 	 	 		
@@ -38,7 +42,8 @@ module.exports = {
 
 	getMedia : function(config, callback){
 
-		request.get(config.api_url.media, function (error, response, body) {
+		var media_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
+		request.get(media_url, function (error, response, body) {
 	 	 
 	 	 if (!error && response.statusCode == 200) {
 	 	 		
@@ -64,9 +69,10 @@ module.exports = {
 	},
 
 	addObject : function(config, object, callback){
-	
+		
+		var add_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
 		request.post({ 
-			url : config.api_url.add_object, 
+			url : add_object_url, 
 			form : object 
 		}, function (error, response, body) {
 	 	 
@@ -89,9 +95,10 @@ module.exports = {
 	},
 
 	editObject : function(config, object, callback){
-	
+		
+		var edit_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
 		request.put({ 
-			url : config.api_url.edit_object, 
+			url : edit_object_url, 
 			form : object 
 		}, function (error, response, body) {
 	 	 	
@@ -114,9 +121,10 @@ module.exports = {
 	},
 
 	deleteObject : function(config, object, callback){
-	
+		
+		var delete_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/delete-object';
 		request.del({ 
-			url : config.api_url.delete_object, 
+			url : delete_object_url, 
 			form : object 
 		}, function (error, response, body) {
 	 	 	
