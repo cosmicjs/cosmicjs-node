@@ -26,7 +26,6 @@ config.bucket = {
 Cosmic.getObjects(config, function(err, objects){
 				
 	// do something with objects
-	return;
 
 });
 
@@ -35,7 +34,6 @@ Cosmic.getObjects(config, function(err, objects){
 Cosmic.getMedia(config, function(err, media){
 			
 	// do something with media
-	return;
 
 });
 
@@ -50,9 +48,8 @@ var object = {
 
 Cosmic.addObject(config, object, function(err, object){
 	
-	// do something with object
-	return;
-
+	// say hi to your new object
+	
 });
 
 /* Edit object
@@ -67,8 +64,7 @@ var object = {
 
 Cosmic.editObject(config, object, function(err, object){
 	
-	// do something with object
-	return;
+	// say hi to your edited object
 
 });
 
@@ -81,7 +77,7 @@ var object = {
 
 Cosmic.deleteObject(config, object, function(err, object){
 
-	// do something with object
+	// say goodbye to your object
 
 });
 ```
