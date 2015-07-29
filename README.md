@@ -12,16 +12,33 @@ npm install cosmicjs
 #### Usage
 
 ```javascript
-/* !!!! CONFIGURE !!!!
+/* Configure
 ================================ */
 var config = {};
 config.bucket = {
-	slug : 'driver-example',
+	slug : 'client-example',
 	read_key : '', // add read_key if added to your Cosmic JS bucket settings
 	write_key : '' // add write_key if added to your Cosmic JS bucket settings
 };
 
-// Add object
+/* Get objects
+================================ */
+Cosmic.getObjects(config, function(err, objects){
+				
+	// do something with objects
+
+});
+
+/* Get media
+================================ */
+Cosmic.getMedia(config, function(err, media){
+			
+	// do something with media
+
+});
+
+/* Add object
+================================ */
 var object = {
 	"write_key" : config.bucket.write_key,
 	"type_slug" : "pages",
@@ -31,16 +48,12 @@ var object = {
 
 Cosmic.addObject(config, object, function(err, object){
 	
-	if(err){
-		return err.message;
-	}
+	// say hi to your new object
 	
-	// do something with object
-	return;
-
 });
 
-// Edit object
+/* Edit object
+================================ */
 var object = {
 	"write_key" : config.bucket.write_key,
 	"slug" : "test-title",
@@ -51,54 +64,20 @@ var object = {
 
 Cosmic.editObject(config, object, function(err, object){
 	
-	if(err){
-		return err.message;
-	}
-	
-	// do something with object
-	return;
+	// say hi to your edited object
 
 });
 
-// Delete object
+/* Delete object
+================================ */
 var object = {
 	"write_key" : config.bucket.write_key,
 	"slug" : "test-title"
 };
 
-// Delete object
 Cosmic.deleteObject(config, object, function(err, object){
 
-	if(err){
-		return err.message;
-	}
-	
-	// do something with object
-	return;
-
-});
-
-// Get objects
-Cosmic.getObjects(config, function(err, objects){
-				
-	if(err){
-		return err.message;
-	}
-	
-	// do something with objects
-	return;
-
-});
-
-// Get media
-Cosmic.getMedia(config, function(err, media){
-			
-	if(err){
-		return err.message;
-	}
-	
-	// do something with media
-	return;
+	// say goodbye to your object
 
 });
 ```
