@@ -12,7 +12,8 @@ npm install cosmicjs
 #### Usage
 
 ```javascript
-var Cosmic = require('cosmicjs);
+var Cosmic = require('cosmicjs');
+
 /* Configure
 ================================ */
 var config = {};
