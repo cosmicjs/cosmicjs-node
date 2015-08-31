@@ -74,6 +74,13 @@ Cosmic.editObject(config, object, function(err, object){
 ================================ */
 var object = {
 	"write_key": config.bucket.write_key,
+	"_id": "55e3aedff03ccb191c00000b"
+};
+
+or
+
+var object = {
+	"write_key": config.bucket.write_key,
 	"slug": "test-title"
 };
 
