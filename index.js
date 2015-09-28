@@ -6,6 +6,31 @@ var api_version = 'v1';
 
 module.exports = {
 
+	getBucket: function(config, callback){
+
+		var objects_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
+		request.get(objects_url, function (error, response, body) {
+	 		
+	 		if (!error && response.statusCode == 200) {
+	 	 		
+	 	 		var data = JSON.parse(body);
+	 	 		
+	 	 		return callback(false, data);
+		  
+		  } else {
+		  	
+		  	var err = {
+		  		message: 'There was an error with this request.'
+		  	}
+
+		  	return callback(err, false);
+		  
+		  }
+
+		});
+
+	},
+	
 	getObjects : function(config, callback){
 
 		var objects_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;

@@ -23,6 +23,14 @@ config.bucket = {
 	write_key: '' // add write_key if added to your Cosmic JS bucket settings
 };
 
+/* Get bucket
+================================ */
+Cosmic.getBucket(config, function(err, bucket){
+				
+	// do something with bucket
+
+});
+
 /* Get objects
 ================================ */
 Cosmic.getObjects(config, function(err, objects){
