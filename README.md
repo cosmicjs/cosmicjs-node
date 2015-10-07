@@ -50,7 +50,6 @@ Cosmic.getMedia(config, function(err, media){
 /* Add object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
 	"type_slug": "pages",
 	"title": "Test Title",
 	"content": "Test Content"
@@ -65,7 +64,6 @@ Cosmic.addObject(config, object, function(err, object){
 /* Edit object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
 	"slug": "test-title",
 	"type_slug": "pages",
 	"title": "New Title",
@@ -81,14 +79,12 @@ Cosmic.editObject(config, object, function(err, object){
 /* Delete object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
 	"_id": "55e3aedff03ccb191c00000b"
 };
 
 or
 
 var object = {
-	"write_key": config.bucket.write_key,
 	"slug": "test-title"
 };
 
