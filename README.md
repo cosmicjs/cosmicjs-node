@@ -4,6 +4,8 @@
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
 
+NOTE: This is a package for running Node on the server.  To compile an app to the browser, use the [official Cosmic JS Browser package](https://github.com/cosmicjs/cosmicjs-node).
+
 #### Install
 ```
 npm install cosmicjs
