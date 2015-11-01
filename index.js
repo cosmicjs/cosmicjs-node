@@ -12,17 +12,16 @@ module.exports = {
     fetch(bucket_url)
     .then(function(response){
       if (response.status >= 400) {
-      var err = {
-        "message" : "There was an error with this request."
-      }
-      return callback(err, false);
+        var err = {
+          "message" : "There was an error with this request."
+        }
+        return callback(err, false);
       }
       return response.json()
     })
     .then(function(response){
       return callback(false, response);
-    })
-
+    });
   },
 	
   getObjects: function(config, callback){
@@ -30,10 +29,10 @@ module.exports = {
     fetch(objects_url)
     .then(function(response){
       if (response.status >= 400) {
-      var err = {
-      "message" : "There was an error with this request."
-      }
-      return callback(err, false);
+        var err = {
+          "message" : "There was an error with this request."
+        }
+        return callback(err, false);
       }
       return response.json()
     })
@@ -47,12 +46,12 @@ module.exports = {
       cosmic.object = _.map(objects, keyMetafields);
       cosmic.object = _.indexBy(cosmic.object, "slug");
       return callback(false, cosmic);
-    })
+    });
   },
 
-	getMedia: function(config, callback){
-		var media_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
-		fetch(bucket_url)
+  getMedia: function(config, callback){
+    var media_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
+    fetch(bucket_url)
     .then(function(response){
       if (response.status >= 400) {
         var err = {
@@ -63,11 +62,11 @@ module.exports = {
       return response.json()
     })
     .then(function(response){
-    	return callback(false, response);
-    })
-	},
+      return callback(false, response);
+    });
+  },
 
-	addObject: function(config, object, callback){
+  addObject: function(config, object, callback){
     var add_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
     fetch(add_object_url,{
       method: 'post',
@@ -87,9 +86,7 @@ module.exports = {
     })
     .then(function(response){
       return callback(false, response);
-    }).catch(function(err){
-      console.log(err)
-    })
+    });
   },
 
   editObject: function(config, object, callback){
@@ -112,9 +109,7 @@ module.exports = {
     })
     .then(function(response){
       return callback(false, response);
-    }).catch(function(err){
-      console.log(err)
-    })
+    });
   },
 
   deleteObject: function(config, object, callback){
@@ -122,7 +117,7 @@ module.exports = {
     fetch(delete_object_url,{
       method: 'post',
       headers: {  
-        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
       body: transformRequest(object)
     })
@@ -137,23 +132,21 @@ module.exports = {
     })
     .then(function(response){
       return callback(false, response);
-    }).catch(function(err){
-      console.log(err)
-    })
+    });
   }
 };
 
 // Functions
 function keyMetafields(object){
-	var metafields = object.metafields;
-	if(metafields){
-		object.metafield = _.indexBy(metafields, "key");
-	}
-	return object;
+  var metafields = object.metafields;
+  if(metafields){
+    object.metafield = _.indexBy(metafields, "key");
+  }
+  return object;
 }
 function transformRequest(obj) {
   var str = [];
   for(var p in obj)
-  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
   return str.join("&");
 }
