@@ -1,6 +1,6 @@
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
-var	_ = require('lodash');
+var _ = require('lodash');
 
 var api_url = 'https://api.cosmicjs.com';
 var api_version = 'v1';
