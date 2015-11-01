@@ -144,7 +144,7 @@ function keyMetafields(object){
   }
   return object;
 }
-function transformRequest(obj) {
+function transformRequest(obj){
   var str = [];
   for(var p in obj)
     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
