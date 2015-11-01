@@ -1,5 +1,5 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
-## Cosmic JS Client for JavaScript (Now Universal!)
+## Official Cosmic JS Client (Now Universal!)
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.

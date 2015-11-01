@@ -1,0 +1,101 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.4
+3 info using node@v4.1.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/tonyspiro/github-repos/cosmicjs-node',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/tonyspiro/.npm/cosmicjs/2.0.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/tonyspiro/.npm/cosmicjs/2.0.0/package.tgz',
+9 verbose tar pack   '/Users/tonyspiro/github-repos/cosmicjs-node' ]
+10 verbose tarball /Users/tonyspiro/.npm/cosmicjs/2.0.0/package.tgz
+11 verbose folder /Users/tonyspiro/github-repos/cosmicjs-node
+12 info prepublish cosmicjs@2.0.0
+13 verbose addLocalTarball adding from inside cache /Users/tonyspiro/.npm/cosmicjs/2.0.0/package.tgz
+14 silly cache afterAdd cosmicjs@2.0.0
+15 verbose afterAdd /Users/tonyspiro/.npm/cosmicjs/2.0.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/tonyspiro/.npm/cosmicjs/2.0.0/package/package.json written
+17 silly publish { name: 'cosmicjs',
+17 silly publish   version: '2.0.0',
+17 silly publish   description: 'The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.',
+17 silly publish   main: 'index.js',
+17 silly publish   dependencies:
+17 silly publish    { 'es6-promise': '^3.0.2',
+17 silly publish      'isomorphic-fetch': '^2.2.0',
+17 silly publish      lodash: '^3.10.1' },
+17 silly publish   devDependencies: {},
+17 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/cosmicjs/cosmicjs-node.git' },
+17 silly publish   keywords: [ 'cms', 'node', 'content', 'api' ],
+17 silly publish   author:
+17 silly publish    { name: 'Tony Spiro',
+17 silly publish      email: 'tspiro@tonyspiro.com',
+17 silly publish      url: 'http://tonyspiro.com/' },
+17 silly publish   license: 'ISC',
+17 silly publish   bugs: { url: 'https://github.com/cosmicjs/cosmicjs-node/issues' },
+17 silly publish   homepage: 'https://github.com/cosmicjs/cosmicjs-node#readme',
+17 silly publish   readme: '[![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)\n## Cosmic JS Client for JavaScript (Now Universal!)\n\n### Getting started\nGo to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.\n\n#### Install\n```\nnpm install cosmicjs\n```\n\n#### Usage\n\n```javascript\n/* Configure\n================================ */\nvar config = {};\nconfig.bucket = {\n\tslug: \'react-flux-cosmicjs\',\n\tread_key: \'\', // add read_key if added to your Cosmic JS bucket settings\n\twrite_key: \'\' // add write_key if added to your Cosmic JS bucket settings\n};\n\n/* Get bucket\n================================ */\nCosmic.getBucket(config, function(err, bucket){\n\t\t\t\t\n\t// do something with the bucket\n\n});\n\n/* Get objects\n================================ */\nCosmic.getObjects(config, function(err, objects){\n\t\t\t\t\n\t// do something with objects\n\n});\n\n/* Get media\n================================ */\nCosmic.getMedia(config, function(err, media){\n\t\t\t\n\t// do something with media\n\n});\n\n/* Add object\n================================ */\nvar object = {\n\t"write_key": config.bucket.write_key,\n\t"type_slug": "pages",\n\t"title": "Test Title",\n\t"content": "Test Content"\n};\n\nCosmic.addObject(config, object, function(err, object){\n\t\n\t// say hi to your new object\n\t\n});\n\n/* Edit object\n================================ */\nvar object = {\n\t"write_key": config.bucket.write_key,\n\t"slug": "test-title",\n\t"type_slug": "pages",\n\t"title": "New Title",\n\t"content": "New Content"\n};\n\nCosmic.editObject(config, object, function(err, object){\n\t\n\t// say hi to your edited object\n\n});\n\n/* Delete object\n================================ */\nvar object = {\n\t"write_key": config.bucket.write_key,\n\t"slug": "test-title"\n};\n\nCosmic.deleteObject(config, object, function(err, object){\n\n\t// say goodbye to your object\n\n});\n```\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '6074b711937d2c0a3536e68c57ce8d75d6513639',
+17 silly publish   _id: 'cosmicjs@2.0.0',
+17 silly publish   _shasum: 'c757537e468952775f7246105b853a9ed634e445',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name cosmicjs
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/cosmicjs
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/tonyspiro/.npm/cosmicjs/2.0.0/package.tgz
+25 verbose request uri https://registry.npmjs.org/cosmicjs
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 1:31:21 PM
+28 verbose request using bearer token for auth
+29 verbose request id cce8937a76b83aae
+30 http request PUT https://registry.npmjs.org/cosmicjs
+31 http 403 https://registry.npmjs.org/cosmicjs
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Sun, 01 Nov 2015 19:31:23 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-dfw1825-DFW',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1446406282.185982,VS0,VE875' }
+33 verbose request invalidating /Users/tonyspiro/.npm/registry.npmjs.org/cosmicjs on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 2.0.0." : cosmicjs
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:263:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:171:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1073:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1019:12)
+36 verbose statusCode 403
+37 verbose pkgid cosmicjs
+38 verbose cwd /Users/tonyspiro/github-repos/cosmicjs-node
+39 error Darwin 15.0.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.1.2
+42 error npm  v2.14.4
+43 error code E403
+44 error "You cannot publish over the previously published version 2.0.0." : cosmicjs
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
