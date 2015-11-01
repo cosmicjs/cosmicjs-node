@@ -7,23 +7,23 @@ var api_version = 'v1';
 
 module.exports = {
 
-	getBucket: function(config, callback){
-		var bucket_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
-		fetch(bucket_url)
+  getBucket: function(config, callback){
+    var bucket_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
+    fetch(bucket_url)
     .then(function(response){
       if (response.status >= 400) {
-        var err = {
-          "message" : "There was an error with this request."
-        }
-        return callback(err, false);
+      var err = {
+        "message" : "There was an error with this request."
+      }
+      return callback(err, false);
       }
       return response.json()
     })
     .then(function(response){
-    	return callback(false, response);
+      return callback(false, response);
     })
 
-	},
+  },
 	
 	getObjects: function(config, callback){
     var objects_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
