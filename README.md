@@ -1,21 +1,17 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
-## Cosmic JS Client for Node
+## Cosmic JS Client for the browser
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
 
-NOTE: This is a package for server-side apps using Node.js.  For all browser-based apps, use the [official Cosmic JS Browser package](https://github.com/cosmicjs/cosmicjs-node).  These two packages will soon be merged to allow for universal application development with Cosmic JS.
-
 #### Install
 ```
-npm install cosmicjs
+npm install cosmicjs-browser
 ```
 
 #### Usage
 
 ```javascript
-var Cosmic = require('cosmicjs');
-
 /* Configure
 ================================ */
 var config = {};
@@ -29,7 +25,7 @@ config.bucket = {
 ================================ */
 Cosmic.getBucket(config, function(err, bucket){
 				
-	// do something with bucket
+	// do something with the bucket
 
 });
 
@@ -52,6 +48,7 @@ Cosmic.getMedia(config, function(err, media){
 /* Add object
 ================================ */
 var object = {
+	"write_key": config.bucket.write_key,
 	"type_slug": "pages",
 	"title": "Test Title",
 	"content": "Test Content"
@@ -66,6 +63,7 @@ Cosmic.addObject(config, object, function(err, object){
 /* Edit object
 ================================ */
 var object = {
+	"write_key": config.bucket.write_key,
 	"slug": "test-title",
 	"type_slug": "pages",
 	"title": "New Title",
@@ -81,12 +79,7 @@ Cosmic.editObject(config, object, function(err, object){
 /* Delete object
 ================================ */
 var object = {
-	"_id": "55e3aedff03ccb191c00000b"
-};
-
-or
-
-var object = {
+	"write_key": config.bucket.write_key,
 	"slug": "test-title"
 };
 

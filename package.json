@@ -1,30 +1,59 @@
 {
-  "name": "cosmicjs",
-  "version": "1.09.3",
-  "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
+  "name": "cosmicjs-browser",
+  "version": "1.2.4",
+  "description": "The official Javascript client for Cosmic JS on the browser. This module helps you easily add dynamic content to your website or application",
   "main": "index.js",
-  "dependencies": {
-    "lodash": "^3.3.1",
-    "request": "^2.53.0"
-  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": {
+    "name": "Tony Spiro",
+    "email": "tspiro@tonyspiro.com",
+    "url": "http://tonyspiro.com/"
+  },
+  "license": "ISC",
+  "directories": {
+    "example": "examples"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosmicjs/cosmicjs-node.git"
+    "url": "git+https://github.com/cosmicjs/cosmicjs-browser.git"
   },
   "keywords": [
+    "browser",
     "cms",
-    "node",
-    "content",
-    "api"
+    "content"
   ],
-  "author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cosmicjs/cosmicjs-node/issues"
+    "url": "https://github.com/cosmicjs/cosmicjs-browser/issues"
   },
-  "homepage": "https://github.com/cosmicjs/cosmicjs-node#readme"
+  "homepage": "https://github.com/cosmicjs/cosmicjs-browser#readme",
+  "gitHead": "4bcd2719ece27cbfe7ac198ba25adb3b0e8d6e6c",
+  "_id": "cosmicjs-browser@1.2.4",
+  "_shasum": "54e8cc44b7bb4cb56c2dafbac2dcbfc15b3f8064",
+  "_from": "cosmicjs-browser@>=1.2.1 <2.0.0",
+  "_npmVersion": "2.10.1",
+  "_nodeVersion": "0.12.4",
+  "_npmUser": {
+    "name": "tonyspiro",
+    "email": "tspiro@tonyspiro.com"
+  },
+  "maintainers": [
+    {
+      "name": "tonyspiro",
+      "email": "tspiro@tonyspiro.com"
+    }
+  ],
+  "dist": {
+    "shasum": "54e8cc44b7bb4cb56c2dafbac2dcbfc15b3f8064",
+    "tarball": "http://registry.npmjs.org/cosmicjs-browser/-/cosmicjs-browser-1.2.4.tgz"
+  },
+  "_resolved": "https://registry.npmjs.org/cosmicjs-browser/-/cosmicjs-browser-1.2.4.tgz",
+  "readme": "ERROR: No README data found!",
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+    "isomorphic-fetch": "^2.2.0",
+    "lodash": "^3.10.1"
+  }
 }
