@@ -1,12 +1,12 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
-## Cosmic JS Client for the browser
+## Cosmic JS Client for Node.js and the browser
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
 
 #### Install
 ```
-npm install cosmicjs-browser
+npm install cosmicjs
 ```
 
 #### Usage
@@ -16,7 +16,7 @@ npm install cosmicjs-browser
 ================================ */
 var config = {};
 config.bucket = {
-	slug: 'client-example',
+	slug: 'react-flux-cosmicjs',
 	read_key: '', // add read_key if added to your Cosmic JS bucket settings
 	write_key: '' // add write_key if added to your Cosmic JS bucket settings
 };
