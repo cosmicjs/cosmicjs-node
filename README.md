@@ -2,7 +2,7 @@
 ## Official Cosmic JS Client (Now Universal!)
 
 ### Getting started
-Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and setup a bucket.
+Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
 #### Install
 ```
