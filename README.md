@@ -16,16 +16,16 @@ npm install cosmicjs
 ================================ */
 var config = {};
 config.bucket = {
-	slug: 'react-flux-cosmicjs',
-	read_key: '', // add read_key if added to your Cosmic JS bucket settings
-	write_key: '' // add write_key if added to your Cosmic JS bucket settings
+  slug: 'react-flux-cosmicjs',
+  read_key: '', // add read_key if added to your Cosmic JS bucket settings
+  write_key: '' // add write_key if added to your Cosmic JS bucket settings
 };
 
 /* Get bucket
 ================================ */
 Cosmic.getBucket(config, function(err, bucket){
 				
-	// do something with the bucket
+  // do something with the bucket
 
 });
 
@@ -33,7 +33,7 @@ Cosmic.getBucket(config, function(err, bucket){
 ================================ */
 Cosmic.getObjects(config, function(err, objects){
 				
-	// do something with objects
+  // do something with objects
 
 });
 
@@ -41,51 +41,51 @@ Cosmic.getObjects(config, function(err, objects){
 ================================ */
 Cosmic.getMedia(config, function(err, media){
 			
-	// do something with media
+  // do something with media
 
 });
 
 /* Add object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
-	"type_slug": "pages",
-	"title": "Test Title",
-	"content": "Test Content"
+  "write_key": config.bucket.write_key,
+  "type_slug": "pages",
+  "title": "Test Title",
+  "content": "Test Content"
 };
 
 Cosmic.addObject(config, object, function(err, object){
 	
-	// say hi to your new object
+  // say hi to your new object
 	
 });
 
 /* Edit object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
-	"slug": "test-title",
-	"type_slug": "pages",
-	"title": "New Title",
-	"content": "New Content"
+  "write_key": config.bucket.write_key,
+  "slug": "test-title",
+  "type_slug": "pages",
+  "title": "New Title",
+  "content": "New Content"
 };
 
 Cosmic.editObject(config, object, function(err, object){
 	
-	// say hi to your edited object
+  // say hi to your edited object
 
 });
 
 /* Delete object
 ================================ */
 var object = {
-	"write_key": config.bucket.write_key,
-	"slug": "test-title"
+  "write_key": config.bucket.write_key,
+  "slug": "test-title"
 };
 
 Cosmic.deleteObject(config, object, function(err, object){
 
-	// say goodbye to your object
+  // say goodbye to your object
 
 });
 ```
