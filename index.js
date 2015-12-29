@@ -65,8 +65,7 @@ module.exports = {
       return response.json()
     })
     .then(function(response){
-      var object = response.object;
-      return callback(false, object);
+      return callback(false, response);
     });
   },
 
