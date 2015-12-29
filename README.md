@@ -27,7 +27,7 @@ var Cosmic = require('cosmicjs');
 ================================ */
 Cosmic.getBucket(config, function(err, bucket){
 				
-  // do something with the bucket
+  // console.log(bucket);
 
 });
 
@@ -35,7 +35,18 @@ Cosmic.getBucket(config, function(err, bucket){
 ================================ */
 Cosmic.getObjects(config, function(err, objects){
 				
-  // do something with objects
+  // console.log(objects);
+
+});
+
+/* Get object
+================================ */
+var object = {
+  slug: 'object-slug'
+}
+Cosmic.getObject(config, object, function(err, object){
+        
+  // console.log(object);
 
 });
 
@@ -43,51 +54,51 @@ Cosmic.getObjects(config, function(err, objects){
 ================================ */
 Cosmic.getMedia(config, function(err, media){
 			
-  // do something with media
+  // console.log(media);
 
 });
 
 /* Add object
 ================================ */
 var object = {
-  "write_key": config.bucket.write_key,
-  "type_slug": "pages",
-  "title": "Test Title",
-  "content": "Test Content"
+  'write_key': config.bucket.write_key,
+  'type_slug': 'pages',
+  'title': 'Test Title',
+  'content': 'Test Content'
 };
 
 Cosmic.addObject(config, object, function(err, object){
 	
-  // say hi to your new object
+  // console.log(object);
 	
 });
 
 /* Edit object
 ================================ */
 var object = {
-  "write_key": config.bucket.write_key,
-  "slug": "test-title",
-  "type_slug": "pages",
-  "title": "New Title",
-  "content": "New Content"
+  'write_key': config.bucket.write_key,
+  'slug': 'test-title',
+  'type_slug': 'pages',
+  'title': 'New Title',
+  'content': 'New Content'
 };
 
 Cosmic.editObject(config, object, function(err, object){
 	
-  // say hi to your edited object
+  // console.log(object);
 
 });
 
 /* Delete object
 ================================ */
 var object = {
-  "write_key": config.bucket.write_key,
-  "slug": "test-title"
+  'write_key': config.bucket.write_key,
+  'slug': 'test-title'
 };
 
 Cosmic.deleteObject(config, object, function(err, object){
 
-  // say goodbye to your object
+  // console.log(object);
 
 });
 ```

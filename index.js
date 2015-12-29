@@ -8,8 +8,8 @@ var api_version = 'v1';
 module.exports = {
 
   getBucket: function(config, callback){
-    var bucket_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
-    fetch(bucket_url)
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
+    fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
         var err = {
@@ -23,10 +23,10 @@ module.exports = {
       return callback(false, response);
     });
   },
-	
+  
   getObjects: function(config, callback){
-    var objects_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
-    fetch(objects_url)
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
+    fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
         var err = {
@@ -49,9 +49,30 @@ module.exports = {
     });
   },
 
+  getObject: function(config, object, callback){
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object/' + object.slug + '?read_key=' + config.bucket.read_key;
+    if (object._id) {
+      endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-by-id/' + object._id + '?read_key=' + config.bucket.read_key;
+    }
+    fetch(endpoint)
+    .then(function(response){
+      if (response.status >= 400) {
+        var err = {
+          "message" : "There was an error with this request."
+        }
+        return callback(err, false);
+      }
+      return response.json()
+    })
+    .then(function(response){
+      var object = response.object;
+      return callback(false, object);
+    });
+  },
+
   getMedia: function(config, callback){
-    var media_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
-    fetch(bucket_url)
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
+    fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
         var err = {
@@ -67,8 +88,8 @@ module.exports = {
   },
 
   addObject: function(config, object, callback){
-    var add_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
-    fetch(add_object_url,{
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
+    fetch(endpoint, {
       method: 'post',
       headers: {  
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -90,8 +111,8 @@ module.exports = {
   },
 
   editObject: function(config, object, callback){
-    var edit_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
-    fetch(edit_object_url,{
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
+    fetch(endpoint, {
       method: 'post',
       headers: {  
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -113,8 +134,8 @@ module.exports = {
   },
 
   deleteObject: function(config, object, callback){
-    var delete_object_url = api_url + '/' + api_version + '/' + config.bucket.slug + '/delete-object';
-    fetch(delete_object_url,{
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/delete-object';
+    fetch(endpoint, {
       method: 'post',
       headers: {  
       'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
