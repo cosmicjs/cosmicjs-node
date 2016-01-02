@@ -107,7 +107,7 @@ var config = {
     slug: 'home'
   }
 }
-Cosmic.getObject({ bucket: config.bucket }, config.object, (err, res) => {
+Cosmic.getObject({ bucket: config.bucket }, config.object, function(err, res) {
   var object = res.object
   document.getElementById('title').innerHTML = object.title
   document.getElementById('content').innerHTML = object.content
