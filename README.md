@@ -111,7 +111,14 @@ Cosmic.getObject(config, config.object, (err, res) => {
   var object = res.object;
   document.getElementById('title').innerHTML = object.title;
   document.getElementById('content').innerHTML = object.content;
-  document.getElementById('metafields').innerHTML = '<pre>' + JSON.stringify(object.metafields, null, 2) + '</pre>';
+  var metafields = object.metafields;
+  var images = '';
+  metafields.forEach(function(metafield){
+    images += '<h2>' + metafield.title + '</h2>';
+    images += '<img width="300" src="https://cosmicjs.com/uploads/' + metafield.value + '"/>';
+    images += '<br><br>';
+  })
+  document.getElementById('metafields').innerHTML = images;
 });
 </script>
 </body>
