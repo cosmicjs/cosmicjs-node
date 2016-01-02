@@ -26,14 +26,14 @@ var Cosmic = require('cosmicjs');
 
 /* Get bucket
 ================================ */
-Cosmic.getBucket(config, function(err, bucket){
-  // console.log(bucket);
+Cosmic.getBucket(config, function(error, response){
+  // console.log(response);
 });
 
 /* Get objects
 ================================ */
-Cosmic.getObjects(config, function(err, objects){
-  // console.log(objects);
+Cosmic.getObjects(config, function(error, response){
+  // console.log(response);
 });
 
 /* Get object
@@ -41,14 +41,14 @@ Cosmic.getObjects(config, function(err, objects){
 var object = {
   slug: 'object-slug'
 }
-Cosmic.getObject(config, object, function(err, object){
-  // console.log(object);
+Cosmic.getObject(config, object, function(error, response){
+  // console.log(response);
 });
 
 /* Get media
 ================================ */
-Cosmic.getMedia(config, function(err, media){
-  // console.log(media);
+Cosmic.getMedia(config, function(error, response){
+  // console.log(response);
 });
 
 /* Add object
@@ -59,8 +59,8 @@ var object = {
   'title': 'Test Title',
   'content': 'Test Content'
 };
-Cosmic.addObject(config, object, function(err, object){
-  // console.log(object);
+Cosmic.addObject(config, object, function(error, response){
+  // console.log(response);
 });
 
 /* Edit object
@@ -72,8 +72,8 @@ var object = {
   'title': 'New Title',
   'content': 'New Content'
 };
-Cosmic.editObject(config, object, function(err, object){
-  // console.log(object);
+Cosmic.editObject(config, object, function(error, response){
+  // console.log(response);
 });
 
 /* Delete object
@@ -82,8 +82,8 @@ var object = {
   'write_key': config.bucket.write_key,
   'slug': 'test-title'
 };
-Cosmic.deleteObject(config, object, function(err, object){
-  // console.log(object);
+Cosmic.deleteObject(config, object, function(error, response){
+  // console.log(response);
 });
 ```
 #### Easy Browser Example
