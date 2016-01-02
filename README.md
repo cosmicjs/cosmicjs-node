@@ -4,6 +4,8 @@
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
+This package now comes with `cosmicjs.browser.min.js` for easy itegration into your browser.
+
 #### Install
 ```
 npm install cosmicjs
@@ -83,4 +85,35 @@ var object = {
 Cosmic.deleteObject(config, object, function(err, object){
   // console.log(object);
 });
+```
+## Easy Browser Example
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cosmic JS Easy Browser Example</title>
+</head>
+<body>
+<h1 id="title">If you see this, something isn't working...</h1>
+<div id="content"></div>
+<div id="metafields"></div>
+<script src="cosmicjs.browser.min.js"></script>
+<script>
+var config = {
+  bucket: {
+    slug: 'easy-browser-example'
+  },
+  object: {
+    slug: 'home'
+  }
+}
+Cosmic.getObject({ bucket: config.bucket }, config.object, (err, res) => {
+  var object = res.object
+  document.getElementById('title').innerHTML = object.title
+  document.getElementById('content').innerHTML = object.content
+  document.getElementById('metafields').innerHTML = '<pre>' + JSON.stringify(object.metafields, null, 2) + '</pre>'
+})
+</script>
+</body>
+</html>
 ```
