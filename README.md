@@ -86,7 +86,7 @@ Cosmic.deleteObject(config, object, function(err, object){
   // console.log(object);
 });
 ```
-## Easy Browser Example
+#### Easy Browser Example
 ```html
 <!DOCTYPE html>
 <html>
