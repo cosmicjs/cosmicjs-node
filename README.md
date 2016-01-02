@@ -1,6 +1,6 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
 ## Official Cosmic JS JavaScript Client
-
+Use the official Cosmic JS JavaScript Client to easily create, read, update and delete content from your Cosmic JS buckets.
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
