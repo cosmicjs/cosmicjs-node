@@ -1,6 +1,6 @@
 {
   "name": "cosmicjs",
-  "version": "2.0.1",
+  "version": "2.0.",
   "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
   "main": "index.js",
   "dependencies": {
@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "browserify": "browserify index-browser.js | uglifyjs > cosmicjs.browser.min.js",
   },
   "repository": {
     "type": "git",
