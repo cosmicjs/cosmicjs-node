@@ -106,13 +106,13 @@ var config = {
   object: {
     slug: 'home'
   }
-}
-Cosmic.getObject({ bucket: config.bucket }, config.object, function(err, res) {
-  var object = res.object
-  document.getElementById('title').innerHTML = object.title
-  document.getElementById('content').innerHTML = object.content
-  document.getElementById('metafields').innerHTML = '<pre>' + JSON.stringify(object.metafields, null, 2) + '</pre>'
-})
+};
+Cosmic.getObject(config, config.object, (err, res) => {
+  var object = res.object;
+  document.getElementById('title').innerHTML = object.title;
+  document.getElementById('content').innerHTML = object.content;
+  document.getElementById('metafields').innerHTML = '<pre>' + JSON.stringify(object.metafields, null, 2) + '</pre>';
+});
 </script>
 </body>
 </html>
