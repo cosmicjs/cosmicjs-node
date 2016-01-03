@@ -1,10 +1,11 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
 ## Official Cosmic JS JavaScript Client
 This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS buckets.
-### Getting started
-Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
 This package now comes with `cosmicjs.browser.min.js` for easy integration in the browser.
+
+### Getting started
+Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
 #### Install
 ```
