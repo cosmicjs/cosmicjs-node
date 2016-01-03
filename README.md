@@ -4,7 +4,7 @@ This is the Official Cosmic JS JavaScript Client which allows you to easily crea
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
 
-This package now comes with `cosmicjs.browser.min.js` for easy itegration into your browser.
+This package now comes with `cosmicjs.browser.min.js` for easy integration into your browser.
 
 #### Install
 ```
