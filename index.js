@@ -13,7 +13,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -30,7 +30,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -58,7 +58,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -75,7 +75,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -98,7 +98,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -121,7 +121,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -144,7 +144,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          'message' : 'There was an error with this request.'
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
