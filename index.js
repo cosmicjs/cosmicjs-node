@@ -91,9 +91,9 @@ module.exports = {
     fetch(endpoint, {
       method: 'post',
       headers: {  
-        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-type': 'application/json'
       },
-      body: transformRequest(object)
+      body: JSON.stringify(object)
     })
     .then(function(response){
       if (response.status >= 400) {
@@ -114,9 +114,9 @@ module.exports = {
     fetch(endpoint, {
       method: 'post',
       headers: {  
-        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-type': 'application/json'
       },
-      body: transformRequest(object)
+      body: JSON.stringify(object)
     })
     .then(function(response){
       if (response.status >= 400) {
@@ -137,9 +137,9 @@ module.exports = {
     fetch(endpoint, {
       method: 'post',
       headers: {  
-      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-type': 'application/json'
       },
-      body: transformRequest(object)
+      body: JSON.stringify(object)
     })
     .then(function(response){
       if (response.status >= 400) {
@@ -163,10 +163,4 @@ function keyMetafields(object){
     object.metafield = _.indexBy(metafields, "key");
   }
   return object;
-}
-function transformRequest(obj){
-  var str = [];
-  for(var p in obj)
-    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-  return str.join("&");
 }
