@@ -55,10 +55,10 @@ Cosmic.getMedia(config, function(error, response){
 /* Add object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'type_slug': 'pages',
-  'title': 'Test Title',
-  'content': 'Test Content'
+  write_key: config.bucket.write_key,
+  type_slug: 'pages',
+  title: 'Test Title',
+  content: 'Test Content'
 };
 Cosmic.addObject(config, object, function(error, response){
   // console.log(response);
@@ -67,11 +67,11 @@ Cosmic.addObject(config, object, function(error, response){
 /* Edit object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'slug': 'test-title',
-  'type_slug': 'pages',
-  'title': 'New Title',
-  'content': 'New Content'
+  write_key: config.bucket.write_key,
+  slug: 'test-title',
+  type_slug: 'pages',
+  title: 'New Title',
+  content: 'New Content'
 };
 Cosmic.editObject(config, object, function(error, response){
   // console.log(response);
@@ -80,8 +80,8 @@ Cosmic.editObject(config, object, function(error, response){
 /* Delete object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'slug': 'test-title'
+  write_key: config.bucket.write_key,
+  slug: 'test-title'
 };
 Cosmic.deleteObject(config, object, function(error, response){
   // console.log(response);
