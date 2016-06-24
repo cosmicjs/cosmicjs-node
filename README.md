@@ -118,7 +118,7 @@ Cosmic.getObject(config, config.object, (err, res) => {
     objects += '<h2>' + metafield.title + '</h2>';
     objects += '<img width="300" src="' + metafield.url + '"/>';
     objects += '<br><br>';
-  })
+  });
   document.getElementById('metafields').innerHTML = objects;
 });
 </script>
