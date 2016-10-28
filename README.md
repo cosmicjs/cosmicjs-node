@@ -1,5 +1,4 @@
-[![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)
-## Official Cosmic JS JavaScript Client
+[![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)<br><br>
 This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS buckets.
 
 This package now comes with `cosmicjs.browser.min.js` for easy integration in the browser.
@@ -55,10 +54,10 @@ Cosmic.getMedia(config, function(error, response){
 /* Add object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'type_slug': 'pages',
-  'title': 'Test Title',
-  'content': 'Test Content'
+  write_key: config.bucket.write_key,
+  type_slug: 'pages',
+  title: 'Test Title',
+  content: 'Test Content'
 };
 Cosmic.addObject(config, object, function(error, response){
   // console.log(response);
@@ -67,11 +66,11 @@ Cosmic.addObject(config, object, function(error, response){
 /* Edit object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'slug': 'test-title',
-  'type_slug': 'pages',
-  'title': 'New Title',
-  'content': 'New Content'
+  write_key: config.bucket.write_key,
+  slug: 'test-title',
+  type_slug: 'pages',
+  title: 'New Title',
+  content: 'New Content'
 };
 Cosmic.editObject(config, object, function(error, response){
   // console.log(response);
@@ -80,8 +79,8 @@ Cosmic.editObject(config, object, function(error, response){
 /* Delete object
 ================================ */
 var object = {
-  'write_key': config.bucket.write_key,
-  'slug': 'test-title'
+  write_key: config.bucket.write_key,
+  slug: 'test-title'
 };
 Cosmic.deleteObject(config, object, function(error, response){
   // console.log(response);
@@ -113,13 +112,13 @@ Cosmic.getObject(config, config.object, (err, res) => {
   document.getElementById('title').innerHTML = object.title;
   document.getElementById('content').innerHTML = object.content;
   var metafields = object.metafields;
-  var images = '';
+  var objects = '';
   metafields.forEach(function(metafield){
-    images += '<h2>' + metafield.title + '</h2>';
-    images += '<img width="300" src="https://cosmicjs.com/uploads/' + metafield.value + '"/>';
-    images += '<br><br>';
-  })
-  document.getElementById('metafields').innerHTML = images;
+    objects += '<h2>' + metafield.title + '</h2>';
+    objects += '<img width="300" src="' + metafield.url + '"/>';
+    objects += '<br><br>';
+  });
+  document.getElementById('metafields').innerHTML = objects;
 });
 </script>
 </body>

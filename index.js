@@ -13,7 +13,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -30,7 +30,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -42,9 +42,9 @@ module.exports = {
       var objects = response.objects;
       cosmic.objects = {};
       cosmic.objects.all = objects;
-      cosmic.objects.type = _.groupBy(objects, "type_slug");
+      cosmic.objects.type = _.groupBy(objects, 'type_slug');
       cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.indexBy(cosmic.object, "slug");
+      cosmic.object = _.indexBy(cosmic.object, 'slug');
       return callback(false, cosmic);
     });
   },
@@ -58,7 +58,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -75,7 +75,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -98,7 +98,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -121,7 +121,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -144,7 +144,7 @@ module.exports = {
     .then(function(response){
       if (response.status >= 400) {
         var err = {
-          "message" : "There was an error with this request."
+          'message': 'There was an error with this request.'
         }
         return callback(err, false);
       }
@@ -160,7 +160,7 @@ module.exports = {
 function keyMetafields(object){
   var metafields = object.metafields;
   if(metafields){
-    object.metafield = _.indexBy(metafields, "key");
+    object.metafield = _.indexBy(metafields, 'key');
   }
   return object;
 }
