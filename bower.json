@@ -1,0 +1,24 @@
+{
+  "name": "cosmicjs",
+  "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
+  "main": "index.js",
+  "authors": [
+    "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "cms",
+    "node",
+    "content",
+    "api"
+  ],
+  "homepage": "https://github.com/cosmicjs/cosmicjs-node",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

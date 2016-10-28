@@ -112,7 +112,7 @@ module.exports = {
   editObject: function(config, object, callback){
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
     fetch(endpoint, {
-      method: 'post',
+      method: 'put',
       headers: {  
         'Content-type': 'application/json'
       },
