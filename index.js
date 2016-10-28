@@ -65,7 +65,15 @@ module.exports = {
       return response.json()
     })
     .then(function(response){
-      return callback(false, response);
+      // Constructor
+      var cosmic = {};
+      var object = response.object;
+      var metafields = object.metafields;
+      if(metafields){
+        object.metafield = _.indexBy(metafields, "key");
+      }
+      cosmic.object = object;
+      return callback(false, cosmic);
     });
   },
 
