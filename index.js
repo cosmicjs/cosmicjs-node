@@ -49,6 +49,30 @@ module.exports = {
     });
   },
 
+  getObjectType: function(config, object_type, callback){
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object_type + '?read_key=' + config.bucket.read_key;
+    fetch(endpoint)
+    .then(function(response){
+      if (response.status >= 400) {
+        var err = {
+          "message" : "There was an error with this request."
+        }
+        return callback(err, false);
+      }
+      return response.json()
+    })
+    .then(function(response){
+      // Constructor
+      var cosmic = {};
+      var objects = response.objects;
+      cosmic.objects = {};
+      cosmic.objects.all = objects;
+      cosmic.object = _.map(objects, keyMetafields);
+      cosmic.object = _.indexBy(cosmic.object, "slug");
+      return callback(false, cosmic);
+    });
+  },
+
   getObject: function(config, object, callback){
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object/' + object.slug + '?read_key=' + config.bucket.read_key;
     if (object._id) {
