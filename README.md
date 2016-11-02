@@ -36,6 +36,13 @@ Cosmic.getObjects(config, function(error, response){
   // console.log(response);
 });
 
+/* Get objects by type
+================================ */
+var object_type = 'pages';
+Cosmic.getObjectType(config, object_type, function(error, response){
+  // console.log(response);
+});
+
 /* Get object
 ================================ */
 var object = {
