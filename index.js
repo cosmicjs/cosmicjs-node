@@ -49,8 +49,10 @@ module.exports = {
     });
   },
 
-  getObjectType: function(config, object_type, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object_type + '?read_key=' + config.bucket.read_key;
+  getObjectType: function(config, object, callback){
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + '?read_key=' + config.bucket.read_key;
+    if (object.limit) endpoint += '&limit=' + object.limit;
+    if (object.skip) endpoint +=  '&skip=' + object.skip;
     fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
