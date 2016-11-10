@@ -38,8 +38,12 @@ Cosmic.getObjects(config, function(error, response){
 
 /* Get objects by type
 ================================ */
-var object_type = 'pages';
-Cosmic.getObjectType(config, object_type, function(error, response){
+var object = {
+  type_slug: 'posts',
+  limit: 5,
+  skip: 0
+};
+Cosmic.getObjectType(config, object, function(error, response){
   // console.log(response);
 });
 
