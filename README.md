@@ -123,13 +123,13 @@ Cosmic.getObject(config, config.object, (err, res) => {
   document.getElementById('title').innerHTML = object.title;
   document.getElementById('content').innerHTML = object.content;
   var metafields = object.metafields;
-  var objects = '';
+  var items = '';
   metafields.forEach(function(metafield){
-    objects += '<h2>' + metafield.title + '</h2>';
-    objects += '<img width="300" src="' + metafield.url + '"/>';
-    objects += '<br><br>';
+    items += '<h2>' + metafield.title + '</h2>';
+    items += '<img width="300" src="' + metafield.url + '"/>';
+    items += '<br><br>';
   });
-  document.getElementById('metafields').innerHTML = objects;
+  document.getElementById('metafields').innerHTML = items;
 });
 </script>
 </body>
