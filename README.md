@@ -36,21 +36,21 @@ Cosmic.getObjects(config, function(error, response){
 
 /* Get objects by type
 ================================ */
-var object = {
+var params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0
 };
-Cosmic.getObjectType(config, object, function(error, response){
+Cosmic.getObjectType(config, params, function(error, response){
   // console.log(response);
 });
 
 /* Get object
 ================================ */
-var object = {
+var params = {
   slug: 'object-slug'
 }
-Cosmic.getObject(config, object, function(error, response){
+Cosmic.getObject(config, params, function(error, response){
   // console.log(response);
 });
 
@@ -62,36 +62,36 @@ Cosmic.getMedia(config, function(error, response){
 
 /* Add object
 ================================ */
-var object = {
+var params = {
   write_key: config.bucket.write_key,
   type_slug: 'pages',
   title: 'Test Title',
   content: 'Test Content'
 };
-Cosmic.addObject(config, object, function(error, response){
+Cosmic.addObject(config, params, function(error, response){
   // console.log(response);
 });
 
 /* Edit object
 ================================ */
-var object = {
+var params = {
   write_key: config.bucket.write_key,
   slug: 'test-title',
   type_slug: 'pages',
   title: 'New Title',
   content: 'New Content'
 };
-Cosmic.editObject(config, object, function(error, response){
+Cosmic.editObject(config, params, function(error, response){
   // console.log(response);
 });
 
 /* Delete object
 ================================ */
-var object = {
+var params = {
   write_key: config.bucket.write_key,
   slug: 'test-title'
 };
-Cosmic.deleteObject(config, object, function(error, response){
+Cosmic.deleteObject(config, params, function(error, response){
   // console.log(response);
 });
 ```
