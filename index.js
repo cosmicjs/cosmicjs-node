@@ -44,7 +44,7 @@ module.exports = {
       cosmic.objects.all = objects;
       cosmic.objects.type = _.groupBy(objects, 'type_slug');
       cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.indexBy(cosmic.object, 'slug');
+      cosmic.object = _.keyBy(cosmic.object, 'slug');
       return callback(false, cosmic);
     });
   },
@@ -70,7 +70,7 @@ module.exports = {
       cosmic.objects = {};
       cosmic.objects.all = objects;
       cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.indexBy(cosmic.object, "slug");
+      cosmic.object = _.keyBy(cosmic.object, "slug");
       return callback(false, cosmic);
     });
   },
@@ -96,7 +96,7 @@ module.exports = {
       var object = response.object;
       var metafields = object.metafields;
       if(metafields){
-        object.metafield = _.indexBy(metafields, "key");
+        object.metafield = _.keyBy(metafields, "key");
       }
       cosmic.object = object;
       return callback(false, cosmic);
