@@ -194,7 +194,7 @@ module.exports = {
 function keyMetafields(object){
   var metafields = object.metafields;
   if(metafields){
-    object.metafield = _.indexBy(metafields, 'key');
+    object.metafield = _.keyBy(metafields, 'key');
   }
   return object;
 }
