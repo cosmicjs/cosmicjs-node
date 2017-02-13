@@ -16,7 +16,7 @@ npm install cosmicjs
 ================================ */
 var config = {};
 config.bucket = {
-  slug: 'react-flux-cosmicjs',
+  slug: 'your-bucket-slug',
   read_key: '', // add read_key if added to your Cosmic JS bucket settings
   write_key: '' // add write_key if added to your Cosmic JS bucket settings
 };
@@ -110,7 +110,7 @@ Cosmic.deleteObject(config, params, function(error, response){
 <script>
 var config = {
   bucket: {
-    slug: 'easy-browser-example'
+    slug: 'your-bucket-slug'
   },
   object: {
     slug: 'home'
