@@ -71,6 +71,7 @@ module.exports = {
       cosmic.objects.all = objects;
       cosmic.object = _.map(objects, keyMetafields);
       cosmic.object = _.keyBy(cosmic.object, "slug");
+      cosmic.total = response.total;
       return callback(false, cosmic);
     });
   },
