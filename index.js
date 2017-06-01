@@ -1,6 +1,8 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 var _ = require('lodash');
+var superagent = require('superagent');
+var FormData = require('form-data');
 
 var api_url = 'https://api.cosmicjs.com';
 var api_version = 'v1';
@@ -187,6 +189,27 @@ module.exports = {
     })
     .then(function(response){
       return callback(false, response);
+    });
+  },
+
+  addMedia: function(config, params, callback){
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media';
+    var form = new FormData();
+    if (config.bucket.write_key)
+      form.append('write_key', config.bucket.write_key);
+    form.append('media', params.media);
+    if (params.folder)
+      form.append('folder', params.folder);
+    superagent.post(endpoint)
+      .send(form)
+      .end(function(err, response) {
+        if (response.status >= 400) {
+          var err = {
+            'message': 'There was an error with this request.'
+          }
+          return callback(err, false);
+        }
+        return callback(false, response);
     });
   }
 };
