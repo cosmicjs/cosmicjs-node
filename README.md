@@ -1,5 +1,5 @@
 [![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)<br><br>
-This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
@@ -17,24 +17,24 @@ npm install cosmicjs
 var config = {};
 config.bucket = {
   slug: 'your-bucket-slug',
-  read_key: '', // add read_key if added to your Cosmic JS bucket settings
-  write_key: '' // add write_key if added to your Cosmic JS bucket settings
+  read_key: '', // add read_key if added to your Cosmic JS Bucket settings
+  write_key: '' // add write_key if added to your Cosmic JS Bucket settings
 };
 var Cosmic = require('cosmicjs');
 
-/* Get bucket
+/* Get Bucket
 ================================ */
 Cosmic.getBucket(config, function(error, response){
   // console.log(response);
 });
 
-/* Get objects
+/* Get Objects
 ================================ */
 Cosmic.getObjects(config, function(error, response){
   // console.log(response);
 });
 
-/* Get objects by type
+/* Get Objects by type
 ================================ */
 var params = {
   type_slug: 'posts',
@@ -45,7 +45,7 @@ Cosmic.getObjectType(config, params, function(error, response){
   // console.log(response);
 });
 
-/* Get object
+/* Get Object
 ================================ */
 var params = {
   slug: 'object-slug'
@@ -54,13 +54,13 @@ Cosmic.getObject(config, params, function(error, response){
   // console.log(response);
 });
 
-/* Get media
+/* Get Media
 ================================ */
 Cosmic.getMedia(config, function(error, response){
   // console.log(response);
 });
 
-/* Add object
+/* Add Object
 ================================ */
 var params = {
   write_key: config.bucket.write_key,
@@ -72,7 +72,7 @@ Cosmic.addObject(config, params, function(error, response){
   // console.log(response);
 });
 
-/* Edit object
+/* Edit Object
 ================================ */
 var params = {
   write_key: config.bucket.write_key,
@@ -85,7 +85,7 @@ Cosmic.editObject(config, params, function(error, response){
   // console.log(response);
 });
 
-/* Delete object
+/* Delete Object
 ================================ */
 var params = {
   write_key: config.bucket.write_key,
