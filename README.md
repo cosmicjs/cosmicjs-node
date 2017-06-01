@@ -20,7 +20,7 @@ config.bucket = {
   read_key: '', // add read_key if added to your Cosmic JS Bucket settings
   write_key: '' // add write_key if added to your Cosmic JS Bucket settings
 };
-const Cosmic = require('cosmicjs');
+import Cosmic from 'cosmicjs';
 
 /* Get Bucket
 ================================ */
