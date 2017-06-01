@@ -24,13 +24,13 @@ var Cosmic = require('cosmicjs');
 
 /* Get Bucket
 ================================ */
-Cosmic.getBucket(config, function(error, response){
+Cosmic.getBucket(config, (error, response) => {
   // console.log(response);
 });
 
 /* Get Objects
 ================================ */
-Cosmic.getObjects(config, function(error, response){
+Cosmic.getObjects(config, (error, response) => {
   // console.log(response);
 });
 
@@ -41,7 +41,7 @@ var params = {
   limit: 5,
   skip: 0
 };
-Cosmic.getObjectType(config, params, function(error, response){
+Cosmic.getObjectType(config, params, (error, response) => {
   // console.log(response);
 });
 
@@ -50,13 +50,7 @@ Cosmic.getObjectType(config, params, function(error, response){
 var params = {
   slug: 'object-slug'
 }
-Cosmic.getObject(config, params, function(error, response){
-  // console.log(response);
-});
-
-/* Get Media
-================================ */
-Cosmic.getMedia(config, function(error, response){
+Cosmic.getObject(config, params, (error, response) => {
   // console.log(response);
 });
 
@@ -68,7 +62,7 @@ var params = {
   title: 'Test Title',
   content: 'Test Content'
 };
-Cosmic.addObject(config, params, function(error, response){
+Cosmic.addObject(config, params, (error, response) => {
   // console.log(response);
 });
 
@@ -81,7 +75,7 @@ var params = {
   title: 'New Title',
   content: 'New Content'
 };
-Cosmic.editObject(config, params, function(error, response){
+Cosmic.editObject(config, params, (error, response) => {
   // console.log(response);
 });
 
@@ -91,9 +85,25 @@ var params = {
   write_key: config.bucket.write_key,
   slug: 'test-title'
 };
-Cosmic.deleteObject(config, params, function(error, response){
+Cosmic.deleteObject(config, params, (error, response) => {
   // console.log(response);
 });
+
+/* Get Media
+================================ */
+Cosmic.getMedia(config, (error, response) => {
+  // console.log(response);
+});
+
+/* Add Media
+================================ */
+const params = {
+  media: FILE_DATA,
+  folder: 'your-folder-slug'
+}
+Cosmic.addMedia(config, params, (error, response) => {
+  // console.log(res)
+})
 ```
 #### Easy Browser Example
 ```html
