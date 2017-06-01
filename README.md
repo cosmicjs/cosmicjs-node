@@ -2,7 +2,7 @@
 This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
-Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a bucket.
+Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
 
 #### Install
 ```
