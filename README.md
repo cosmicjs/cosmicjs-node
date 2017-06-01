@@ -6,7 +6,7 @@ Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up
 
 #### Install
 ```
-npm install cosmicjs
+yarn add cosmicjs
 ```
 
 #### Usage
@@ -14,13 +14,13 @@ npm install cosmicjs
 ```javascript
 /* Configure
 ================================ */
-var config = {};
+const config = {};
 config.bucket = {
   slug: 'your-bucket-slug',
   read_key: '', // add read_key if added to your Cosmic JS Bucket settings
   write_key: '' // add write_key if added to your Cosmic JS Bucket settings
 };
-var Cosmic = require('cosmicjs');
+const Cosmic = require('cosmicjs');
 
 /* Get Bucket
 ================================ */
@@ -36,7 +36,7 @@ Cosmic.getObjects(config, (error, response) => {
 
 /* Get Objects by type
 ================================ */
-var params = {
+const params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0
@@ -47,7 +47,7 @@ Cosmic.getObjectType(config, params, (error, response) => {
 
 /* Get Object
 ================================ */
-var params = {
+const params = {
   slug: 'object-slug'
 }
 Cosmic.getObject(config, params, (error, response) => {
@@ -56,7 +56,7 @@ Cosmic.getObject(config, params, (error, response) => {
 
 /* Add Object
 ================================ */
-var params = {
+const params = {
   write_key: config.bucket.write_key,
   type_slug: 'pages',
   title: 'Test Title',
@@ -68,7 +68,7 @@ Cosmic.addObject(config, params, (error, response) => {
 
 /* Edit Object
 ================================ */
-var params = {
+const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title',
   type_slug: 'pages',
@@ -81,7 +81,7 @@ Cosmic.editObject(config, params, (error, response) => {
 
 /* Delete Object
 ================================ */
-var params = {
+const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title'
 };
