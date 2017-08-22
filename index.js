@@ -25,7 +25,7 @@ module.exports = {
       return callback(false, response);
     });
   },
-  
+
   getObjects: function(config, callback){
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
     fetch(endpoint)
@@ -106,6 +106,37 @@ module.exports = {
     });
   },
 
+  getObjectBySearch: function(config, object , callback){
+    var searchParams = '/search?' + 'metafield_key=' + object.metafield_key;
+    if (object.metafield_value) searchParams += '&metafield_value=' + object.metafield_value;
+    else if (object.metafield_object_slug) searchParams += '&metafield_object_slug=' + object.metafield_object_slug;
+    else searchParams += '&metafield_value_has=' + object.metafield_value_has;
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + searchParams + '&read_key=' + config.bucket.read_key;
+    if (object.limit) endpoint += '&limit=' + object.limit;
+    if (object.skip) endpoint +=  '&skip=' + object.skip;
+    fetch(endpoint)
+    .then(function(response){
+      if (response.status >= 400) {
+        var err = {
+          "message" : "There was an error with this request."
+        }
+        return callback(err, false);
+      }
+      return response.json()
+    })
+    .then(function(response){
+      // Constructor
+      var cosmic = {};
+      var objects = response.objects;
+      cosmic.objects = {};
+      cosmic.objects.all = objects;
+      cosmic.object = _.map(objects, keyMetafields);
+      cosmic.object = _.keyBy(cosmic.object, "slug");
+      cosmic.total = response.total;
+      return callback(false, cosmic);
+    });
+  },
+
   getMedia: function(config, callback){
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
     fetch(endpoint)
@@ -127,7 +158,7 @@ module.exports = {
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
     fetch(endpoint, {
       method: 'post',
-      headers: {  
+      headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(object)
@@ -150,7 +181,7 @@ module.exports = {
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
     fetch(endpoint, {
       method: 'put',
-      headers: {  
+      headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(object)
@@ -173,7 +204,7 @@ module.exports = {
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/delete-object';
     fetch(endpoint, {
       method: 'post',
-      headers: {  
+      headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(object)

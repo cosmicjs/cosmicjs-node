@@ -10,7 +10,10 @@
     "lodash": "^4.17.4",
     "superagent": "^3.5.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "uglify-js": "^3.0.28"
+  },
   "scripts": {
     "browserify": "browserify index-browser.js | uglifyjs > cosmicjs.browser.min.js"
   },
