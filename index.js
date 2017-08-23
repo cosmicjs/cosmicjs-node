@@ -107,7 +107,7 @@ module.exports = {
   },
 
   getObjectBySearch: function(config, object , callback){
-    var searchParams = '/search?' + 'metafield_key=' + object.metafield_key;
+    var searchParams = '/search?metafield_key=' + object.metafield_key;
     if (object.metafield_value) searchParams += '&metafield_value=' + object.metafield_value;
     else if (object.metafield_object_slug) searchParams += '&metafield_object_slug=' + object.metafield_object_slug;
     else searchParams += '&metafield_value_has=' + object.metafield_value_has;
