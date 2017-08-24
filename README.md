@@ -25,19 +25,19 @@ const config = {
 };
 ```
 ##### Get Bucket
-```
+```javascript
 Cosmic.getBucket(config, (error, response) => {
   // console.log(response);
 });
 ```
 ##### Get Objects
-```
+```javascript
 Cosmic.getObjects(config, (error, response) => {
   // console.log(response);
 });
 ```
 ##### Get Objects by Type
-```
+```javascript
 const params = {
   type_slug: 'posts',
   limit: 5,
@@ -48,7 +48,7 @@ Cosmic.getObjectsByType(config, params, (error, response) => {
 });
 ```
 ##### Get Objects by Search
-```
+```javascript
 // Search by Object Metafield
 const params = {
   type_slug: 'posts',
@@ -78,7 +78,7 @@ Cosmic.getObjectsBySearch(config, params, (error, response) => {
 });
 ```
 ##### Get Object
-```
+```javascript
 const params = {
   slug: 'object-slug'
 }
@@ -87,7 +87,7 @@ Cosmic.getObject(config, params, (error, response) => {
 });
 ```
 ##### Add Object
-```
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   type_slug: 'pages',
@@ -99,7 +99,7 @@ Cosmic.addObject(config, params, (error, response) => {
 });
 ```
 ##### Edit Object
-```
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title',
@@ -112,7 +112,7 @@ Cosmic.editObject(config, params, (error, response) => {
 });
 ```
 ##### Delete Object
-```
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title'
@@ -122,7 +122,7 @@ Cosmic.deleteObject(config, params, (error, response) => {
 });
 ```
 ##### Get Media
-```
+```javascript
 Cosmic.getMedia(config, (error, response) => {
   // console.log(response);
 });
