@@ -41,7 +41,8 @@ Cosmic.getObjects(config, (error, response) => {
 const params = {
   type_slug: 'posts',
   limit: 5,
-  skip: 0
+  skip: 0,
+  locale: 'en'
 };
 Cosmic.getObjectsByType(config, params, (error, response) => {
   // console.log(response);
@@ -55,7 +56,8 @@ const params = {
   metafield_key: 'author',
   metafield_object_slug: 'carson-gibbons',
   limit: 5,
-  skip: 0
+  skip: 0,
+  locale: 'en'
 };
 // Search by Metafield Value
 const params = {
