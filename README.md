@@ -42,7 +42,7 @@ const params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0,
-  locale: 'en'
+  locale: 'en' // optional, if localization set on Objects
 };
 Cosmic.getObjectsByType(config, params, (error, response) => {
   // console.log(response);
@@ -57,7 +57,7 @@ const params = {
   metafield_object_slug: 'carson-gibbons',
   limit: 5,
   skip: 0,
-  locale: 'en'
+  locale: 'en' // optional, if localization set on Objects
 };
 // Search by Metafield Value
 const params = {
