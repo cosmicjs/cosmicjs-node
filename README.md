@@ -10,7 +10,7 @@ yarn add cosmicjs
 ```
 
 #### Usage
-
+##### Include and Config
 ```javascript
 import Cosmic from 'cosmicjs';
 
@@ -23,41 +23,71 @@ const config = {
     write_key: '' // add write_key if added to your Cosmic JS Bucket settings
   }
 };
-
-/* Get Bucket
-================================ */
+```
+##### Get Bucket
+```javascript
 Cosmic.getBucket(config, (error, response) => {
   // console.log(response);
 });
-
-/* Get Objects
-================================ */
+```
+##### Get Objects
+```javascript
 Cosmic.getObjects(config, (error, response) => {
   // console.log(response);
 });
-
-/* Get Objects by type
-================================ */
+```
+##### Get Objects by Type
+```javascript
 const params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0
 };
-Cosmic.getObjectType(config, params, (error, response) => {
+Cosmic.getObjectsByType(config, params, (error, response) => {
   // console.log(response);
 });
-
-/* Get Object
-================================ */
+```
+##### Get Objects by Search
+```javascript
+// Search by Object Metafield
+const params = {
+  type_slug: 'posts',
+  metafield_key: 'author',
+  metafield_object_slug: 'carson-gibbons',
+  limit: 5,
+  skip: 0
+};
+// Search by Metafield Value
+const params = {
+  type_slug: 'posts',
+  metafield_key: 'headline',
+  metafield_value: 'Hello World',
+  limit: 5,
+  skip: 0
+};
+// Search by Metafield Has Value
+const params = {
+  type_slug: 'posts',
+  metafield_key: 'headline',
+  metafield_has_value: 'World',
+  limit: 5,
+  skip: 0
+};
+Cosmic.getObjectsBySearch(config, params, (error, response) => {
+  // console.log(response);
+});
+```
+##### Get Object
+```javascript
 const params = {
   slug: 'object-slug'
 }
 Cosmic.getObject(config, params, (error, response) => {
   // console.log(response);
 });
-
-/* Add Object
-================================ */
+```
+##### Add Object
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   type_slug: 'pages',
@@ -67,9 +97,9 @@ const params = {
 Cosmic.addObject(config, params, (error, response) => {
   // console.log(response);
 });
-
-/* Edit Object
-================================ */
+```
+##### Edit Object
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title',
@@ -80,9 +110,9 @@ const params = {
 Cosmic.editObject(config, params, (error, response) => {
   // console.log(response);
 });
-
-/* Delete Object
-================================ */
+```
+##### Delete Object
+```javascript
 const params = {
   write_key: config.bucket.write_key,
   slug: 'test-title'
@@ -90,9 +120,9 @@ const params = {
 Cosmic.deleteObject(config, params, (error, response) => {
   // console.log(response);
 });
-
-/* Get Media
-================================ */
+```
+##### Get Media
+```javascript
 Cosmic.getMedia(config, (error, response) => {
   // console.log(response);
 });
