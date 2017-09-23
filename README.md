@@ -138,6 +138,16 @@ const params = {
 Cosmic.addMedia(config, params, (error, response) => {
   // console.log(res)
 })
+
+/* Delete Media
+================================ */
+const params = {
+  media_id: MEDIA_ID,
+  write_key: config.bucket.write_key,
+}
+Cosmic.deleteMedia(config, params, (error, response) => {
+  // console.log(res)
+})
 ```
 #### Easy Browser Example
 ```html
