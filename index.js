@@ -85,6 +85,7 @@ module.exports = {
     if (object.limit) endpoint += '&limit=' + object.limit;
     if (object.skip) endpoint +=  '&skip=' + object.skip;
     if (object.locale) endpoint += '&locale=' + object.locale;
+    if (object.sort) endpoint += '&sort=' + object.sort;
       fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
