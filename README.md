@@ -42,6 +42,7 @@ const params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0,
+  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
 };
 Cosmic.getObjectsByType(config, params, (error, response) => {
