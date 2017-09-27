@@ -129,9 +129,9 @@ Cosmic.deleteObject(config, params, (error, response) => {
 Cosmic.getMedia(config, (error, response) => {
   // console.log(response);
 });
-
-/* Add Media
-================================ */
+```
+##### Add Media
+```javascript
 const params = {
   media: FILE_DATA,
   folder: 'your-folder-slug'
@@ -139,9 +139,9 @@ const params = {
 Cosmic.addMedia(config, params, (error, response) => {
   // console.log(res)
 })
-
-/* Delete Media
-================================ */
+```
+##### Delete Media
+```javascript
 const params = {
   media_id: MEDIA_ID,
   write_key: config.bucket.write_key,
