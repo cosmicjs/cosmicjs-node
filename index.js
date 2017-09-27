@@ -145,6 +145,7 @@ module.exports = {
     var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + searchParams + '&read_key=' + config.bucket.read_key;
     if (object.limit) endpoint += '&limit=' + object.limit;
     if (object.skip) endpoint +=  '&skip=' + object.skip;
+    if (object.sort) endpoint += '&sort=' + object.sort;
     if (object.locale) endpoint += '&locale=' + object.locale;
       fetch(endpoint)
     .then(function(response){
