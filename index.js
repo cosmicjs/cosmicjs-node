@@ -85,6 +85,7 @@ module.exports = {
     if (object.limit) endpoint += '&limit=' + object.limit;
     if (object.skip) endpoint +=  '&skip=' + object.skip;
     if (object.locale) endpoint += '&locale=' + object.locale;
+    if (object.sort) endpoint += '&sort=' + object.sort;
       fetch(endpoint)
     .then(function(response){
       if (response.status >= 400) {
@@ -272,6 +273,29 @@ module.exports = {
           return callback(err, false);
         }
         return callback(false, response);
+    });
+  },
+
+  deleteMedia: function(config, object, callback){
+    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media/' + object.media_id;
+    fetch(endpoint, {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(object)
+    })
+    .then(function(response){
+      if (response.status >= 400) {
+        var err = {
+          'message': 'There was an error with this request.'
+        }
+        return callback(err, false);
+      }
+      return response.json()
+    })
+    .then(function(response){
+      return callback(false, response);
     });
   }
 };

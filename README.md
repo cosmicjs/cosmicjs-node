@@ -42,6 +42,7 @@ const params = {
   type_slug: 'posts',
   limit: 5,
   skip: 0,
+  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
 };
 Cosmic.getObjectsByType(config, params, (error, response) => {
@@ -136,6 +137,16 @@ const params = {
   folder: 'your-folder-slug'
 }
 Cosmic.addMedia(config, params, (error, response) => {
+  // console.log(res)
+})
+
+/* Delete Media
+================================ */
+const params = {
+  media_id: MEDIA_ID,
+  write_key: config.bucket.write_key,
+}
+Cosmic.deleteMedia(config, params, (error, response) => {
   // console.log(res)
 })
 ```
