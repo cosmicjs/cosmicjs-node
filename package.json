@@ -1,6 +1,6 @@
 {
   "name": "cosmicjs",
-  "version": "2.4.13",
+  "version": "2.4.20",
   "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
   "main": "index.js",
   "dependencies": {
