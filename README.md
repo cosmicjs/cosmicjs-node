@@ -44,6 +44,7 @@ const params = {
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
+  status: 'all' // optional, if need to get draft Objects
 };
 Cosmic.getObjectsByType(config, params, (error, response) => {
   // console.log(response);
@@ -59,7 +60,8 @@ const params = {
   limit: 5,
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
-  locale: 'en' // optional, if localization set on Objects
+  locale: 'en' // optional, if localization set on Objects,
+  status: 'all' // optional, if need to get draft Objects,
 };
 // Search by Metafield Value
 const params = {
