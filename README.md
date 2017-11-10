@@ -6,7 +6,7 @@ Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up
 
 #### Install
 ```
-yarn add cosmicjs
+npm i cosmicjs
 ```
 
 #### Usage
