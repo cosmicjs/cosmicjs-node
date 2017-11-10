@@ -59,6 +59,7 @@ const params = {
   metafield_object_slug: 'carson-gibbons',
   limit: 5,
   skip: 0,
+  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects,
   status: 'all' // optional, if need to get draft Objects,
 };
@@ -68,7 +69,8 @@ const params = {
   metafield_key: 'headline',
   metafield_value: 'Hello World',
   limit: 5,
-  skip: 0
+  skip: 0,
+  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
 };
 // Search by Metafield Has Value
 const params = {
@@ -76,7 +78,8 @@ const params = {
   metafield_key: 'headline',
   metafield_has_value: 'World',
   limit: 5,
-  skip: 0
+  skip: 0,
+  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
 };
 Cosmic.getObjectsBySearch(config, params, (error, response) => {
   // console.log(response);
