@@ -1,7 +1,7 @@
 {
   "name": "cosmicjs-node",
   "version": "3.0",
-  "description": "",
+  "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
   "main": "index.js",
   "engines" : {
     "node" : ">=6.0"
