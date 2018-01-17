@@ -1,2 +1,3 @@
-var Cosmic = require('./index');
-window.Cosmic = Cosmic;
+import Cosmic from './index'
+
+window.Cosmic = Cosmic

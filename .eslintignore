@@ -1,0 +1,5 @@
+# Ignore everything
+*
+
+# Except index.js
+!index.js

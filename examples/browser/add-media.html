@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+  <h1>Add Media</h1>
+  <input id="myImage" type="file">
+  <button id="uploadImage">Upload</button>
+<body>
+<script src="../../cosmicjs.browser.min.js"></script>
+<script>
+  var api = new Cosmic();
+  var bucket = api.bucket({
+    slug: 'test-new-api'
+  })
+  document.getElementById("uploadImage").addEventListener("click", function(){
+    var myImage = document.getElementById("myImage");
+    if(myImage.files.length > 0){
+      bucket.addMedia({
+        'media': myImage.files[0]
+      }).then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+  <h1>Get Objects</h1>
+  <div id="root"></div>
+<body>
+<script src="../../cosmicjs.browser.min.js"></script>
+<script>
+  var api = new Cosmic();
+  var bucket = api.bucket({
+    slug: 'creative-agency'
+  })
+  bucket.getObjects().then(data => {
+    var objects = data.objects;
+    var markup = '';
+    objects.forEach(function(object) {
+      markup += '<div>' + object.title + '</div>';
+      if (object.metadata && object.metadata.image)
+        markup += '<div><img src="' + object.metadata.image.imgix_url + '?w=300"/></div>';
+    });
+    document.getElementById("root").innerHTML = markup;
+  }).catch(err => {
+    console.log(err)
+  })
+</script>
+</body>
+</html>
