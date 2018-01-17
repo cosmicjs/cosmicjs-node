@@ -1,4 +1,10 @@
-[![Cosmic JS Logo](https://cosmicjs.com/images/marketing/logo-w-brand.jpg)](https://cosmicjs.com/)<br><br>
+<p align="center">
+  <a href="https://cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
+</p>
+<p align="center">
+  📖 <a href="https://cosmicjs.github.io/rest-api-docs/?javascript">View JavaScript Docs</a>
+</p>
+
 This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
@@ -6,37 +12,182 @@ Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up
 
 #### Install
 ```
-npm i cosmicjs
+npm install cosmicjs
+```
+#### Or include in an HTML file
+```html
+<script src="https://unpkg.com/cosmicjs@latest/cosmicjs.browser.min.js"></script>
+<script>
+// Exposes the global variable Cosmic
+// Never expose your private keys or credentials in any public website's client-side code
+</script>
 ```
 
-#### Usage
-##### Include and Config
+## Usage
+### Authentication
+Use your Cosmic JS account email and password to create an authentication token.  **At this time, authentication is only necessary for adding Buckets**.
 ```javascript
-import Cosmic from 'cosmicjs';
+const Cosmic = require('cosmicjs')() // empty init
+Cosmic.authenticate({
+  email: 'you@youremail.com',
+  password: 'yourpassword'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
 
-/* Configure
-================================ */
-const config = {
-  bucket: {
-    slug: 'your-bucket-slug',
-    read_key: '', // add read_key if added to your Cosmic JS Bucket settings
-    write_key: '' // add write_key if added to your Cosmic JS Bucket settings
+### Buckets
+
+#### Add Bucket
+Add a new Bucket to your account.
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
+Cosmic.addBucket({
+  title: 'My New Bucket',
+  slug: 'my-new-bucket' // must be unique across all Buckets in system
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Connect to Bucket
+Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https://cosmicjs.com/login).
+```javascript
+// Use the Cosmic.bucket method to connect to different Buckets in your account.
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // optional
+})
+const bucket = Cosmic.bucket({
+  slug: 'my-new-bucket',
+  read_key: '',
+  write_key: ''
+})
+const bucket2 = Cosmic.bucket({
+  bucket: 'my-other-bucket',
+  read_key: '',
+  write_key: ''
+})
+```
+#### Get Bucket
+Returns the entire Bucket including Object Types, Objects, Media and more.
+```javascript
+bucket.getBucket().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+### Object Types
+#### Add Object Type
+Add a new Object Type to your Bucket.
+```javascript
+const params = {
+  title: 'Pages',
+  singular: 'Page',
+  slug: 'pages',
+  metafields: [
+    {
+      type: 'text',
+      title: 'Headline',
+      key: 'headline',
+      required: true
+    },
+    {
+      type: 'file',
+      title: 'Hero',
+      key: 'hero',
+      required: true
+    }
+  ]
+}
+bucket.addObjectType(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Get Object Types
+Get all Object Types in your Bucket.
+```javascript
+bucket.getObjectTypes().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Edit Object Type
+Edit an existing Object Type in your Bucket.
+```javascript
+bucket.editObjectType({
+  slug: 'posts',
+  title: 'New Posts Title'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Delete Object Type
+Delete an existing Object Type from your Bucket.  *This does not delete Objects in this Object Type.
+```javascript
+bucket.deleteObjectType({
+  slug: 'posts'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+### Objects
+#### Add Object
+Add a new Object to your Bucket.
+```javascript
+const params = {
+  title: 'Cosmic JS Example',
+  type_slug: 'examples',
+  content: 'Learning the Cosmic JS API is really fun and so easy',
+  metafields: [
+    {
+      key: 'Headline',
+      type: 'text',
+      value: 'Learn Cosmic JS!'
+    },
+    {
+      key: 'Author',
+      type: 'text',
+      value: 'Quasar Jones'
+    }
+  ],
+  options: {
+    slug_field: false
   }
-};
+}
+bucket.addObject(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
-##### Get Bucket
+#### Get Objects
+Returns all Objects from your Bucket.
 ```javascript
-Cosmic.getBucket(config, (error, response) => {
-  // console.log(response);
-});
+bucket.getObjects({
+  limit: 2
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
-##### Get Objects
-```javascript
-Cosmic.getObjects(config, (error, response) => {
-  // console.log(response);
-});
-```
-##### Get Objects by Type
+#### Get Objects by Type
+Get Objects from an Object Type.
 ```javascript
 const params = {
   type_slug: 'posts',
@@ -45,14 +196,17 @@ const params = {
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
   status: 'all' // optional, if need to get draft Objects
-};
-Cosmic.getObjectsByType(config, params, (error, response) => {
-  // console.log(response);
-});
+}
+bucket.getObjectsByType(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
-##### Get Objects by Search
+#### Search Objects
+Search Objects in an Object Type.
 ```javascript
-// Search by Object Metafield
+// Search by connected Object Metafield
 const params = {
   type_slug: 'posts',
   metafield_key: 'author',
@@ -62,7 +216,7 @@ const params = {
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects,
   status: 'all' // optional, if need to get draft Objects,
-};
+}
 // Search by Metafield Value
 const params = {
   type_slug: 'posts',
@@ -71,7 +225,7 @@ const params = {
   limit: 5,
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
-};
+}
 // Search by Metafield Has Value
 const params = {
   type_slug: 'posts',
@@ -80,116 +234,120 @@ const params = {
   limit: 5,
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
-};
-Cosmic.getObjectsBySearch(config, params, (error, response) => {
-  // console.log(response);
-});
-```
-##### Get Object
-```javascript
-const params = {
-  slug: 'object-slug'
 }
-Cosmic.getObject(config, params, (error, response) => {
-  // console.log(response);
-});
-```
-##### Add Object
-```javascript
-const params = {
-  write_key: config.bucket.write_key,
-  type_slug: 'pages',
-  title: 'Test Title',
-  content: 'Test Content'
-};
-Cosmic.addObject(config, params, (error, response) => {
-  // console.log(response);
-});
-```
-##### Edit Object
-```javascript
-const params = {
-  write_key: config.bucket.write_key,
-  slug: 'test-title',
-  type_slug: 'pages',
-  title: 'New Title',
-  content: 'New Content'
-};
-Cosmic.editObject(config, params, (error, response) => {
-  // console.log(response);
-});
-```
-##### Delete Object
-```javascript
-const params = {
-  write_key: config.bucket.write_key,
-  slug: 'test-title'
-};
-Cosmic.deleteObject(config, params, (error, response) => {
-  // console.log(response);
-});
-```
-##### Get Media
-```javascript
-Cosmic.getMedia(config, (error, response) => {
-  // console.log(response);
-});
-```
-##### Add Media
-```javascript
-const params = {
-  media: FILE_DATA,
-  folder: 'your-folder-slug'
-}
-Cosmic.addMedia(config, params, (error, response) => {
-  // console.log(res)
+bucket.searchObjectType(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
 })
 ```
-##### Delete Media
+
+#### Edit Object
+Edit an existing Object in your Bucket.
 ```javascript
-const params = {
-  media_id: MEDIA_ID,
-  write_key: config.bucket.write_key,
-}
-Cosmic.deleteMedia(config, params, (error, response) => {
-  // console.log(res)
+bucket.editObject({
+  slug: 'cosmic-js-example',
+  title: 'New Title Edit'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
 })
 ```
-#### Easy Browser Example
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Cosmic JS Easy Browser Example</title>
-</head>
-<body>
-<h1 id="title">If you see this, something isn't working...</h1>
-<div id="content"></div>
-<div id="metafields"></div>
-<script src="cosmicjs.browser.min.js"></script>
-<script>
-var config = {
-  bucket: {
-    slug: 'your-bucket-slug'
-  },
-  object: {
-    slug: 'home'
+
+#### Delete Object
+Delete an existing Object in your Bucket.
+```javascript
+bucket.deleteObject({
+  slug: 'cosmic-js-example'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+### Media
+#### Add Media
+The only required post value is media which is the name of your media sent.
+```javascript
+bucket.addMedia({
+  media: '<FILE_DATA>',
+  folder: 'your-folder-slug',
+  metadata: {
+    caption: 'Beautiful picture of the beach',
+    credit: 'Tyler Jackson'
   }
-};
-Cosmic.getObject(config, config.object, (err, res) => {
-  var object = res.object;
-  document.getElementById('title').innerHTML = object.title;
-  document.getElementById('content').innerHTML = object.content;
-  var metafields = object.metafields;
-  var items = '';
-  metafields.forEach(function(metafield){
-    items += '<h2>' + metafield.title + '</h2>';
-    items += '<img width="300" src="' + metafield.url + '"/>';
-    items += '<br><br>';
-  });
-  document.getElementById('metafields').innerHTML = items;
-});
-</script>
-</body>
-</html>
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Get Media
+You can add the `folder` parameter to get Media from a certain folder. You can use the full [Imgix suite of image processing tools](https://imgix.com) on the URL provided by the `imgix_url` property value. Check out the Imgix documentation for more info.
+```javascript
+bucket.getMedia({
+  folder: 'groomsmen',
+  limit: 3
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Delete Media
+```javascript
+bucket.deleteMedia({
+ id: '5a4b18e12fff7ec0e3c13c65'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+### Webhooks
+#### Add Webhook
+Sends a POST request to the endpoint of your choice when the event occurs.  The data payload in the same fomat as Object and Media.  Read more about Webhooks including the payload sent to the endpoint on the <a href='https://cosmicjs.com/docs/webhooks' target='_blank'>Webhooks documentation page</a>.
+```javascript
+bucket.addWebhook({
+  event: 'object.created.published',
+  endpoint: 'http://my-listener.com'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Delete Webhook
+```javascript
+bucket.deleteWebhook({
+  id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+### Extensions
+#### Add Extension
+Adds an Extension to your Bucket.  Required post values include zip which is the name of your file sent.   Read more about Extensions on the <a href='https://cosmicjs.com/docs/extensions' target='_blank'>Extensions documentation page</a>.
+```javascript
+bucket.addExtension({
+  zip: '<ZIP_FILE_DATA>'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Delete Extension
+```javascript
+bucket.deleteExtension({
+  id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```

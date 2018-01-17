@@ -1,315 +1,337 @@
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-var _ = require('lodash');
-var superagent = require('superagent');
-var FormData = require('form-data');
+const axios = require('axios')
+const FormData = require('form-data')
 
-var api_url = 'https://api.cosmicjs.com';
-var api_version = 'v1';
-
-module.exports = {
-
-  getBucket: function(config, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/?read_key=' + config.bucket.read_key;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  },
-
-  getObjects: function(config, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/objects?read_key=' + config.bucket.read_key;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      // Constructor
-      var cosmic = {};
-      var objects = response.objects;
-      cosmic.objects = {};
-      cosmic.objects.all = objects;
-      cosmic.objects.type = _.groupBy(objects, 'type_slug');
-      cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.keyBy(cosmic.object, 'slug');
-      return callback(false, cosmic);
-    });
-  },
-
-  getObjectsByType: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + '?read_key=' + config.bucket.read_key;
-    if (object.limit) endpoint += '&limit=' + object.limit;
-    if (object.skip) endpoint +=  '&skip=' + object.skip;
-    if (object.locale) endpoint += '&locale=' + object.locale;
-    if (object.status) endpoint += '&status=' + object.status;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          "message" : "There was an error with this request."
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      // Constructor
-      var cosmic = {};
-      var objects = response.objects;
-      cosmic.objects = {};
-      cosmic.objects.all = objects;
-      cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.keyBy(cosmic.object, "slug");
-      cosmic.total = response.total;
-      return callback(false, cosmic);
-    });
-  },
-
-  // DEPRECATE THIS
-  getObjectType: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + '?read_key=' + config.bucket.read_key;
-    if (object.limit) endpoint += '&limit=' + object.limit;
-    if (object.skip) endpoint +=  '&skip=' + object.skip;
-    if (object.locale) endpoint += '&locale=' + object.locale;
-    if (object.sort) endpoint += '&sort=' + object.sort;
-    if (object.status) endpoint += '&status=' + object.status;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          "message" : "There was an error with this request."
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      // Constructor
-      var cosmic = {};
-      var objects = response.objects;
-      cosmic.objects = {};
-      cosmic.objects.all = objects;
-      cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.keyBy(cosmic.object, "slug");
-      cosmic.total = response.total;
-      return callback(false, cosmic);
-    });
-  },
-
-  getObject: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object/' + object.slug + '?read_key=' + config.bucket.read_key;
-    if (object._id) {
-      endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-by-id/' + object._id + '?read_key=' + config.bucket.read_key;
-    }
-    if (object.status) endpoint += '&status=' + object.status;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      // Constructor
-      var cosmic = {};
-      var object = response.object;
-      var metafields = object.metafields;
-      if(metafields){
-        object.metafield = _.keyBy(metafields, "key");
-      }
-      cosmic.object = object;
-      return callback(false, cosmic);
-    });
-  },
-
-  getObjectsBySearch: function(config, object , callback){
-    var searchParams = '/search?metafield_key=' + object.metafield_key;
-    if (object.metafield_value) searchParams += '&metafield_value=' + object.metafield_value;
-    else if (object.metafield_object_slug) searchParams += '&metafield_object_slug=' + object.metafield_object_slug;
-    else searchParams += '&metafield_value_has=' + object.metafield_value_has;
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/object-type/' + object.type_slug + searchParams + '&read_key=' + config.bucket.read_key;
-    if (object.limit) endpoint += '&limit=' + object.limit;
-    if (object.skip) endpoint +=  '&skip=' + object.skip;
-    if (object.sort) endpoint += '&sort=' + object.sort;
-    if (object.locale) endpoint += '&locale=' + object.locale;
-    if (object.status) endpoint += '&status=' + object.status;
-      fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          "message" : "There was an error with this request."
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      // Constructor
-      var cosmic = {};
-      var objects = response.objects;
-      cosmic.objects = {};
-      cosmic.objects.all = objects;
-      cosmic.object = _.map(objects, keyMetafields);
-      cosmic.object = _.keyBy(cosmic.object, "slug");
-      cosmic.total = response.total;
-      return callback(false, cosmic);
-    });
-  },
-
-  getMedia: function(config, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media?read_key=' + config.bucket.read_key;
-    fetch(endpoint)
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  },
-
-  addObject: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/add-object';
-    fetch(endpoint, {
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(object)
-    })
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  },
-
-  editObject: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/edit-object';
-    fetch(endpoint, {
-      method: 'put',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(object)
-    })
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  },
-
-  deleteObject: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/delete-object';
-    fetch(endpoint, {
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(object)
-    })
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  },
-
-  addMedia: function(config, params, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media';
-    var form = new FormData();
-    if (config.bucket.write_key)
-      form.append('write_key', config.bucket.write_key);
-    form.append('media', params.media);
-    if (params.folder)
-      form.append('folder', params.folder);
-    superagent.post(endpoint)
-      .send(form)
-      .end(function(err, response) {
-        if (response.status >= 400) {
-          var err = {
-            'message': 'There was an error with this request.'
-          }
-          return callback(err, false);
-        }
-        return callback(false, response);
-    });
-  },
-
-  deleteMedia: function(config, object, callback){
-    var endpoint = api_url + '/' + api_version + '/' + config.bucket.slug + '/media/' + object.media_id;
-    fetch(endpoint, {
-      method: 'delete',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(object)
-    })
-    .then(function(response){
-      if (response.status >= 400) {
-        var err = {
-          'message': 'There was an error with this request.'
-        }
-        return callback(err, false);
-      }
-      return response.json()
-    })
-    .then(function(response){
-      return callback(false, response);
-    });
-  }
-};
-
-// Functions
-function keyMetafields(object){
-  var metafields = object.metafields;
-  if(metafields){
-    object.metafield = _.keyBy(metafields, 'key');
-  }
-  return object;
+const API_URL = 'https://api.cosmicjs.com'
+const API_VERSION = 'v1'
+const URI = `${API_URL}/${API_VERSION}`
+const Cosmic = (config) => {
+	if (config && config.token) {
+		axios.defaults.headers.common.Authorization = config.token
+	}
+	const main_methods = {
+		authenticate: (params) => {
+			const endpoint = `${URI}/authenticate`
+			return axios.post(endpoint, params)
+				.then(response => response.data)
+				.catch((error) => {
+					throw error.response.data
+				})
+		},
+		addBucket: (params) => {
+			const endpoint = `${URI}/buckets`
+			return axios.post(endpoint, params)
+				.then(response => response.data)
+				.catch((error) => {
+					throw error.response.data
+				})
+		}
+	}
+	const bucketMethods = (bucket_config) => {
+		const bucket_methods = {
+			getBucket: () => {
+				const endpoint = `${URI}/${bucket_config.slug}/?read_key=${bucket_config.read_key}`
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			getObjects: (params) => {
+				let endpoint = `${URI}/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			getObjectTypes: (params) => {
+				let endpoint = `${URI}/${bucket_config.slug}/objects-types?read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			getObjectsByType: (params) => {
+				let endpoint = `${URI}/${bucket_config.slug}/objects-type/${params.type_slug}?read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			searchObjectType: (params) => {
+				let searchParams = `/search?metafield_key=${params.metafield_key}`
+				if (params.metafield_value) {
+					searchParams += `&metafield_value=${params.metafield_value}`
+				} else if (params.metafield_params_slug) {
+					searchParams += `&metafield_params_slug=${params.metafield_params_slug}`
+				} else {
+					searchParams += `&metafield_value_has=${params.metafield_value_has}`
+				}
+				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-type/
+					${params.type_slug}${searchParams}&read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.sort) {
+					endpoint += `&sort=${params.sort}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			addObjectType: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/add-object-type`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.post(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			editObjectType: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object-type`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.put(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			deleteObjectType: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-types/${params.slug}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.delete(endpoint, { data: bucket_config })
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			addObject: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/add-object`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.post(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			editObject: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.put(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			deleteObject: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/objects/${params.slug}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.delete(endpoint, { data: bucket_config, slug: params.slug })
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			addMedia: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media`
+				const data = new FormData()
+				if (params.media.buffer) {
+					data.append('media', params.media.buffer, params.media.originalname)
+				} else {
+					data.append('media', params.media, params.media.name)
+				}
+				if (bucket_config.write_key) {
+					data.append('write_key', bucket_config.write_key)
+				}
+				if (params.folder) {
+					data.append('folder', params.folder)
+				}
+				const getHeaders = (form =>
+					new Promise((resolve, reject) => {
+						if (params.media.buffer) {
+							form.getLength((err, length) => {
+								if (err) reject(err)
+								const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
+								resolve(headers)
+							})
+						} else {
+							resolve({ 'Content-Type': 'multipart/form-data' })
+						}
+					})
+				)
+				return getHeaders(data)
+					.then(headers => axios.post(endpoint, data, { headers })
+						.then(response => response.data)
+						.catch((error) => {
+							throw error.response.data
+						}))
+			},
+			getMedia: (params) => {
+				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			deleteMedia: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media/${params.id}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.delete(endpoint, { data: bucket_config })
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			addWebhook: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.post(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			deleteWebhook: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks/${params.id}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.delete(endpoint, { data: bucket_config })
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			addExtension: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions`
+				const data = new FormData()
+				if (params.zip.buffer) {
+					data.append('zip', params.zip.buffer, params.zip.originalname)
+				} else {
+					data.append('zip', params.zip, params.zip.name)
+				}
+				if (bucket_config.write_key) {
+					data.append('write_key', bucket_config.write_key)
+				}
+				const getHeaders = (form =>
+					new Promise((resolve, reject) => {
+						if (params.zip.buffer) {
+							form.getLength((err, length) => {
+								if (err) reject(err)
+								const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
+								resolve(headers)
+							})
+						} else {
+							resolve({ 'Content-Type': 'multipart/form-data' })
+						}
+					})
+				)
+				return getHeaders(data)
+					.then(headers => axios.post(endpoint, data, { headers })
+						.then(response => response.data)
+						.catch((error) => {
+							throw error.response.data
+						}))
+			},
+			deleteExtension: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.delete(endpoint, { data: bucket_config })
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			}
+		}
+		return bucket_methods
+	} // end bucketMethods
+	// Combine methods
+	let methods = {
+		bucket: bucketMethods
+	}
+	methods = Object.assign(main_methods, methods)
+	return methods
 }
+
+module.exports = Cosmic
