@@ -56,20 +56,20 @@ const Cosmic = (config) => {
 						throw error.response.data
 					})
 			},
-      getObject: (params) => {
-        let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}?read_key=${bucket_config.read_key}`
-        if (params && params.locale) {
-          endpoint += `&locale=${params.locale}`
-        }
-        if (params && params.status) {
-          endpoint += `&status=${params.status}`
-        }
-        return axios.get(endpoint)
-          .then(response => response.data)
-          .catch((error) => {
-            throw error.response.data
-          })
-      },
+			getObject: (params) => {
+				let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}?read_key=${bucket_config.read_key}`
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 			getObjectTypes: (params) => {
 				let endpoint = `${URI}/${bucket_config.slug}/object-types?read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
