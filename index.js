@@ -71,7 +71,7 @@ const Cosmic = (config) => {
           })
       },
 			getObjectTypes: (params) => {
-				let endpoint = `${URI}/${bucket_config.slug}/objects-types?read_key=${bucket_config.read_key}`
+				let endpoint = `${URI}/${bucket_config.slug}/object-types?read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
 					endpoint += `&limit=${params.limit}`
 				}
@@ -91,7 +91,7 @@ const Cosmic = (config) => {
 					})
 			},
 			getObjectsByType: (params) => {
-				let endpoint = `${URI}/${bucket_config.slug}/objects-type/${params.type_slug}?read_key=${bucket_config.read_key}`
+				let endpoint = `${URI}/${bucket_config.slug}/object-type/${params.type_slug}?read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
 					endpoint += `&limit=${params.limit}`
 				}
