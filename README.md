@@ -188,7 +188,7 @@ bucket.getObjects({
 ```
 
 #### Get Single Object
-Returns single Object from your Bucket.
+Returns a single Object from your Bucket.
 ```javascript
 bucket.getObject({
   slug: 'home'
