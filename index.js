@@ -100,13 +100,12 @@ const Cosmic = (config) => {
 				let searchParams = `/search?metafield_key=${params.metafield_key}`
 				if (params.metafield_value) {
 					searchParams += `&metafield_value=${params.metafield_value}`
-				} else if (params.metafield_params_slug) {
-					searchParams += `&metafield_params_slug=${params.metafield_params_slug}`
+				} else if (params.metafield_object_slug) {
+					searchParams += `&metafield_object_slug=${params.metafield_object_slug}`
 				} else {
 					searchParams += `&metafield_value_has=${params.metafield_value_has}`
 				}
-				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-type/
-					${params.type_slug}${searchParams}&read_key=${bucket_config.read_key}`
+				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-type/${params.type_slug}${searchParams}&read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
 					endpoint += `&limit=${params.limit}`
 				}
@@ -122,6 +121,7 @@ const Cosmic = (config) => {
 				if (params && params.status) {
 					endpoint += `&status=${params.status}`
 				}
+				console.log(endpoint)
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
