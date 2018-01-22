@@ -186,6 +186,18 @@ bucket.getObjects({
   console.log(err)
 })
 ```
+
+#### Get Single Object
+Returns a single Object from your Bucket.
+```javascript
+bucket.getObject({
+  slug: 'home'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
 #### Get Objects by Type
 Get Objects from an Object Type.
 ```javascript
