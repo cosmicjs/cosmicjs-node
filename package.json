@@ -1,6 +1,6 @@
 {
   "name": "cosmicjs",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
   "main": "index.js",
   "engines": {
@@ -29,7 +29,8 @@
     "lint": "eslint index.js",
     "dev": "nodemon test.js && eslint test.js",
     "clean": "rm -f ./cosmicjs.browser.min.js",
-    "build": "npm run clean; webpack -p"
+    "build": "npm run clean; webpack -p",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
