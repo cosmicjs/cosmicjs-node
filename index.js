@@ -1,8 +1,8 @@
 const axios = require('axios')
 const FormData = require('form-data')
 
-const API_URL = 'https://api.cosmicjs.com'
-const API_VERSION = 'v1'
+const API_URL = process.env.API_URL || 'https://api.cosmicjs.com'
+const API_VERSION = process.env.API_VERSION || 'v1'
 const URI = `${API_URL}/${API_VERSION}`
 const Cosmic = (config) => {
 	if (config && config.token) {
@@ -20,6 +20,14 @@ const Cosmic = (config) => {
 		addBucket: (params) => {
 			const endpoint = `${URI}/buckets`
 			return axios.post(endpoint, params)
+				.then(response => response.data)
+				.catch((error) => {
+					throw error.response.data
+				})
+		},
+		deleteBucket: (params) => {
+			const endpoint = `${URI}/buckets/${params.id}`
+			return axios.delete(endpoint, params)
 				.then(response => response.data)
 				.catch((error) => {
 					throw error.response.data

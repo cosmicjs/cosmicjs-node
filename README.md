@@ -82,6 +82,18 @@ bucket.getBucket().then(data => {
   console.log(err)
 })
 ```
+#### Delete Bucket
+Deletes the Bucket
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // required
+})
+Cosmic.deleteBucket().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
 
 ### Object Types
 #### Add Object Type
