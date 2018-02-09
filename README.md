@@ -88,7 +88,9 @@ Deletes the Bucket
 const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // required
 })
-Cosmic.deleteBucket().then(data => {
+Cosmic.deleteBucket({
+	id: 'bucket_id'
+}).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
