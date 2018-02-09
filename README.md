@@ -89,7 +89,7 @@ const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // required
 })
 Cosmic.deleteBucket({
-	id: 'bucket_id'
+  id: 'bucket_id'
 }).then(data => {
   console.log(data)
 }).catch(err => {
