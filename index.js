@@ -5,6 +5,7 @@ const API_URL = process.env.API_URL || 'https://api.cosmicjs.com'
 const API_VERSION = process.env.API_VERSION || 'v1'
 const URI = `${API_URL}/${API_VERSION}`
 const Cosmic = (config) => {
+	console.log(config)
 	if (config && config.token) {
 		axios.defaults.headers.common.Authorization = config.token
 	}
@@ -61,10 +62,14 @@ const Cosmic = (config) => {
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
+						console.log(error)
 						throw error.response.data
 					})
 			},
 			getObject: (params) => {
+				if (!params) {
+					throw new Error('Must supply params object with object slug')
+				}
 				let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}?read_key=${bucket_config.read_key}`
 				if (params && params.locale) {
 					endpoint += `&locale=${params.locale}`

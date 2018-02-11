@@ -33,7 +33,7 @@ suite('Test Main Methods.', function() {
       slug: 'my-new-bucket'
     }
 
-    /* stub out a request to URI/addBucket, only intercept if body matches */
+    /* stub out a request to URI/addBucket, only intercept if header and body match */
     const reqNock = nock(`${URI}`, expectedAuthHeader)
     .post('/buckets', params)
     .reply(200, {
@@ -53,11 +53,10 @@ suite('Test Main Methods.', function() {
 
   test('deleteBucket hits expected url and returns data from request', function(done) {
     const params = {
-      title: 'My New Bucket',
-      slug: 'my-new-bucket'
+      id: 'my-id'
     }
 
-    /* stub out a request to URI/addBucket, only intercept if body matches */
+    /* stub out a request to URI/addBucket, only intercept if header and body match */
     const reqNock = nock(`${URI}`, expectedAuthHeader)
     .post('/buckets', params)
     .reply(200, {
