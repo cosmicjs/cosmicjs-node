@@ -17,8 +17,6 @@
   "nyc": {
     "check-coverage": true,
     "lines": 45,
-    "sourceMap": false,
-    "instrument": false
   },
   "dependencies": {
     "axios": "^0.17.1",
