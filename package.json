@@ -8,11 +8,17 @@
     "dev": "nodemon test.js && eslint test.js",
     "clean": "rm -f ./cosmicjs.browser.min.js",
     "build": "npm run clean; webpack -p",
-    "test": "nyc mocha --reporter spec",
+    "test": "nyc ./node_modules/.bin/mocha --reporter spec",
     "test-no-cov": "mocha --reporter spec"
   },
   "engines": {
     "node": ">=6.0"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 45,
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -22,6 +28,7 @@
     "multer": "^1.3.0"
   },
   "devDependencies": {
+    "archiver": "^2.1.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
