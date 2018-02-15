@@ -160,7 +160,6 @@ const Cosmic = (config) => {
 				return axios.post(endpoint, params)
 					.then(response => response.data)
 					.catch((error) => {
-						console.log(error)
 						throw error.response.data
 					})
 			},

@@ -575,8 +575,37 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
-  test.skip('addMedia', function(done) {
-    done()
+  test('addMedia', function(done) {
+    const testBuffer = Buffer.from('sample file stream')
+    const name = 'test-file'
+    const params = {
+      media: {
+        buffer: testBuffer,
+        originalname: name,
+        size: testBuffer.byteLength
+      }
+    }
+
+    /* stub out a request to URI/addBucket, only intercept if query and route match */
+    const reqNock = nock(`${URI}`, {
+      reqheaders: {
+        'Content-Type': /multipart\/form-data/, // regex check to contain multipart
+        'Content-Length': headerExistsCheck
+      }
+    })
+    .post(`/${bucket_config.slug}/media`)
+    .reply(200, {
+      success: true
+    })
+
+    /* send the request and expect the returned body to contain the token our stub sends */
+    cosmicBucket.addMedia(params)
+    .then(data => {
+        expect(data.success).to.be.true()
+        done()
+    }).catch(err => {
+        done(err)
+    })
   })
 
   test('getMedia', function(done) {
@@ -666,23 +695,22 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
-  test.skip('addExtension', function(done) {
+  test('addExtension', function(done) {
 
-    const Archiver = require('archiver');
-
-    const zip = Archiver('zip');
-    // Create zip with a file
-    zip.append('a file in the zip file', { name: '1.txt' })
-        .finalize();
-
+    const testBuffer = Buffer.from('sample file stream')
+    const name = 'test-file'
     const params = {
-      zip: zip
+      zip: {
+        buffer: testBuffer,
+        originalname: name,
+        size: testBuffer.byteLength
+      }
     }
 
     /* stub out a request to URI/addBucket, only intercept if query and route match */
     const reqNock = nock(`${URI}`, {
       reqheaders: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': /multipart\/form-data/, // regex check to contain multipart
         'Content-Length': headerExistsCheck
       }
     })
@@ -726,7 +754,6 @@ suite('Test Bucket Methods.', function() {
 })
 
 function headerExistsCheck(headerValue) {
-  console.log(headerValue)
    if (headerValue) {
      return true;
    }
