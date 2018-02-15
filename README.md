@@ -5,7 +5,7 @@
   📖 <a href="https://cosmicjs.github.io/rest-api-docs/?javascript">View JavaScript Docs</a>
 </p>
 
-![CircleCI status](https://circleci.com/gh/RobinJayaswal/cosmicjs-node.png?circle-token=b0b182a6896640c2756a7143c31269ff6c929504)
+![CircleCI status](https://circleci.com/gh/RobinJayaswal/cosmicjs-node.svg?style=shield&circle-token=b0b182a6896640c2756a7143c31269ff6c929504)
 
 This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
