@@ -7,8 +7,8 @@ const rewire = require('rewire')
 
 suite('Test URI Construction.', function() {
   test('URI is created based on env variables', function(done) {
-    process.env.API_URL = TEST_API_URL
-    process.env.API_VERSION = TEST_API_VERSION
+    process.env.COSMIC_API_URL = TEST_API_URL
+    process.env.COSMIC_API_VERSION = TEST_API_VERSION
 
     /* use rewire to be able to access global variables in the file and check URI is created correctly */
     const CosmicLib = rewire('../../index')
@@ -23,8 +23,8 @@ suite('Test URI Construction.', function() {
   })
 
   test('URI is with defaults when no env variables set', function(done) {
-    delete process.env.API_URL
-    delete process.env.API_VERSION
+    delete process.env.COSMIC_API_URL
+    delete process.env.COSMIC_API_VERSION
 
     /* use rewire to be able to access global variables in the file and check URI is created correctly */
     const CosmicLib = rewire('../../index')
