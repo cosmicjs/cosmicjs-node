@@ -582,7 +582,6 @@ suite('Test Bucket Methods.', function() {
       media: {
         buffer: testBuffer,
         originalname: name,
-        size: testBuffer.byteLength
       }
     }
 
@@ -703,7 +702,6 @@ suite('Test Bucket Methods.', function() {
       zip: {
         buffer: testBuffer,
         originalname: name,
-        size: testBuffer.byteLength
       }
     }
 
