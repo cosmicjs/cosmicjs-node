@@ -68,6 +68,9 @@ const Cosmic = (config) => {
 					})
 			},
 			getObject: (params) => {
+				if (!params) {
+					throw new Error('Must supply params object with object slug')
+				}
 				let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}?read_key=${bucket_config.read_key}`
 				if (params && params.locale) {
 					endpoint += `&locale=${params.locale}`
@@ -176,9 +179,6 @@ const Cosmic = (config) => {
 			},
 			deleteObjectType: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-types/${params.slug}`
-				if (bucket_config.write_key) {
-					params.write_key = bucket_config.write_key
-				}
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -209,9 +209,6 @@ const Cosmic = (config) => {
 			},
 			deleteObject: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/objects/${params.slug}`
-				if (bucket_config.write_key) {
-					params.write_key = bucket_config.write_key
-				}
 				return axios.delete(endpoint, { data: bucket_config, slug: params.slug })
 					.then(response => response.data)
 					.catch((error) => {
@@ -274,9 +271,6 @@ const Cosmic = (config) => {
 			},
 			deleteMedia: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media/${params.id}`
-				if (bucket_config.write_key) {
-					params.write_key = bucket_config.write_key
-				}
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -296,9 +290,6 @@ const Cosmic = (config) => {
 			},
 			deleteWebhook: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks/${params.id}`
-				if (bucket_config.write_key) {
-					params.write_key = bucket_config.write_key
-				}
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -338,9 +329,6 @@ const Cosmic = (config) => {
 			},
 			deleteExtension: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
-				if (bucket_config.write_key) {
-					params.write_key = bucket_config.write_key
-				}
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
