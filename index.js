@@ -37,7 +37,7 @@ const Cosmic = (config) => {
 	const bucketMethods = (bucket_config) => {
 		const bucket_methods = {
 			getBucket: (params) => {
-				const endpoint = `${URI}/${bucket_config.slug}/?read_key=${bucket_config.read_key}`
+				let endpoint = `${URI}/${bucket_config.slug}/?read_key=${bucket_config.read_key}`
 				if (params && params.show_options) {
 					endpoint += `&show_options=${params.show_options}`
 				}
