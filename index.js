@@ -337,6 +337,17 @@ const Cosmic = (config) => {
 					.catch((error) => {
 						throw error.response.data
 					})
+			},
+			addUser: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.post(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
 			}
 		}
 		return bucket_methods
