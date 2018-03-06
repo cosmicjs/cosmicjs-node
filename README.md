@@ -104,9 +104,9 @@ Add a new User to your Bucket.
 ```javascript
 const params = {
   email: 'quasar@theuniverse.com',
-  first_name: 'Quasar',
-  last_name: 'Jones',
-  role: 'editor'
+  role: 'editor',
+	first_name: 'Quasar',
+  last_name: 'Jones'
 }
 bucket.addUser(params).then(data => {
   console.log(data)
