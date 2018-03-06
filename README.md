@@ -99,6 +99,22 @@ Cosmic.deleteBucket({
 })
 ```
 
+### Add Users
+Add a new User to your Bucket.
+```javascript
+const params = {
+  email: 'quasar@theuniverse.com',
+  first_name: 'Quasar',
+  last_name: 'Jones',
+  role: 'editor'
+}
+bucket.addUser(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 ### Object Types
 #### Add Object Type
 Add a new Object Type to your Bucket.
