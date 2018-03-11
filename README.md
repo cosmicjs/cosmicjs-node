@@ -8,7 +8,7 @@
 [![npm version](https://badge.fury.io/js/cosmicjs.svg)](https://www.npmjs.com/package/cosmicjs)
 [![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
 
-This is the official [Cosmic JS](https://cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage your Buckets and manage data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the official [Cosmic JS](https://cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets, all from the comfort of your command line interface.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
