@@ -7,7 +7,7 @@
 
 [![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
 
-This is the Official Cosmic JS JavaScript Client.  Log in, manage your Buckets, Bucket data, files and users.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the official Cosmic JS JavaScript client.  Log in, manage your Buckets, Bucket data, files and users.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
