@@ -7,7 +7,7 @@
 
 [![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
 
-This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the Official Cosmic JS JavaScript Client.  Log in, manage your Buckets, Bucket data, files and users.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
@@ -27,7 +27,7 @@ npm install cosmicjs
 
 ## Usage
 ### Authentication
-Use your Cosmic JS account email and password to create an authentication token.  **At this time, authentication is only required for adding and deleting Buckets**.
+Use your Cosmic JS account email and password to create an authentication token.  **Authentication is required for adding and deleting Buckets and adding users to Buckets**.
 ```javascript
 const Cosmic = require('cosmicjs')() // empty init
 Cosmic.authenticate({
