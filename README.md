@@ -59,7 +59,8 @@ Cosmic.addBucket({
 })
 ```
 
-#### Get Buckets Connected to Your Account
+#### Get Buckets
+Get all Buckets connected to your account.
 ```javascript
 const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // optional
