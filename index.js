@@ -17,7 +17,7 @@ const Cosmic = (config) => {
 					throw error.response.data
 				})
 		},
-		getBuckets: (params) => {
+		getBuckets: () => {
 			const endpoint = `${URI}/buckets`
 			return axios.get(endpoint)
 				.then(response => response.data)
