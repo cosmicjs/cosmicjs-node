@@ -58,6 +58,19 @@ Cosmic.addBucket({
   console.log(err)
 })
 ```
+
+#### Get Buckets Connected to Your Account
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // optional
+})
+Cosmic.getBuckets().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 #### Connect to Bucket
 Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https://cosmicjs.com/login).
 ```javascript
