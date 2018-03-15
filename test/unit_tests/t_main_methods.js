@@ -51,6 +51,26 @@ suite('Test Main Methods.', function() {
     })
   })
 
+  test('getBuckets hits expected url and returns data from request', function(done) {
+
+    /* stub out a request to URI/addBucket, only intercept if header and body match */
+    const reqNock = nock(`${URI}`, expectedAuthHeader)
+    .get('/buckets')
+    .reply(200, {
+      success: true,
+    })
+
+    /* send the request and expect the returned body to contain the token our stub sends */
+    Cosmic.getBuckets()
+    .then(data => {
+        expect(data.success).to.be.true() /* response was as expected */
+        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        done()
+    }).catch(err => {
+        done(err)
+    })
+  })
+
   test('deleteBucket hits expected url and returns data from request', function(done) {
     const params = {
       id: 'my-id'
