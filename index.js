@@ -69,6 +69,11 @@ const Cosmic = (config) => {
 				if (params && params.status) {
 					endpoint += `&status=${params.status}`
 				}
+				if (params && params.filters) {
+					for (var key in params.filters) {
+						endpoint += `&filters[${key}]=${params.filters[key]}`
+					}
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
