@@ -80,6 +80,10 @@ suite('Test Bucket Methods.', function() {
     const skip = 1
     const locale = 'US'
     const status = 'published'
+    const filters = {
+      _id: '1',
+      title: 'test',
+    };
 
     /* stub out a request to URI/addBucket, only intercept if query and route match */
     const reqNock = nock(`${URI}`)
@@ -89,7 +93,8 @@ suite('Test Bucket Methods.', function() {
 			limit,
 			skip,
 			locale,
-			status,
+      status,
+      filters,
     })
     .reply(200, {
       objects
@@ -100,7 +105,8 @@ suite('Test Bucket Methods.', function() {
 			limit,
 			skip,
 			locale,
-			status,
+      status,
+      filters
     })
     .then(data => {
         expect(data.objects.length).to.equal(2)
