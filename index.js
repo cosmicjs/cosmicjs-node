@@ -70,9 +70,9 @@ const Cosmic = (config) => {
 					endpoint += `&status=${params.status}`
 				}
 				if (params && params.filters) {
-					for (var key in params.filters) {
+					Object.keys(params.filters).forEach((key) => {
 						endpoint += `&filters[${key}]=${params.filters[key]}`
-					}
+					})
 				}
 				return axios.get(endpoint)
 					.then(response => response.data)
