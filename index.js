@@ -40,6 +40,23 @@ const Cosmic = (config) => {
 				.catch((error) => {
 					throw error.response.data
 				})
+		},
+		importBucket: (params) => {
+			const endpoint = `${URI}/buckets/${params.id}/import`
+			console.log(endpoint)
+			return axios.post(endpoint, params)
+				.then(response => response.data)
+				.catch((error) => {
+					throw error.response.data
+				})
+		},
+		deployApp: (params) => {
+			const endpoint = `${URI}/buckets/${params.id}/deploy`
+			return axios.post(endpoint, params)
+				.then(response => response.data)
+				.catch((error) => {
+					throw error.response.data
+				})
 		}
 	}
 	const bucketMethods = (bucket_config) => {
