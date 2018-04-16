@@ -43,7 +43,6 @@ const Cosmic = (config) => {
 		},
 		importBucket: (params) => {
 			const endpoint = `${URI}/buckets/${params.id}/import`
-			console.log(endpoint)
 			return axios.post(endpoint, params)
 				.then(response => response.data)
 				.catch((error) => {
