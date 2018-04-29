@@ -5,7 +5,10 @@
   📖 <a href="https://cosmicjs.github.io/rest-api-docs/?javascript">View JavaScript Docs</a>
 </p>
 
-This is the Official Cosmic JS JavaScript Client which allows you to easily create, read, update and delete content from your Cosmic JS Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+[![npm version](https://badge.fury.io/js/cosmicjs.svg)](https://www.npmjs.com/package/cosmicjs)
+[![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
+
+This is the official [Cosmic JS](https://cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
@@ -25,7 +28,7 @@ npm install cosmicjs
 
 ## Usage
 ### Authentication
-Use your Cosmic JS account email and password to create an authentication token.  **At this time, authentication is only necessary for adding Buckets**.
+Use your Cosmic JS account email and password to create an authentication token.  **Authentication is required for adding and deleting Buckets and adding users to Buckets**.
 ```javascript
 const Cosmic = require('cosmicjs')() // empty init
 Cosmic.authenticate({
@@ -55,6 +58,20 @@ Cosmic.addBucket({
   console.log(err)
 })
 ```
+
+#### Get Buckets
+Get all Buckets connected to your account.
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // optional
+})
+Cosmic.getBuckets().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 #### Connect to Bucket
 Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https://cosmicjs.com/login).
 ```javascript
@@ -77,6 +94,36 @@ const bucket2 = Cosmic.bucket({
 Returns the entire Bucket including Object Types, Objects, Media and more.
 ```javascript
 bucket.getBucket().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+#### Delete Bucket
+Deletes the Bucket
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // required
+})
+Cosmic.deleteBucket({
+  id: 'bucket_id'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+### Add Users
+Add a new User to your Bucket.
+```javascript
+const params = {
+  email: 'quasar@theuniverse.com',
+  role: 'editor',
+  first_name: 'Quasar',
+  last_name: 'Jones'
+}
+bucket.addUser(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -180,6 +227,18 @@ Returns all Objects from your Bucket.
 ```javascript
 bucket.getObjects({
   limit: 2
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+#### Get Single Object
+Returns a single Object from your Bucket.
+```javascript
+bucket.getObject({
+  slug: 'home'
 }).then(data => {
   console.log(data)
 }).catch(err => {
