@@ -1,0 +1,396 @@
+'use strict';
+
+var axios = require('axios');
+var FormData = require('form-data');
+
+var API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com';
+var API_VERSION = process.env.COSMIC_API_VERSION || 'v1';
+var URI = API_URL + '/' + API_VERSION;
+var Cosmic = function Cosmic(config) {
+	if (config && config.token) {
+		axios.defaults.headers.common.Authorization = config.token;
+	}
+	var main_methods = {
+		authenticate: function authenticate(params) {
+			var endpoint = URI + '/authenticate';
+			return axios.post(endpoint, params).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		},
+		getBuckets: function getBuckets() {
+			var endpoint = URI + '/buckets';
+			return axios.get(endpoint).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		},
+		addBucket: function addBucket(params) {
+			var endpoint = URI + '/buckets';
+			return axios.post(endpoint, params).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		},
+		deleteBucket: function deleteBucket(params) {
+			var endpoint = URI + '/buckets/' + params.id;
+			return axios.delete(endpoint, params).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		},
+		importBucket: function importBucket(params) {
+			var endpoint = URI + '/buckets/' + params.id + '/import';
+			return axios.post(endpoint, params).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		},
+		deployApp: function deployApp(params) {
+			var endpoint = URI + '/buckets/' + params.id + '/deploy';
+			return axios.post(endpoint, params).then(function (response) {
+				return response.data;
+			}).catch(function (error) {
+				throw error.response.data;
+			});
+		}
+	};
+	var bucketMethods = function bucketMethods(bucket_config) {
+		var bucket_methods = {
+			getBucket: function getBucket(params) {
+				var endpoint = URI + '/' + bucket_config.slug + '/?read_key=' + bucket_config.read_key;
+				if (params && params.show_options) {
+					endpoint += '&show_options=' + params.show_options;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getObjects: function getObjects(params) {
+				var endpoint = URI + '/' + bucket_config.slug + '/objects?read_key=' + bucket_config.read_key;
+				if (params && params.limit) {
+					endpoint += '&limit=' + params.limit;
+				}
+				if (params && params.skip) {
+					endpoint += '&skip=' + params.skip;
+				}
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				if (params && params.filters) {
+					Object.keys(params.filters).forEach(function (key) {
+						endpoint += '&filters[' + key + ']=' + params.filters[key];
+					});
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getObject: function getObject(params) {
+				if (!params) {
+					throw new Error('Must supply params object with object slug');
+				}
+				var endpoint = URI + '/' + bucket_config.slug + '/object/' + params.slug + '?read_key=' + bucket_config.read_key;
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				if (params && params.revision) {
+					endpoint += '&revision=' + params.revision;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getObjectTypes: function getObjectTypes(params) {
+				var endpoint = URI + '/' + bucket_config.slug + '/object-types?read_key=' + bucket_config.read_key;
+				if (params && params.limit) {
+					endpoint += '&limit=' + params.limit;
+				}
+				if (params && params.skip) {
+					endpoint += '&skip=' + params.skip;
+				}
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getObjectsByType: function getObjectsByType(params) {
+				var endpoint = URI + '/' + bucket_config.slug + '/object-type/' + params.type_slug + '?read_key=' + bucket_config.read_key;
+				if (params && params.limit) {
+					endpoint += '&limit=' + params.limit;
+				}
+				if (params && params.skip) {
+					endpoint += '&skip=' + params.skip;
+				}
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			searchObjectType: function searchObjectType(params) {
+				var searchParams = '/search?metafield_key=' + params.metafield_key;
+				if (params.metafield_value) {
+					searchParams += '&metafield_value=' + params.metafield_value;
+				} else if (params.metafield_object_slug) {
+					searchParams += '&metafield_object_slug=' + params.metafield_object_slug;
+				} else {
+					searchParams += '&metafield_value_has=' + params.metafield_value_has;
+				}
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/object-type/' + params.type_slug + searchParams + '&read_key=' + bucket_config.read_key;
+				if (params && params.limit) {
+					endpoint += '&limit=' + params.limit;
+				}
+				if (params && params.skip) {
+					endpoint += '&skip=' + params.skip;
+				}
+				if (params && params.sort) {
+					endpoint += '&sort=' + params.sort;
+				}
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addObjectType: function addObjectType(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/add-object-type';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.post(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			editObjectType: function editObjectType(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object-type';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.put(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			deleteObjectType: function deleteObjectType(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/object-types/' + params.slug;
+				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addObject: function addObject(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/add-object';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.post(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			editObject: function editObject(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.put(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			deleteObject: function deleteObject(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/objects/' + params.slug;
+				return axios.delete(endpoint, { data: bucket_config, slug: params.slug }).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addMedia: function addMedia(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media';
+				var data = new FormData();
+				if (params.media.buffer) {
+					data.append('media', params.media.buffer, params.media.originalname);
+				} else {
+					data.append('media', params.media, params.media.name);
+				}
+				if (bucket_config.write_key) {
+					data.append('write_key', bucket_config.write_key);
+				}
+				if (params.folder) {
+					data.append('folder', params.folder);
+				}
+				var getHeaders = function getHeaders(form) {
+					return new Promise(function (resolve, reject) {
+						if (params.media.buffer) {
+							form.getLength(function (err, length) {
+								if (err) reject(err);
+								var headers = Object.assign({ 'Content-Length': length }, form.getHeaders());
+								resolve(headers);
+							});
+						} else {
+							resolve({ 'Content-Type': 'multipart/form-data' });
+						}
+					});
+				};
+				return getHeaders(data).then(function (headers) {
+					return axios.post(endpoint, data, { headers: headers }).then(function (response) {
+						return response.data;
+					}).catch(function (error) {
+						throw error.response.data;
+					});
+				});
+			},
+			getMedia: function getMedia(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media?read_key=' + bucket_config.read_key;
+				if (params && params.limit) {
+					endpoint += '&limit=' + params.limit;
+				}
+				if (params && params.skip) {
+					endpoint += '&skip=' + params.skip;
+				}
+				if (params && params.locale) {
+					endpoint += '&locale=' + params.locale;
+				}
+				if (params && params.status) {
+					endpoint += '&status=' + params.status;
+				}
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			deleteMedia: function deleteMedia(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media/' + params.id;
+				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addWebhook: function addWebhook(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.post(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			deleteWebhook: function deleteWebhook(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks/' + params.id;
+				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addExtension: function addExtension(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions';
+				var data = new FormData();
+				if (params.zip.buffer) {
+					data.append('zip', params.zip.buffer, params.zip.originalname);
+				} else {
+					data.append('zip', params.zip, params.zip.name);
+				}
+				if (bucket_config.write_key) {
+					data.append('write_key', bucket_config.write_key);
+				}
+				var getHeaders = function getHeaders(form) {
+					return new Promise(function (resolve, reject) {
+						if (params.zip.buffer) {
+							form.getLength(function (err, length) {
+								if (err) reject(err);
+								var headers = Object.assign({ 'Content-Length': length }, form.getHeaders());
+								resolve(headers);
+							});
+						} else {
+							resolve({ 'Content-Type': 'multipart/form-data' });
+						}
+					});
+				};
+				return getHeaders(data).then(function (headers) {
+					return axios.post(endpoint, data, { headers: headers }).then(function (response) {
+						return response.data;
+					}).catch(function (error) {
+						throw error.response.data;
+					});
+				});
+			},
+			deleteExtension: function deleteExtension(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions/' + params.id;
+				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			addUser: function addUser(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.post(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			}
+		};
+		return bucket_methods;
+	}; // end bucketMethods
+	// Combine methods
+	var methods = {
+		bucket: bucketMethods
+	};
+	methods = Object.assign(main_methods, methods);
+	return methods;
+};
+
+module.exports = Cosmic;
