@@ -42,7 +42,7 @@
     "api"
   ],
   "author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cosmicjs/cosmicjs-node/issues"
   },
