@@ -246,37 +246,36 @@ bucket.getObject({
 })
 ```
 #### Get Objects by Type
-Get Objects from an Object Type.
+Get Objects from an Object Type. Uses `getObjects` method with additional `type` param.
 ```javascript
 const params = {
-  type_slug: 'posts',
+  type: 'posts',
   limit: 5,
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
   status: 'all' // optional, if need to get draft Objects
 }
-bucket.getObjectsByType(params).then(data => {
+bucket.getObjects(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
 })
 ```
 #### Search Objects
-Search Objects in an Object Type.
+Search Objects in an Object Type.  Uses `getObjects` method with additional params.
 ```javascript
-// Search by connected Object Metafield
+// Search by keyword in title or content
 const params = {
-  type_slug: 'posts',
-  metafield_key: 'author',
-  metafield_object_slug: 'carson-gibbons',
+  type: 'posts',
+  q: 'cats',
   limit: 5,
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects,
   status: 'all' // optional, if need to get draft Objects,
 }
-// Search by Metafield Value
+// Search by Metafield value
 const params = {
   type_slug: 'posts',
   metafield_key: 'headline',
@@ -285,16 +284,7 @@ const params = {
   skip: 0,
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
 }
-// Search by Metafield Has Value
-const params = {
-  type_slug: 'posts',
-  metafield_key: 'headline',
-  metafield_has_value: 'World',
-  limit: 5,
-  skip: 0,
-  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
-}
-bucket.searchObjectType(params).then(data => {
+bucket.getObjects(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
