@@ -87,6 +87,32 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.status) {
 					endpoint += '&status=' + params.status;
 				}
+				// Type param
+				if (params && params.type) {
+					endpoint += '&type=' + params.type;
+				}
+				// Search params
+				if (params && params.q) {
+					endpoint += '&q=' + params.q;
+				}
+				if (params && params.metafield_key) {
+					endpoint += '&metafield_key=' + params.metafield_key;
+				}
+				if (params && params.metafield_value) {
+					endpoint += '&metafield_value=' + params.metafield_value;
+				}
+				if (params && params.metafield_object_id) {
+					endpoint += '&metafield_object_id=' + params.metafield_object_id;
+				}
+				if (params && params.q) {
+					endpoint += '&q=' + params.q;
+				}
+				if (params && params.hide_metafields) {
+					endpoint += '&hide_metafields=' + params.hide_metafields;
+				}
+				if (params && params.pretty) {
+					endpoint += '&pretty=' + params.pretty;
+				}
 				if (params && params.filters) {
 					Object.keys(params.filters).forEach(function (key) {
 						endpoint += '&filters[' + key + ']=' + params.filters[key];
@@ -138,6 +164,7 @@ var Cosmic = function Cosmic(config) {
 					throw error.response.data;
 				});
 			},
+			// DEPRECATED
 			getObjectsByType: function getObjectsByType(params) {
 				var endpoint = URI + '/' + bucket_config.slug + '/object-type/' + params.type_slug + '?read_key=' + bucket_config.read_key;
 				if (params && params.limit) {
@@ -158,6 +185,7 @@ var Cosmic = function Cosmic(config) {
 					throw error.response.data;
 				});
 			},
+			// DEPRECATED
 			searchObjectType: function searchObjectType(params) {
 				var searchParams = '/search?metafield_key=' + params.metafield_key;
 				if (params.metafield_value) {

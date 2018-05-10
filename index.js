@@ -102,9 +102,6 @@ const Cosmic = (config) => {
 				if (params && params.metafield_object_id) {
 					endpoint += `&metafield_object_id=${params.metafield_object_id}`
 				}
-				if (params && params.q) {
-					endpoint += `&q=${params.q}`
-				}
 				if (params && params.hide_metafields) {
 					endpoint += `&hide_metafields=${params.hide_metafields}`
 				}
