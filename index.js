@@ -271,7 +271,7 @@ const Cosmic = (config) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/objects/${params.slug}`
 				delete bucket_config.slug
 				const data = Object.assign(bucket_config, params)
-				return axios.delete(endpoint, { data: data })
+				return axios.delete(endpoint, { data })
 					.then(response => response.data)
 					.catch((error) => {
 						throw error.response.data
