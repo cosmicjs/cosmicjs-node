@@ -87,6 +87,9 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.status) {
 					endpoint += '&status=' + params.status;
 				}
+				if (params && params.sort) {
+					endpoint += '&sort=' + params.sort;
+				}
 				// Type param
 				if (params && params.type) {
 					endpoint += '&type=' + params.type;
