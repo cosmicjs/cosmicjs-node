@@ -415,7 +415,7 @@ var Cosmic = function Cosmic(config) {
 					throw error.response.data;
 				});
 			},
-			getUsers: function getUsers(params) {
+			getUsers: function getUsers() {
 				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users';
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
