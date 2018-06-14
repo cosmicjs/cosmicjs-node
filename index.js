@@ -411,7 +411,7 @@ const Cosmic = (config) => {
 						throw error.response.data
 					})
 			},
-			getUsers: (params) => {
+			getUsers: () => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users`
 				return axios.get(endpoint)
 					.then(response => response.data)

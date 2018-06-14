@@ -414,6 +414,22 @@ var Cosmic = function Cosmic(config) {
 				}).catch(function (error) {
 					throw error.response.data;
 				});
+			},
+			getUsers: function getUsers(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users';
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getUser: function getUser(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users/' + params.id;
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
 			}
 		};
 		return bucket_methods;
