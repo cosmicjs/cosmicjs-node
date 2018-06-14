@@ -28,7 +28,7 @@ npm install cosmicjs
 
 ## Usage
 ### Authentication
-Use your Cosmic JS account email and password to create an authentication token.  **Authentication is required for adding and deleting Buckets and adding users to Buckets**.
+Use your Cosmic JS account email and password to create an authentication token.  **Authentication is required for adding and deleting Buckets, adding and getting users from Buckets**.
 ```javascript
 const Cosmic = require('cosmicjs')() // empty init
 Cosmic.authenticate({
