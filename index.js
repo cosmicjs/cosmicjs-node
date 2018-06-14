@@ -410,6 +410,22 @@ const Cosmic = (config) => {
 					.catch((error) => {
 						throw error.response.data
 					})
+			},
+			getUsers: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users`
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
+			getUser: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users/${params.id}`
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
 			}
 		}
 		return bucket_methods
