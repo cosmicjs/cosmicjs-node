@@ -114,7 +114,8 @@ Cosmic.deleteBucket({
 })
 ```
 
-### Add Users
+### Users
+#### Add Users
 Add a new User to your Bucket.
 ```javascript
 const params = {
@@ -130,7 +131,7 @@ bucket.addUser(params).then(data => {
 })
 ```
 
-### Get Users
+#### Get Users
 Get users from your Bucket.
 ```javascript
 bucket.getUsers().then(data => {
@@ -140,8 +141,8 @@ bucket.getUsers().then(data => {
 })
 ```
 
-### Get User
-Get user from your Bucket.
+#### Get User
+Get a user from your Bucket.
 ```javascript
 bucket.getUser({ id: '5357ef811693be2118000001' }).then(data => {
   console.log(data)
