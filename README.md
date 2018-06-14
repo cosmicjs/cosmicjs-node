@@ -130,6 +130,26 @@ bucket.addUser(params).then(data => {
 })
 ```
 
+### Get Users
+Get users from your Bucket.
+```javascript
+bucket.getUsers().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+### Get User
+Get user from your Bucket.
+```javascript
+bucket.getUser({ id: '5357ef811693be2118000001' }).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 ### Object Types
 #### Add Object Type
 Add a new Object Type to your Bucket.
