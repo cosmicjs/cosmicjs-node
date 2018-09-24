@@ -271,7 +271,6 @@ var Cosmic = function Cosmic(config) {
 			},
 			deleteObject: function deleteObject(params) {
 				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/objects/' + params.slug;
-				delete bucket_config.slug;
 				var data = Object.assign(bucket_config, params);
 				return axios.delete(endpoint, { data: data }).then(function (response) {
 					return response.data;
