@@ -291,6 +291,9 @@ const Cosmic = (config) => {
 				if (params.folder) {
 					data.append('folder', params.folder)
 				}
+				if (params.metadata) {
+					data.append('metadata', JSON.stringify(params.metadata))
+				}
 				const getHeaders = (form =>
 					new Promise((resolve, reject) => {
 						if (params.media.buffer) {
