@@ -293,6 +293,9 @@ var Cosmic = function Cosmic(config) {
 				if (params.folder) {
 					data.append('folder', params.folder);
 				}
+				if (params.metadata) {
+					data.append('metadata', JSON.stringify(params.metadata));
+				}
 				var getHeaders = function getHeaders(form) {
 					return new Promise(function (resolve, reject) {
 						if (params.media.buffer) {
