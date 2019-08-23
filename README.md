@@ -326,7 +326,7 @@ bucket.editObject({
 ```
 
 #### Edit Object Metafields
-Edit existing Object Metafields in your Bucket. This method allows you to edit specific Metafields indentified by `key`, without affecting other Metafields.
+You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields indentified by `key`, without affecting other Metafields.
 ```javascript
 const params = {
   slug: 'my-object',
