@@ -267,6 +267,17 @@ const Cosmic = (config) => {
 						throw error.response.data
 					})
 			},
+			editObjectMetafields: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.patch(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 			deleteObject: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/objects/${params.slug}`
 				const bucket_data = Object.assign({}, bucket_config)
