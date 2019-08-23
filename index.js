@@ -268,7 +268,7 @@ const Cosmic = (config) => {
 					})
 			},
 			editObjectMetafields: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object`
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object-metafields`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}

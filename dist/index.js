@@ -269,6 +269,17 @@ var Cosmic = function Cosmic(config) {
 					throw error.response.data;
 				});
 			},
+			editObjectMetafields: function editObjectMetafields(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object';
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.patch(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
 			deleteObject: function deleteObject(params) {
 				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/objects/' + params.slug;
 				var bucket_data = Object.assign({}, bucket_config);
