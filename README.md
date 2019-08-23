@@ -325,6 +325,39 @@ bucket.editObject({
 })
 ```
 
+#### Edit Object Metafields
+Edit existing Object Metafields in your Bucket.
+```javascript
+const params = {
+  slug: 'my-object',
+  metafields: [
+    {
+      title: 'Headline',
+      key: 'headline',
+      type: 'text',
+      value: 'What I Learned Today'
+    },
+    {
+      title: 'Subheadline',
+      key: 'subheadline',
+      type: 'text',
+      value: 'Something different'
+    }
+  ]
+}
+const bucket = Cosmic.bucket({
+  slug: 'bucket-slug',
+  write_key: ''
+})
+bucket.editObjectMetafields(params)
+.then(data => {
+  console.log(data)
+})
+.catch(err => {
+  console.log(err)
+})
+```
+
 #### Delete Object
 Delete an existing Object in your Bucket.
 ```javascript
