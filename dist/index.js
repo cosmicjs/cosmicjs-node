@@ -270,7 +270,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			editObjectMetafields: function editObjectMetafields(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object';
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object-metafields';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -439,6 +439,14 @@ var Cosmic = function Cosmic(config) {
 			},
 			getUser: function getUser(params) {
 				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users/' + params.id;
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
+			},
+			getWebhooks: function getWebhooks() {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks';
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {

@@ -448,7 +448,7 @@ const Cosmic = (config) => {
 					.catch((error) => {
 						throw error.response.data
 					})
-			},
+			}
 		}
 		return bucket_methods
 	} // end bucketMethods
