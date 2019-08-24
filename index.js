@@ -440,7 +440,15 @@ const Cosmic = (config) => {
 					.catch((error) => {
 						throw error.response.data
 					})
-			}
+			},
+			getWebhooks: () => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks`
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 		}
 		return bucket_methods
 	} // end bucketMethods
