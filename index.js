@@ -116,6 +116,9 @@ const Cosmic = (config) => {
 						endpoint += `&filters[${key}]=${params.filters[key]}`
 					})
 				}
+				if (params && params.props) {
+					endpoint += `&props=${params.props}`
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -135,6 +138,9 @@ const Cosmic = (config) => {
 				}
 				if (params && params.revision) {
 					endpoint += `&revision=${params.revision}`
+				}
+				if (params && params.props) {
+					endpoint += `&props=${params.props}`
 				}
 				return axios.get(endpoint)
 					.then(response => response.data)
