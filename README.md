@@ -316,7 +316,7 @@ bucket.getObject({
 })
 ```
 
-#### Edit Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#search-and-filter-objects)]
+#### Edit Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#edit-object)]
 Edit an existing Object in your Bucket.
 ```javascript
 bucket.editObject({
