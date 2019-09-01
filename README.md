@@ -248,7 +248,7 @@ Returns all Objects from your Bucket.
 ```javascript
 bucket.getObjects({
   limit: 2,
-	props: 'slug,title,type_slug' // get only what you need
+  props: 'slug,title,type_slug' // get only what you need
 }).then(data => {
   console.log(data)
 }).catch(err => {
@@ -263,7 +263,7 @@ const params = {
   type: 'posts',
   limit: 5,
   skip: 0,
-	props: 'slug,title,content', // get only what you need
+  props: 'slug,title,content', // get only what you need
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
   status: 'all' // optional, if need to get draft Objects
@@ -308,7 +308,7 @@ Returns a single Object from your Bucket.
 ```javascript
 bucket.getObject({
   slug: 'home',
-	props: 'slug,title,content' // get only what you need
+  props: 'slug,title,content' // get only what you need
 }).then(data => {
   console.log(data)
 }).catch(err => {
@@ -396,7 +396,7 @@ You can add the `folder` parameter to get Media from a certain folder. You can u
 ```javascript
 bucket.getMedia({
   folder: 'groomsmen',
-	props: 'imgix_url' // get only what you need
+  props: 'imgix_url' // get only what you need
   limit: 3
 }).then(data => {
   console.log(data)
