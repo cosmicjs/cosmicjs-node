@@ -348,6 +348,9 @@ const Cosmic = (config) => {
 				if (params && params.folder) {
 					endpoint += `&folder=${params.folder}`
 				}
+				if (params && params.props) {
+					endpoint += `&props=${params.props}`
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
