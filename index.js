@@ -65,6 +65,12 @@ const Cosmic = (config) => {
 				if (params && params.show_options) {
 					endpoint += `&show_options=${params.show_options}`
 				}
+				if (params && params.props) {
+					endpoint += `&props=${params.props}`
+				}
+				if (params && params.depth) {
+					endpoint += `&depth=${params.depth}`
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -119,6 +125,9 @@ const Cosmic = (config) => {
 				if (params && params.props) {
 					endpoint += `&props=${params.props}`
 				}
+				if (params && params.depth) {
+					endpoint += `&depth=${params.depth}`
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -141,6 +150,9 @@ const Cosmic = (config) => {
 				}
 				if (params && params.props) {
 					endpoint += `&props=${params.props}`
+				}
+				if (params && params.depth) {
+					endpoint += `&depth=${params.depth}`
 				}
 				return axios.get(endpoint)
 					.then(response => response.data)

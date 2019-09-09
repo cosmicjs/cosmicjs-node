@@ -351,6 +351,9 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.folder) {
 					endpoint += '&folder=' + params.folder;
 				}
+				if (params && params.props) {
+					endpoint += '&props=' + params.props;
+				}
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
