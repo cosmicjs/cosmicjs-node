@@ -124,6 +124,11 @@ var Cosmic = function Cosmic(config) {
 						endpoint += '&filters[' + key + ']=' + params.filters[key];
 					});
 				}
+				if (params && params.metadata) {
+					Object.keys(params.metadata).forEach(function (key) {
+						endpoint += '&metadata[' + key + ']=' + params.metadata[key];
+					});
+				}
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
