@@ -122,6 +122,11 @@ const Cosmic = (config) => {
 						endpoint += `&filters[${key}]=${params.filters[key]}`
 					})
 				}
+				if (params && params.metadata) {
+					Object.keys(params.metadata).forEach((key) => {
+						endpoint += `&filters[${key}]=${params.metadata[key]}`
+					})
+				}
 				if (params && params.props) {
 					endpoint += `&props=${params.props}`
 				}
