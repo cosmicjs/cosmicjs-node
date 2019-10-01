@@ -70,7 +70,7 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
-				if (params && params.depth) {
+				if (params && typeof params.depth !== 'undefined') {
 					endpoint += '&depth=' + params.depth;
 				}
 				return axios.get(endpoint).then(function (response) {
@@ -126,13 +126,13 @@ var Cosmic = function Cosmic(config) {
 				}
 				if (params && params.metadata) {
 					Object.keys(params.metadata).forEach(function (key) {
-						endpoint += '&metadata[' + key + ']=' + params.metadata[key];
+						endpoint += '&filters[' + key + ']=' + params.metadata[key];
 					});
 				}
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
-				if (params && params.depth) {
+				if (params && typeof params.depth !== 'undefined') {
 					endpoint += '&depth=' + params.depth;
 				}
 				return axios.get(endpoint).then(function (response) {
@@ -158,7 +158,7 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
-				if (params && params.depth) {
+				if (params && typeof params.depth !== 'undefined') {
 					endpoint += '&depth=' + params.depth;
 				}
 				return axios.get(endpoint).then(function (response) {
