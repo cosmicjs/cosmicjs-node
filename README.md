@@ -330,7 +330,7 @@ bucket.editObject({
 ```
 
 #### Edit Object Metafields [[View Docs](https://cosmicjs.com/docs/rest-api/metafields.html#edit-metafields)]
-You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields indentified by `key`, without affecting other Metafields.
+You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields identified by `key`, without affecting other Metafields.
 ```javascript
 const params = {
   slug: 'my-object',
