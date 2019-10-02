@@ -1,4 +1,5 @@
 const axios = require('axios')
+const request = require('request')
 const FormData = require('form-data')
 
 const API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com'
@@ -402,6 +403,55 @@ const Cosmic = (config) => {
 					.then(response => response.data)
 					.catch((error) => {
 						throw error.response.data
+					})
+			},
+			addExtensionFromURL: (params) => {
+				if (!params.url) throw new Error('Error: url is missing')
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions`
+
+				const getZipFile = (url =>
+					new Promise((resolve, reject) => {
+						const options = {
+							url,
+							method: 'get',
+							encoding: null
+						}
+						request(options, (error, _response, body) => {
+							if (error) {
+								reject(error)
+							} else {
+								resolve(body)
+							}
+						})
+					})
+				)
+
+				const getHeaders = (form =>
+					new Promise((resolve, reject) => {
+						form.getLength((err, length) => {
+							if (err) reject(err)
+							const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
+							resolve(headers)
+						})
+					})
+				)
+
+				return getZipFile(params.url)
+					.then((body) => {
+						const data = new FormData()
+						data.append('zip', body, `${Date.now()}-extension.zip`)
+						if (bucket_config.write_key) {
+							data.append('write_key', bucket_config.write_key)
+						}
+						return getHeaders(data)
+							.then(headers =>	axios.post(endpoint, data, { headers })
+								.then(response => response.data)
+								.catch((error) => {
+									throw error.response.data
+								}))
+					})
+					.catch((error) => {
+						throw error
 					})
 			},
 			addExtension: (params) => {
