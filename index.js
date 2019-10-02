@@ -485,6 +485,17 @@ const Cosmic = (config) => {
 							throw error.response.data
 						}))
 			},
+			editExtension: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.put(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 			deleteExtension: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
 				return axios.delete(endpoint, { data: bucket_config })
