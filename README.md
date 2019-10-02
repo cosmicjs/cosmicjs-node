@@ -460,6 +460,16 @@ bucket.addExtension({
   console.log(err)
 })
 ```
+#### Add Extension From Remote URL (not supported in browsers)
+```javascript
+bucket.addExtensionFromURL({
+  url: '<ZIP_FILE_URL>'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
 #### Edit Extension [[View Docs](https://cosmicjs.com/docs/rest-api/extensions.html#edit-extension)]
 If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present. For security, `query_params` values will be saved as JavaScript Web Tokens (JWT), but available in your Extension as a decoded value.
 ```javascript
