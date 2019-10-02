@@ -124,11 +124,14 @@ const Cosmic = (config) => {
 				}
 				if (params && params.metadata) {
 					Object.keys(params.metadata).forEach((key) => {
-						endpoint += `&filters[${key}]=${params.metadata[key]}`
+						endpoint += `&metadata[${key}]=${params.metadata[key]}`
 					})
 				}
 				if (params && params.props) {
 					endpoint += `&props=${params.props}`
+				}
+				if (params && typeof params.created_by !== 'undefined') {
+					endpoint += `&created_by=${params.created_by}`
 				}
 				if (params && typeof params.depth !== 'undefined') {
 					endpoint += `&depth=${params.depth}`
