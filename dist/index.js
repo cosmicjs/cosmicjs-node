@@ -132,6 +132,9 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
+				if (params && typeof params.created_by !== 'undefined') {
+					endpoint += '&created_by=' + params.created_by;
+				}
 				if (params && typeof params.depth !== 'undefined') {
 					endpoint += '&depth=' + params.depth;
 				}
@@ -406,25 +409,37 @@ var Cosmic = function Cosmic(config) {
 			},
 			addExtension: function addExtension(params) {
 				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions';
-				var data = new FormData();
-				if (params.zip.buffer) {
-					data.append('zip', params.zip.buffer, params.zip.originalname);
+				var data = void 0;
+				if (params.zip) {
+					data = new FormData();
+					if (params.zip.buffer) {
+						data.append('zip', params.zip.buffer, params.zip.originalname);
+					} else {
+						data.append('zip', params.zip, params.zip.name);
+					}
+					if (bucket_config.write_key) {
+						data.append('write_key', bucket_config.write_key);
+					}
 				} else {
-					data.append('zip', params.zip, params.zip.name);
-				}
-				if (bucket_config.write_key) {
-					data.append('write_key', bucket_config.write_key);
+					data = params;
+					if (bucket_config.write_key) {
+						data.write_key = bucket_config.write_key;
+					}
 				}
 				var getHeaders = function getHeaders(form) {
 					return new Promise(function (resolve, reject) {
-						if (params.zip.buffer) {
-							form.getLength(function (err, length) {
-								if (err) reject(err);
-								var headers = Object.assign({ 'Content-Length': length }, form.getHeaders());
-								resolve(headers);
-							});
+						if (params.zip) {
+							if (params.zip.buffer) {
+								form.getLength(function (err, length) {
+									if (err) reject(err);
+									var headers = Object.assign({ 'Content-Length': length }, form.getHeaders());
+									resolve(headers);
+								});
+							} else {
+								resolve({ 'Content-Type': 'multipart/form-data' });
+							}
 						} else {
-							resolve({ 'Content-Type': 'multipart/form-data' });
+							resolve({ 'Content-Type': 'application/json' });
 						}
 					});
 				};
@@ -434,6 +449,17 @@ var Cosmic = function Cosmic(config) {
 					}).catch(function (error) {
 						throw error.response.data;
 					});
+				});
+			},
+			editExtension: function editExtension(params) {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions/' + params.id;
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key;
+				}
+				return axios.put(endpoint, params).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
 				});
 			},
 			deleteExtension: function deleteExtension(params) {

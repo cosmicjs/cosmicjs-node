@@ -406,25 +406,37 @@ const Cosmic = (config) => {
 			},
 			addExtension: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions`
-				const data = new FormData()
-				if (params.zip.buffer) {
-					data.append('zip', params.zip.buffer, params.zip.originalname)
+				let data
+				if (params.zip) {
+					data = new FormData()
+					if (params.zip.buffer) {
+						data.append('zip', params.zip.buffer, params.zip.originalname)
+					} else {
+						data.append('zip', params.zip, params.zip.name)
+					}
+					if (bucket_config.write_key) {
+						data.append('write_key', bucket_config.write_key)
+					}
 				} else {
-					data.append('zip', params.zip, params.zip.name)
-				}
-				if (bucket_config.write_key) {
-					data.append('write_key', bucket_config.write_key)
+					data = params
+					if (bucket_config.write_key) {
+						data.write_key = bucket_config.write_key
+					}
 				}
 				const getHeaders = (form =>
 					new Promise((resolve, reject) => {
-						if (params.zip.buffer) {
-							form.getLength((err, length) => {
-								if (err) reject(err)
-								const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
-								resolve(headers)
-							})
+						if (params.zip) {
+							if (params.zip.buffer) {
+								form.getLength((err, length) => {
+									if (err) reject(err)
+									const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
+									resolve(headers)
+								})
+							} else {
+								resolve({ 'Content-Type': 'multipart/form-data' })
+							}
 						} else {
-							resolve({ 'Content-Type': 'multipart/form-data' })
+							resolve({ 'Content-Type': 'application/json' })
 						}
 					})
 				)
@@ -434,6 +446,17 @@ const Cosmic = (config) => {
 						.catch((error) => {
 							throw error.response.data
 						}))
+			},
+			editExtension: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.put(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
 			},
 			deleteExtension: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
