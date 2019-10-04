@@ -132,6 +132,9 @@ var Cosmic = function Cosmic(config) {
 				if (params && params.props) {
 					endpoint += '&props=' + params.props;
 				}
+				if (params && typeof params.created_by !== 'undefined') {
+					endpoint += '&created_by=' + params.created_by;
+				}
 				if (params && typeof params.depth !== 'undefined') {
 					endpoint += '&depth=' + params.depth;
 				}
