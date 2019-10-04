@@ -13,11 +13,10 @@ const bucket = api.bucket({
 })
 
 const addExtension = async (url) => {
-	const createExtensionResponse = await bucket.addExtensionFromURL({
-		url
+	const createExtensionResponse = await bucket.addExtension({
+		zip_url: url
 	})
 	console.log(createExtensionResponse)
 }
 
-// addExtension(zipDownloadUrl)
-console.log(Date.now())
+addExtension(zipDownloadUrl)
