@@ -1,6 +1,6 @@
 {
   "name": "cosmicjs",
-  "version": "3.2.30",
+  "version": "3.2.32",
   "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
   "main": "dist/index.js",
   "scripts": {
@@ -36,11 +36,11 @@
     "eslint-plugin-import": "^2.11.0",
     "mocha": "^5.1.0",
     "nock": "^9.2.5",
-    "nodemon": "^1.17.3",
+    "nodemon": "^1.19.3",
     "nyc": "^11.7.0",
     "rewire": "^3.0.2",
     "webpack": "^3.11.0",
-    "webpack-dev-server": "^3.1.11"
+    "webpack-dev-server": "^3.8.1"
   },
   "repository": {
     "type": "git",

@@ -330,7 +330,7 @@ bucket.editObject({
 ```
 
 #### Edit Object Metafields [[View Docs](https://cosmicjs.com/docs/rest-api/metafields.html#edit-metafields)]
-You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields indentified by `key`, without affecting other Metafields.
+You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields identified by `key`, without affecting other Metafields.
 ```javascript
 const params = {
   slug: 'my-object',
@@ -450,10 +450,12 @@ bucket.deleteWebhook({
 ```
 ### Extensions
 #### Add Extension [[View Docs](https://cosmicjs.com/docs/rest-api/extensions.html#add-extension)]
-Adds an Extension to your Bucket.  Required post values include zip which is the name of your file sent.   Read more about Extensions on the <a href='https://cosmicjs.com/docs/extensions' target='_blank'>Extensions documentation page</a>.
+Adds an Extension to your Bucket. Post values include `zip` (which is the name of your file sent) or `zip_url` (which is the url of the zip file) or `url` (which is hosted url of extension). Note: You can only post one of these at a time. Read more about Extensions on the <a href='https://cosmicjs.com/docs/extensions' target='_blank'>Extensions documentation page</a>.
 ```javascript
 bucket.addExtension({
-  zip: '<ZIP_FILE_DATA>'
+	zip: '<ZIP_FILE_DATA>',
+	zip_url: '<ZIP_FILE_URL>',
+	url: '<EXTENSION_HOSTED_URL'
 }).then(data => {
   console.log(data)
 }).catch(err => {
