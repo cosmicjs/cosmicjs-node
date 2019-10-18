@@ -6,6 +6,7 @@
 </p>
 
 [![npm version](https://badge.fury.io/js/cosmicjs.svg)](https://www.npmjs.com/package/cosmicjs)
+[![cdnjs version](https://img.shields.io/cdnjs/v/cosmicjs?color=g)](https://cdnjs.com/libraries/cosmicjs)
 [![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
 
 This is the official [Cosmic JS](https://cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
@@ -25,6 +26,8 @@ npm install cosmicjs
 // Never expose your private keys or credentials in any public website's client-side code
 </script>
 ```
+
+Refer the file via [cdnjs.com](https://cdnjs.com/libraries/cosmicjs) is also an option.
 
 ## Usage
 ### Authentication [[View Docs](https://cosmicjs.com/docs/rest-api/authentication.html)]
