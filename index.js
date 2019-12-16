@@ -169,6 +169,54 @@ const Cosmic = (config) => {
 						throw error.response.data
 					})
 			},
+			getObjectRevisions: (params) => {
+				let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}/revisions?read_key=${bucket_config.read_key}`
+				if (params && params.limit) {
+					endpoint += `&limit=${params.limit}`
+				}
+				if (params && params.skip) {
+					endpoint += `&skip=${params.skip}`
+				}
+				if (params && params.locale) {
+					endpoint += `&locale=${params.locale}`
+				}
+				if (params && params.status) {
+					endpoint += `&status=${params.status}`
+				}
+				if (params && params.sort) {
+					endpoint += `&sort=${params.sort}`
+				}
+				if (params && params.hide_metafields) {
+					endpoint += `&hide_metafields=${params.hide_metafields}`
+				}
+				if (params && params.pretty) {
+					endpoint += `&pretty=${params.pretty}`
+				}
+				if (params && params.filters) {
+					Object.keys(params.filters).forEach((key) => {
+						endpoint += `&filters[${key}]=${params.filters[key]}`
+					})
+				}
+				if (params && params.metadata) {
+					Object.keys(params.metadata).forEach((key) => {
+						endpoint += `&metadata[${key}]=${params.metadata[key]}`
+					})
+				}
+				if (params && params.props) {
+					endpoint += `&props=${params.props}`
+				}
+				if (params && typeof params.created_by !== 'undefined') {
+					endpoint += `&created_by=${params.created_by}`
+				}
+				if (params && typeof params.depth !== 'undefined') {
+					endpoint += `&depth=${params.depth}`
+				}
+				return axios.get(endpoint)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 			getObjectTypes: (params) => {
 				let endpoint = `${URI}/${bucket_config.slug}/object-types?read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
