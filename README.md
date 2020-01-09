@@ -1,17 +1,17 @@
 <p align="center">
-  <a href="https://cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
+  <a href="https://www.cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
 </p>
 <p align="center">
-  📖 <a href="https://cosmicjs.com/docs">View Docs</a>
+  📖 <a href="https://docs.cosmicjs.com">View Docs</a>
 </p>
 
 [![npm version](https://badge.fury.io/js/cosmicjs.svg)](https://www.npmjs.com/package/cosmicjs)
 [![CircleCI](https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield)](https://circleci.com/gh/cosmicjs/cosmicjs-node)
 
-This is the official [Cosmic JS](https://cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the official [Cosmic JS](https://www.cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
-Go to [https://cosmicjs.com](https://cosmicjs.com), create an account and set up a Bucket.
+Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
 
 #### Install
 ```
@@ -27,7 +27,7 @@ npm install cosmicjs
 ```
 
 ## Usage
-### Authentication [[View Docs](https://cosmicjs.com/docs/rest-api/authentication.html)]
+### Authentication [[View Docs](https://docs.cosmicjs.com/rest-api/authentication.html)]
 Use your Cosmic JS account email and password to create an authentication token.  **Authentication is only required for account-level access such as adding / removing Buckets from your account, getting user info, etc. The token is not required to query Bucket content**.
 ```javascript
 const Cosmic = require('cosmicjs')() // empty init
@@ -43,7 +43,7 @@ Cosmic.authenticate({
 
 ### Buckets
 
-#### Add Bucket [[View Docs](https://cosmicjs.com/docs/rest-api/buckets.html#add-bucket)]
+#### Add Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#add-bucket)]
 Add a new Bucket to your account.
 ```javascript
 const Cosmic = require('cosmicjs')({
@@ -59,7 +59,7 @@ Cosmic.addBucket({
 })
 ```
 
-#### Get Buckets [[View Docs](https://cosmicjs.com/docs/rest-api/buckets.html#get-buckets)]
+#### Get Buckets [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#get-buckets)]
 Get all Buckets connected to your account.
 ```javascript
 const Cosmic = require('cosmicjs')({
@@ -72,8 +72,8 @@ Cosmic.getBuckets().then(data => {
 })
 ```
 
-#### Connect to Bucket [[View Docs](https://cosmicjs.com/docs/rest-api/buckets.html#connect-to-bucket)]
-Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https://cosmicjs.com/login).
+#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#connect-to-bucket)]
+Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https:/www./cosmicjs.com/login).
 ```javascript
 // Use the Cosmic.bucket method to connect to different Buckets in your account.
 const Cosmic = require('cosmicjs')({
@@ -90,7 +90,7 @@ const bucket2 = Cosmic.bucket({
   write_key: ''
 })
 ```
-#### Get Bucket [[View Docs](https://cosmicjs.com/docs/rest-api/buckets.html#get-bucket)]
+#### Get Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#get-bucket)]
 Returns the entire Bucket including Object Types, Objects, Media and more.
 ```javascript
 bucket.getBucket().then(data => {
@@ -99,7 +99,7 @@ bucket.getBucket().then(data => {
   console.log(err)
 })
 ```
-#### Delete Bucket [[View Docs](https://cosmicjs.com/docs/rest-api/buckets.html#delete-bucket)]
+#### Delete Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#delete-bucket)]
 Deletes the Bucket
 ```javascript
 const Cosmic = require('cosmicjs')({
@@ -115,7 +115,7 @@ Cosmic.deleteBucket({
 ```
 
 ### Users
-#### Add Users [[View Docs](https://cosmicjs.com/docs/rest-api/users.html#add-user-to-bucket)]
+#### Add Users [[View Docs](https://docs.cosmicjs.com/rest-api/users.html#add-user-to-bucket)]
 Add a new User to your Bucket.
 ```javascript
 const params = {
@@ -131,7 +131,7 @@ bucket.addUser(params).then(data => {
 })
 ```
 
-#### Get Users [[View Docs](https://cosmicjs.com/docs/rest-api/users.html#get-users)]
+#### Get Users [[View Docs](https://docs.cosmicjs.com/rest-api/users.html#get-users)]
 Get users from your Bucket.
 ```javascript
 bucket.getUsers().then(data => {
@@ -141,7 +141,7 @@ bucket.getUsers().then(data => {
 })
 ```
 
-#### Get User [[View Docs](https://cosmicjs.com/docs/rest-api/users.html#get-user)]
+#### Get User [[View Docs](https://docs.cosmicjs.com/rest-api/users.html#get-user)]
 Get a user from your Bucket.
 ```javascript
 bucket.getUser({ id: '5357ef811693be2118000001' }).then(data => {
@@ -152,7 +152,7 @@ bucket.getUser({ id: '5357ef811693be2118000001' }).then(data => {
 ```
 
 ### Object Types
-#### Add Object Type [[View Docs](https://cosmicjs.com/docs/rest-api/object-types.html#add-object-type)]
+#### Add Object Type [[View Docs](https://docs.cosmicjs.com/rest-api/object-types.html#add-object-type)]
 Add a new Object Type to your Bucket.
 ```javascript
 const params = {
@@ -180,7 +180,7 @@ bucket.addObjectType(params).then(data => {
   console.log(err)
 })
 ```
-#### Get Object Types [[View Docs](https://cosmicjs.com/docs/rest-api/object-types.html#get-object-types)]
+#### Get Object Types [[View Docs](https://docs.cosmicjs.com/rest-api/object-types.html#get-object-types)]
 Get all Object Types in your Bucket.
 ```javascript
 bucket.getObjectTypes().then(data => {
@@ -189,7 +189,7 @@ bucket.getObjectTypes().then(data => {
   console.log(err)
 })
 ```
-#### Edit Object Type [[View Docs](https://cosmicjs.com/docs/rest-api/object-types.html#edit-object-type)]
+#### Edit Object Type [[View Docs](https://docs.cosmicjs.com/rest-api/object-types.html#edit-object-type)]
 Edit an existing Object Type in your Bucket.
 ```javascript
 bucket.editObjectType({
@@ -201,7 +201,7 @@ bucket.editObjectType({
   console.log(err)
 })
 ```
-#### Delete Object Type [[View Docs](https://cosmicjs.com/docs/rest-api/object-types.html#delete-object-type)]
+#### Delete Object Type [[View Docs](https://docs.cosmicjs.com/rest-api/object-types.html#delete-object-type)]
 Delete an existing Object Type from your Bucket.  *This does not delete Objects in this Object Type.
 ```javascript
 bucket.deleteObjectType({
@@ -214,7 +214,7 @@ bucket.deleteObjectType({
 ```
 
 ### Objects
-#### Add Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#add-object)]
+#### Add Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#add-object)]
 Add a new Object to your Bucket.
 ```javascript
 const params = {
@@ -243,7 +243,7 @@ bucket.addObject(params).then(data => {
   console.log(err)
 })
 ```
-#### Get Objects [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#get-objects)]
+#### Get Objects [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects)]
 Returns all Objects from your Bucket.
 ```javascript
 bucket.getObjects({
@@ -256,7 +256,7 @@ bucket.getObjects({
 })
 ```
 
-#### Get Objects by Type [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#get-objects-by-type)]
+#### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects-by-type)]
 Get Objects from an Object Type. Uses `getObjects` method with additional `type` param.
 ```javascript
 const params = {
@@ -274,7 +274,7 @@ bucket.getObjects(params).then(data => {
   console.log(err)
 })
 ```
-#### Search and Filter Objects [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#search-and-filter-objects)]
+#### Search and Filter Objects [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#search-and-filter-objects)]
 Search Objects in an Object Type.  Uses `getObjects` method with additional params.
 ```javascript
 // Search by keyword in title or content
@@ -303,7 +303,7 @@ bucket.getObjects(params).then(data => {
 })
 ```
 
-#### Get Single Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#get-object)]
+#### Get Single Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-object)]
 Returns a single Object from your Bucket.
 ```javascript
 bucket.getObject({
@@ -316,7 +316,7 @@ bucket.getObject({
 })
 ```
 
-#### Edit Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#edit-object)]
+#### Edit Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#edit-object)]
 Edit an existing Object in your Bucket.
 ```javascript
 bucket.editObject({
@@ -329,7 +329,7 @@ bucket.editObject({
 })
 ```
 
-#### Edit Object Metafields [[View Docs](https://cosmicjs.com/docs/rest-api/metafields.html#edit-metafields)]
+#### Edit Object Metafields [[View Docs](https://docs.cosmicjs.com/rest-api/metafields.html#edit-metafields)]
 You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields identified by `key`, without affecting other Metafields.
 ```javascript
 const params = {
@@ -362,7 +362,7 @@ bucket.editObjectMetafields(params)
 })
 ```
 
-#### Delete Object [[View Docs](https://cosmicjs.com/docs/rest-api/objects.html#delete-object)]
+#### Delete Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#delete-object)]
 Delete an existing Object in your Bucket.
 ```javascript
 bucket.deleteObject({
@@ -375,7 +375,7 @@ bucket.deleteObject({
 ```
 
 ### Media
-#### Add Media [[View Docs](https://cosmicjs.com/docs/rest-api/media.html#add-media)]
+#### Add Media [[View Docs](https://docs.cosmicjs.com/rest-api/media.html#add-media)]
 The only required post value is media which is the name of your media sent.
 ```javascript
 bucket.addMedia({
@@ -391,7 +391,7 @@ bucket.addMedia({
   console.log(err)
 })
 ```
-#### Get Media [[View Docs](https://cosmicjs.com/docs/rest-api/media.html#get-media)]
+#### Get Media [[View Docs](https://docs.cosmicjs.com/rest-api/media.html#get-media)]
 You can add the `folder` parameter to get Media from a certain folder. You can use the full [Imgix suite of image processing tools](https://imgix.com) on the URL provided by the `imgix_url` property value. Check out the Imgix documentation for more info.
 ```javascript
 bucket.getMedia({
@@ -404,7 +404,7 @@ bucket.getMedia({
   console.log(err)
 })
 ```
-#### Delete Media [[View Docs](https://cosmicjs.com/docs/rest-api/media.html#delete-media)]
+#### Delete Media [[View Docs](https://docs.cosmicjs.com/rest-api/media.html#delete-media)]
 ```javascript
 bucket.deleteMedia({
  id: '5a4b18e12fff7ec0e3c13c65'
@@ -415,8 +415,8 @@ bucket.deleteMedia({
 })
 ```
 ### Webhooks
-#### Add Webhook [[View Docs](https://cosmicjs.com/docs/rest-api/webhooks.html#add-webhook)]
-Sends a POST request to the endpoint of your choice when the event occurs.  The data payload in the same fomat as Object and Media.  Read more about Webhooks including the payload sent to the endpoint on the <a href='https://cosmicjs.com/docs/webhooks' target='_blank'>Webhooks documentation page</a>.
+#### Add Webhook [[View Docs](https://docs.cosmicjs.com/rest-api/webhooks.html#add-webhook)]
+Sends a POST request to the endpoint of your choice when the event occurs.  The data payload in the same fomat as Object and Media.  Read more about Webhooks including the payload sent to the endpoint on the <a href='https:/docs./cosmicjs/docs/webhooks' target='_blank'>Webhooks documentation page</a>.
 ```javascript
 bucket.addWebhook({
   event: 'object.created.published',
@@ -427,7 +427,7 @@ bucket.addWebhook({
   console.log(err)
 })
 ```
-#### Get Webhooks [[View Docs](https://cosmicjs.com/docs/rest-api/webhooks.html#get-webhooks)]
+#### Get Webhooks [[View Docs](https://docs.cosmicjs.com/rest-api/webhooks.html#get-webhooks)]
 Get webhooks in your Bucket. Authentication token is required in the header (see Authentication section). Must have admin level access.
 ```javascript
 bucket.getWebhooks()
@@ -438,7 +438,7 @@ bucket.getWebhooks()
   console.log(err)
 })
 ```
-#### Delete Webhook [[View Docs](https://cosmicjs.com/docs/rest-api/webhooks.html#delete-a-webhook)]
+#### Delete Webhook [[View Docs](https://docs.cosmicjs.com/rest-api/webhooks.html#delete-a-webhook)]
 ```javascript
 bucket.deleteWebhook({
   id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
@@ -449,8 +449,8 @@ bucket.deleteWebhook({
 })
 ```
 ### Extensions
-#### Add Extension [[View Docs](https://cosmicjs.com/docs/rest-api/extensions.html#add-extension)]
-Adds an Extension to your Bucket. Post values include `zip` (which is the name of your file sent) or `zip_url` (which is the url of the zip file) or `url` (which is hosted url of extension). Note: You can only post one of these at a time. Read more about Extensions on the <a href='https://cosmicjs.com/docs/extensions' target='_blank'>Extensions documentation page</a>.
+#### Add Extension [[View Docs](https://docs.cosmicjs.com/rest-api/extensions.html#add-extension)]
+Adds an Extension to your Bucket. Post values include `zip` (which is the name of your file sent) or `zip_url` (which is the url of the zip file) or `url` (which is hosted url of extension). Note: You can only post one of these at a time. Read more about Extensions on the <a href='https://docs.cosmicjs.com/extensions' target='_blank'>Extensions documentation page</a>.
 ```javascript
 bucket.addExtension({
 	zip: '<ZIP_FILE_DATA>',
@@ -462,7 +462,18 @@ bucket.addExtension({
   console.log(err)
 })
 ```
-#### Edit Extension [[View Docs](https://cosmicjs.com/docs/rest-api/extensions.html#edit-extension)]
+#### Get Extensions [[View Docs](https://docs.cosmicjs.com/rest-api/extensions.html#get-extensions)]
+Get Extensions in your Bucket. Authentication token is required in the header (see Authentication section). Must have admin level access.
+```javascript
+bucket.getExtensions()
+.then(data => {
+  console.log(data)
+})
+.catch(err => {
+  console.log(err)
+})
+```
+#### Edit Extension [[View Docs](https://docs.cosmicjs.com/rest-api/extensions.html#edit-extension)]
 If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present. For security, `query_params` values will be saved as JavaScript Web Tokens (JWT), but available in your Extension as a decoded value.
 ```javascript
 bucket.editExtension({
@@ -485,7 +496,7 @@ bucket.editExtension({
   console.log(err)
 })
 ```
-#### Delete Extension [[View Docs](https://cosmicjs.com/docs/rest-api/extensions.html#delete-extension)]
+#### Delete Extension [[View Docs](https://docs.cosmicjs.com/rest-api/extensions.html#delete-extension)]
 ```javascript
 bucket.deleteExtension({
   id: 'c62defe0-5f93-11e7-8054-873245f0e98d'

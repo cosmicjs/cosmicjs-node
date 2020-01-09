@@ -553,6 +553,14 @@ var Cosmic = function Cosmic(config) {
 				}).catch(function (error) {
 					throw error.response.data;
 				});
+			},
+			getExtensions: function getExtensions() {
+				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions';
+				return axios.get(endpoint).then(function (response) {
+					return response.data;
+				}).catch(function (error) {
+					throw error.response.data;
+				});
 			}
 		};
 		return bucket_methods;
