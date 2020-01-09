@@ -393,7 +393,7 @@ bucket.getObjectRevisions({
 #### Add Object Revision [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#add-object-revision)]
 Add Object Revision to an Object.
 ```javascript
-bucket.getObjectRevisions({
+bucket.addObjectRevision({
   slug: 'a-wonderful-blog-post-about-earth',
   content: 'Some different content to try out',
   status: 'draft'
