@@ -374,6 +374,36 @@ bucket.deleteObject({
 })
 ```
 
+### Object Revisions
+
+#### Get Object Revisions [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-object-revisions)]
+Returns all Object Revisions from the specified Object.
+```javascript
+bucket.getObjectRevisions({
+  slug: 'a-wonderful-blog-post-about-earth',
+  props: 'slug,title,created_at',  // get only what you need
+  limit: 2,
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+#### Add Object Revision [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#add-object-revision)]
+Add Object Revision to an Object.
+```javascript
+bucket.getObjectRevisions({
+  slug: 'a-wonderful-blog-post-about-earth',
+  content: 'Some different content to try out',
+  status: 'draft'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 ### Media
 #### Add Media [[View Docs](https://docs.cosmicjs.com/rest-api/media.html#add-media)]
 The only required post value is media which is the name of your media sent.

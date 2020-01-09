@@ -331,6 +331,17 @@ const Cosmic = (config) => {
 						throw error.response.data
 					})
 			},
+			addObjectRevision: (params) => {
+				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object/${params.slug}/revisions`
+				if (bucket_config.write_key) {
+					params.write_key = bucket_config.write_key
+				}
+				return axios.post(endpoint, params)
+					.then(response => response.data)
+					.catch((error) => {
+						throw error.response.data
+					})
+			},
 			editObject: (params) => {
 				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object`
 				if (bucket_config.write_key) {
