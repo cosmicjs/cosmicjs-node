@@ -257,7 +257,7 @@ bucket.getObjects({
 })
 ```
 
-#### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects-by-type)]
+#### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects)]
 Get Objects from an Object Type. Uses `getObjects` method with additional `type` param.
 ```javascript
 const params = {
