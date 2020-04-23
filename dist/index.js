@@ -7,7 +7,10 @@ var API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com';
 var API_VERSION = process.env.COSMIC_API_VERSION || 'v1';
 var URI = API_URL + '/' + API_VERSION;
 var Cosmic = function Cosmic(config) {
-	axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate';
+	// Accept Encoding in Node
+	if (typeof window === 'undefined') {
+		axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate';
+	}
 	if (config && config.token) {
 		axios.defaults.headers.common.Authorization = config.token;
 	}

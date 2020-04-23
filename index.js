@@ -5,7 +5,10 @@ const API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com'
 const API_VERSION = process.env.COSMIC_API_VERSION || 'v1'
 const URI = `${API_URL}/${API_VERSION}`
 const Cosmic = (config) => {
-	axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate'
+	// Accept Encoding in Node
+	if (typeof window === 'undefined') {
+		axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate'
+	}
 	if (config && config.token) {
 		axios.defaults.headers.common.Authorization = config.token
 	}
