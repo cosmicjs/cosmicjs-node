@@ -9,7 +9,7 @@
 	<a href="https://circleci.com/gh/cosmicjs/cosmicjs-node"><img src="https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield" alt="CircleCI"></a>
 </p>
 
-This is the official [Cosmic](https://www.cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the official JavaScript client for the [Cosmic](https://www.cosmicjs.com) headless CMS.  Use it to log in to your Cosmic account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
