@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
+  <a href="https://www.cosmicjs.com"><img src="https://cdn.cosmicjs.com/3cf62ab0-8e13-11ea-9b8f-cd0254a8c979-cosmic-dark.svg" alt="Cosmic" width="400"></a>
 </p>
 <p align="center">
   📖 <a href="https://docs.cosmicjs.com">View Docs</a>
@@ -9,7 +9,7 @@
 	<a href="https://circleci.com/gh/cosmicjs/cosmicjs-node"><img src="https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield" alt="CircleCI"></a>
 </p>
 
-This is the official [Cosmic JS](https://www.cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic JS account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
+This is the official [Cosmic](https://www.cosmicjs.com) JavaScript client.  Use it to log in to your Cosmic account, manage Buckets, data, files and users within your Buckets.  Includes `cosmicjs.browser.min.js` for easy integration in the browser.
 
 ### Getting started
 Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
@@ -29,7 +29,7 @@ npm install cosmicjs
 
 ## Usage
 ### Authentication [[View Docs](https://docs.cosmicjs.com/rest-api/authentication.html)]
-Use your Cosmic JS account email and password to create an authentication token.  **Authentication is only required for account-level access such as adding / removing Buckets from your account, getting user info, etc. The token is not required to query Bucket content**.
+Use your Cosmic account email and password to create an authentication token.  **Authentication is only required for account-level access such as adding / removing Buckets from your account, getting user info, etc. The token is not required to query Bucket content**.
 ```javascript
 const Cosmic = require('cosmicjs')() // empty init
 Cosmic.authenticate({
@@ -74,7 +74,7 @@ Cosmic.getBuckets().then(data => {
 ```
 
 #### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#connect-to-bucket)]
-Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic JS Dashboard](https:/www./cosmicjs.com/login).
+Use the `Cosmic.bucket` method to connect to different Buckets in your account. If you would like to restrict read and write access to your Bucket, you can do so in Your Bucket > Basic Settings in your [Cosmic Dashboard](https:/www./cosmicjs.com/login).
 ```javascript
 // Use the Cosmic.bucket method to connect to different Buckets in your account.
 const Cosmic = require('cosmicjs')({
@@ -219,14 +219,14 @@ bucket.deleteObjectType({
 Add a new Object to your Bucket.
 ```javascript
 const params = {
-  title: 'Cosmic JS Example',
+  title: 'Cosmic Example',
   type_slug: 'examples',
-  content: 'Learning the Cosmic JS API is really fun and so easy',
+  content: 'Learning the Cosmic API is really fun and so easy',
   metafields: [
     {
       key: 'Headline',
       type: 'text',
-      value: 'Learn Cosmic JS!'
+      value: 'Learn Cosmic!'
     },
     {
       key: 'Author',
