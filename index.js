@@ -2,6 +2,7 @@ const axios = require('axios')
 const FormData = require('form-data')
 
 const API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com'
+const UPLOAD_API_URL = process.env.UPLOAD_API_URL || 'https://upload.cosmicjs.com'
 const API_VERSION = process.env.COSMIC_API_VERSION || 'v1'
 const URI = `${API_URL}/${API_VERSION}`
 const Cosmic = (config) => {
@@ -378,7 +379,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addMedia: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media`
+				const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/${bucket_config.slug}/media`
 				const data = new FormData()
 				if (params.media.buffer) {
 					data.append('media', params.media.buffer, params.media.originalname)
