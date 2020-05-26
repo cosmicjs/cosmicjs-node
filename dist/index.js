@@ -4,6 +4,7 @@ var axios = require('axios');
 var FormData = require('form-data');
 
 var API_URL = process.env.COSMIC_API_URL || 'https://api.cosmicjs.com';
+var UPLOAD_API_URL = process.env.UPLOAD_API_URL || 'https://upload.cosmicjs.com';
 var API_VERSION = process.env.COSMIC_API_VERSION || 'v1';
 var URI = API_URL + '/' + API_VERSION;
 var Cosmic = function Cosmic(config) {
@@ -273,7 +274,7 @@ var Cosmic = function Cosmic(config) {
 				} else {
 					searchParams += '&metafield_value_has=' + params.metafield_value_has;
 				}
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/object-type/' + params.type_slug + searchParams + '&read_key=' + bucket_config.read_key;
+				var endpoint = URI + '/' + bucket_config.slug + '/object-type/' + params.type_slug + searchParams + '&read_key=' + bucket_config.read_key;
 				if (params && params.limit) {
 					endpoint += '&limit=' + params.limit;
 				}
@@ -296,7 +297,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addObjectType: function addObjectType(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/add-object-type';
+				var endpoint = URI + '/' + bucket_config.slug + '/add-object-type';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -307,7 +308,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			editObjectType: function editObjectType(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object-type';
+				var endpoint = URI + '/' + bucket_config.slug + '/edit-object-type';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -318,7 +319,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			deleteObjectType: function deleteObjectType(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/object-types/' + params.slug;
+				var endpoint = URI + '/' + bucket_config.slug + '/object-types/' + params.slug;
 				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -326,7 +327,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addObject: function addObject(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/add-object';
+				var endpoint = URI + '/' + bucket_config.slug + '/add-object';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -337,7 +338,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addObjectRevision: function addObjectRevision(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/object/' + params.slug + '/revisions';
+				var endpoint = URI + '/' + bucket_config.slug + '/object/' + params.slug + '/revisions';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -348,7 +349,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			editObject: function editObject(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object';
+				var endpoint = URI + '/' + bucket_config.slug + '/edit-object';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -359,7 +360,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			editObjectMetafields: function editObjectMetafields(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/edit-object-metafields';
+				var endpoint = URI + '/' + bucket_config.slug + '/edit-object-metafields';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -370,7 +371,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			deleteObject: function deleteObject(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/objects/' + params.slug;
+				var endpoint = URI + '/' + bucket_config.slug + '/objects/' + params.slug;
 				var bucket_data = Object.assign({}, bucket_config);
 				var data = Object.assign(bucket_data, params);
 				return axios.delete(endpoint, { data: data }).then(function (response) {
@@ -380,7 +381,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addMedia: function addMedia(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media';
+				var endpoint = UPLOAD_API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media';
 				var data = new FormData();
 				if (params.media.buffer) {
 					data.append('media', params.media.buffer, params.media.originalname);
@@ -418,7 +419,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			getMedia: function getMedia(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media?read_key=' + bucket_config.read_key;
+				var endpoint = URI + '/' + bucket_config.slug + '/media?read_key=' + bucket_config.read_key;
 				if (params && params.limit) {
 					endpoint += '&limit=' + params.limit;
 				}
@@ -444,7 +445,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			deleteMedia: function deleteMedia(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/media/' + params.id;
+				var endpoint = URI + '/' + bucket_config.slug + '/media/' + params.id;
 				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -452,7 +453,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addWebhook: function addWebhook(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks';
+				var endpoint = URI + '/' + bucket_config.slug + '/webhooks';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -463,7 +464,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			deleteWebhook: function deleteWebhook(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks/' + params.id;
+				var endpoint = URI + '/' + bucket_config.slug + '/webhooks/' + params.id;
 				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -471,7 +472,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addExtension: function addExtension(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions';
+				var endpoint = URI + '/' + bucket_config.slug + '/extensions';
 				var data = void 0;
 				if (params.zip) {
 					data = new FormData();
@@ -515,7 +516,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			editExtension: function editExtension(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions/' + params.id;
+				var endpoint = URI + '/' + bucket_config.slug + '/extensions/' + params.id;
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -526,7 +527,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			deleteExtension: function deleteExtension(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions/' + params.id;
+				var endpoint = URI + '/' + bucket_config.slug + '/extensions/' + params.id;
 				return axios.delete(endpoint, { data: bucket_config }).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -534,7 +535,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			addUser: function addUser(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users';
+				var endpoint = URI + '/' + bucket_config.slug + '/users';
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key;
 				}
@@ -545,7 +546,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			getUsers: function getUsers() {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users';
+				var endpoint = URI + '/' + bucket_config.slug + '/users';
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -553,7 +554,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			getUser: function getUser(params) {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/users/' + params.id;
+				var endpoint = URI + '/' + bucket_config.slug + '/users/' + params.id;
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -561,7 +562,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			getWebhooks: function getWebhooks() {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/webhooks';
+				var endpoint = URI + '/' + bucket_config.slug + '/webhooks';
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
@@ -569,7 +570,7 @@ var Cosmic = function Cosmic(config) {
 				});
 			},
 			getExtensions: function getExtensions() {
-				var endpoint = API_URL + '/' + API_VERSION + '/' + bucket_config.slug + '/extensions';
+				var endpoint = URI + '/' + bucket_config.slug + '/extensions';
 				return axios.get(endpoint).then(function (response) {
 					return response.data;
 				}).catch(function (error) {
