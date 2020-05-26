@@ -8,6 +8,8 @@ const Cosmic = CosmicLib()
 // const URI = CosmicLib.__get__('URI') /* ensure we are stubbing same URI as file is using */
 const API_URL = process.env.API_URL || 'https://api.cosmicjs.com'
 const API_VERSION = process.env.API_VERSION || 'v1'
+const UPLOAD_API_URL = process.env.UPLOAD_API_URL || 'https://upload.cosmicjs.com'
+const UPLOAD_URI = `${UPLOAD_API_URL}/${API_VERSION}`
 const URI = `${API_URL}/${API_VERSION}`
 
 suite('Test Bucket Methods.', function() {
@@ -592,7 +594,7 @@ suite('Test Bucket Methods.', function() {
     }
 
     /* stub out a request to URI/addBucket, only intercept if query and route match */
-    const reqNock = nock(`${URI}`, {
+    const reqNock = nock(`${UPLOAD_URI}`, {
       reqheaders: {
         'Content-Type': /multipart\/form-data/, // regex check to contain multipart
         'Content-Length': headerExistsCheck
