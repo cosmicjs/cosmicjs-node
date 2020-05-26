@@ -272,7 +272,7 @@ const Cosmic = (config) => {
 				} else {
 					searchParams += `&metafield_value_has=${params.metafield_value_has}`
 				}
-				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-type/${params.type_slug}${searchParams}&read_key=${bucket_config.read_key}`
+				let endpoint = `${URI}/${bucket_config.slug}/object-type/${params.type_slug}${searchParams}&read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
 					endpoint += `&limit=${params.limit}`
 				}
@@ -295,7 +295,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addObjectType: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/add-object-type`
+				const endpoint = `${URI}/${bucket_config.slug}/add-object-type`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -306,7 +306,7 @@ const Cosmic = (config) => {
 					})
 			},
 			editObjectType: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object-type`
+				const endpoint = `${URI}/${bucket_config.slug}/edit-object-type`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -317,7 +317,7 @@ const Cosmic = (config) => {
 					})
 			},
 			deleteObjectType: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object-types/${params.slug}`
+				const endpoint = `${URI}/${bucket_config.slug}/object-types/${params.slug}`
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -325,7 +325,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addObject: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/add-object`
+				const endpoint = `${URI}/${bucket_config.slug}/add-object`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -336,7 +336,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addObjectRevision: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/object/${params.slug}/revisions`
+				const endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}/revisions`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -347,7 +347,7 @@ const Cosmic = (config) => {
 					})
 			},
 			editObject: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object`
+				const endpoint = `${URI}/${bucket_config.slug}/edit-object`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -358,7 +358,7 @@ const Cosmic = (config) => {
 					})
 			},
 			editObjectMetafields: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/edit-object-metafields`
+				const endpoint = `${URI}/${bucket_config.slug}/edit-object-metafields`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -369,7 +369,7 @@ const Cosmic = (config) => {
 					})
 			},
 			deleteObject: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/objects/${params.slug}`
+				const endpoint = `${URI}/${bucket_config.slug}/objects/${params.slug}`
 				const bucket_data = Object.assign({}, bucket_config)
 				const data = Object.assign(bucket_data, params)
 				return axios.delete(endpoint, { data })
@@ -416,7 +416,7 @@ const Cosmic = (config) => {
 						}))
 			},
 			getMedia: (params) => {
-				let endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
+				let endpoint = `${URI}/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
 				if (params && params.limit) {
 					endpoint += `&limit=${params.limit}`
 				}
@@ -442,7 +442,7 @@ const Cosmic = (config) => {
 					})
 			},
 			deleteMedia: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/media/${params.id}`
+				const endpoint = `${URI}/${bucket_config.slug}/media/${params.id}`
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -450,7 +450,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addWebhook: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks`
+				const endpoint = `${URI}/${bucket_config.slug}/webhooks`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -461,7 +461,7 @@ const Cosmic = (config) => {
 					})
 			},
 			deleteWebhook: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks/${params.id}`
+				const endpoint = `${URI}/${bucket_config.slug}/webhooks/${params.id}`
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -469,7 +469,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addExtension: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions`
+				const endpoint = `${URI}/${bucket_config.slug}/extensions`
 				let data
 				if (params.zip) {
 					data = new FormData()
@@ -512,7 +512,7 @@ const Cosmic = (config) => {
 						}))
 			},
 			editExtension: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
+				const endpoint = `${URI}/${bucket_config.slug}/extensions/${params.id}`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -523,7 +523,7 @@ const Cosmic = (config) => {
 					})
 			},
 			deleteExtension: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions/${params.id}`
+				const endpoint = `${URI}/${bucket_config.slug}/extensions/${params.id}`
 				return axios.delete(endpoint, { data: bucket_config })
 					.then(response => response.data)
 					.catch((error) => {
@@ -531,7 +531,7 @@ const Cosmic = (config) => {
 					})
 			},
 			addUser: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users`
+				const endpoint = `${URI}/${bucket_config.slug}/users`
 				if (bucket_config.write_key) {
 					params.write_key = bucket_config.write_key
 				}
@@ -542,7 +542,7 @@ const Cosmic = (config) => {
 					})
 			},
 			getUsers: () => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users`
+				const endpoint = `${URI}/${bucket_config.slug}/users`
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -550,7 +550,7 @@ const Cosmic = (config) => {
 					})
 			},
 			getUser: (params) => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/users/${params.id}`
+				const endpoint = `${URI}/${bucket_config.slug}/users/${params.id}`
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -558,7 +558,7 @@ const Cosmic = (config) => {
 					})
 			},
 			getWebhooks: () => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/webhooks`
+				const endpoint = `${URI}/${bucket_config.slug}/webhooks`
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
@@ -566,7 +566,7 @@ const Cosmic = (config) => {
 					})
 			},
 			getExtensions: () => {
-				const endpoint = `${API_URL}/${API_VERSION}/${bucket_config.slug}/extensions`
+				const endpoint = `${URI}/${bucket_config.slug}/extensions`
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
