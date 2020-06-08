@@ -283,9 +283,9 @@ const params = {
   type: 'posts',
   props: 'slug,title,content', // get only what you need
   query: {
-    "metadata.number": {
-      "$gte": 3,
-      "$lte": 6
+    'metadata.number': {
+      '$gte': 3,
+      '$lte': 6
     }
   }
 }
