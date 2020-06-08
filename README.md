@@ -244,7 +244,7 @@ bucket.addObject(params).then(data => {
   console.log(err)
 })
 ```
-#### Get Objects [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects)]
+#### Get All Objects [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects)]
 Returns all Objects from your Bucket.
 ```javascript
 bucket.getObjects({
@@ -275,6 +275,27 @@ bucket.getObjects(params).then(data => {
   console.log(err)
 })
 ```
+
+#### Advanced Queries (Beta) [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#advanced-queries-beta)]
+Advanced queries give you powerful NoSQL database-like functionality for content fetching. Use the `query` parameter to send a valid JSON (stringified) query on the Get Objects Endpoint. View more examples in [the docs](https://docs.cosmicjs.com/rest-api/objects.html#advanced-queries-beta).
+```javascript
+const params = {
+  type: 'posts',
+  props: 'slug,title,content', // get only what you need
+  query: {
+    "metadata.number": {
+      "$gte": 3,
+      "$lte": 6
+    }
+  }
+}
+bucket.getObjects(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 #### Search and Filter Objects [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#search-and-filter-objects)]
 Search Objects in an Object Type.  Uses `getObjects` method with additional params.
 ```javascript
