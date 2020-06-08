@@ -141,6 +141,9 @@ const Cosmic = (config) => {
 				if (params && typeof params.depth !== 'undefined') {
 					endpoint += `&depth=${params.depth}`
 				}
+				if (params && params.query) {
+					endpoint += `&query=${JSON.stringify(params.query)}`
+				}
 				return axios.get(endpoint)
 					.then(response => response.data)
 					.catch((error) => {
