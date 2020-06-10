@@ -142,7 +142,7 @@ const Cosmic = (config) => {
 					endpoint += `&depth=${params.depth}`
 				}
 				if (params && params.query) {
-					endpoint += `&query=${JSON.stringify(params.query)}`
+					endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
 				}
 				return axios.get(endpoint)
 					.then(response => response.data)
