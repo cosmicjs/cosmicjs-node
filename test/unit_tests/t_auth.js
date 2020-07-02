@@ -4,7 +4,7 @@ const expect = require('chai').expect
 
 const CosmicLib = rewire('../../index')
 const Cosmic = CosmicLib()
-const URI = CosmicLib.__get__('URI')
+const { URI } = rewire('../../src/helpers/constants')
 
 suite('Test Authenticate.', function() {
   setup(function(done) {

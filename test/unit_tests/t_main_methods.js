@@ -8,11 +8,12 @@ const TOKEN = 'a-token-from-prior-auth-request'
 const Cosmic = CosmicLib({
   token: TOKEN
 })
-const URI = CosmicLib.__get__('URI') /* ensure we are stubbing same URI as file is using */
+const { URI } = rewire('../../src/helpers/constants') /* ensure we are stubbing same URI as file is using */
 
 suite('Test Main Methods.', function() {
   const expectedAuthHeader = {
     reqheaders: {
+      'Accept-Encoding': 'gzip, deflate',
       'Authorization': TOKEN
     }
   }
