@@ -15,6 +15,6 @@ module.exports = {
     // disable rules from base configurations
     "no-console": "off",
     "camelcase": "off",
-    "indent": ["error", "tab"]
+    "indent": ["error", 2]
   }
 };
