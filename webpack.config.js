@@ -7,7 +7,7 @@ module.exports = {
         filename: 'cosmicjs.browser.min.js',
     },
     module: {
-        loaders: [{
+        rules: [{
             enforce: 'pre',
             test: /\index.js?$/,
             exclude: /node_modules/,
@@ -19,7 +19,7 @@ module.exports = {
             loader: 'babel-loader',
             query: {
                 presets: [
-                    'env',
+                    '@babel/preset-env',
                 ],
             }
         }]
