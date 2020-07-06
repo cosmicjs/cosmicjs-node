@@ -46,7 +46,6 @@ const extensionMethods = bucket_config => ({
     )
     return getHeaders(data)
       .then(headers => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
-        .then(response => response.data)
         .catch((error) => {
           throw error.response.data
         }))
