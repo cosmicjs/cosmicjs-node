@@ -44,8 +44,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.addBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -64,8 +64,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.getBuckets()
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -87,8 +87,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.deleteBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -115,8 +115,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.importBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -140,8 +140,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.deployApp(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)

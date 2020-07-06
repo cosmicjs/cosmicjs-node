@@ -39,7 +39,7 @@ suite('Test Authenticate.', function() {
       password
     }).then(data => {
         expect(data.token).to.equal(token) /* response was as expected */
-        expect(authNock.isDone()).to.be.true() /* we hit the stub */
+        expect(authNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
