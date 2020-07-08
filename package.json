@@ -20,10 +20,10 @@
   "author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run clean; webpack -p; babel index.js --out-dir dist",
-    "clean": "rm -f ./cosmicjs.browser.min.js",
+    "build": "npm run clean; webpack -p; babel src --out-dir dist --source-maps inline --copy-files",
+    "clean": "rm -f ./cosmicjs.browser.min.js; rm -rf dist/*",
     "dev": "nodemon test.js && eslint test.js",
-    "lint": "eslint index.js",
+    "lint": "eslint src",
     "prepublish": "npm run build",
     "test": "mocha -u tdd test/**/*.js --reporter spec"
   },
