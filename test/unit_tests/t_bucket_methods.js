@@ -2,7 +2,7 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = require('../../index')
+const CosmicLib = require('../../dist/index')
 
 const Cosmic = CosmicLib()
 // const URI = CosmicLib.__get__('URI') /* ensure we are stubbing same URI as file is using */

@@ -2,13 +2,13 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = rewire('../../index')
+const CosmicLib = rewire('../../dist/index')
 
 const TOKEN = 'a-token-from-prior-auth-request'
 const Cosmic = CosmicLib({
   token: TOKEN
 })
-const { URI } = rewire('../../src/helpers/constants') /* ensure we are stubbing same URI as file is using */
+const { URI } = rewire('../../dist/helpers/constants') /* ensure we are stubbing same URI as file is using */
 
 suite('Test Main Methods.', function() {
   const expectedAuthHeader = {

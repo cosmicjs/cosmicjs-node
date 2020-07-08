@@ -2,9 +2,9 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = rewire('../../index')
+const CosmicLib = rewire('../../dist/index')
 const Cosmic = CosmicLib()
-const { URI } = rewire('../../src/helpers/constants')
+const { URI } = rewire('../../dist/helpers/constants')
 
 suite('Test Authenticate.', function() {
   setup(function(done) {
