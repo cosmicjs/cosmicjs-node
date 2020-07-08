@@ -3,7 +3,7 @@ const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const extensionMethods = bucket_config => ({
+const extensionMethods = (bucket_config) => ({
   getExtensions: () => {
     const endpoint = `${URI}/${bucket_config.slug}/extensions`
     return requestHandler(HTTP_METHODS.GET, endpoint)
@@ -27,25 +27,24 @@ const extensionMethods = bucket_config => ({
         data.write_key = bucket_config.write_key
       }
     }
-    const getHeaders = (form =>
-      new Promise((resolve, reject) => {
-        if (params.zip) {
-          if (params.zip.buffer) {
-            form.getLength((err, length) => {
-              if (err) reject(err)
-              const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
-              resolve(headers)
-            })
-          } else {
-            resolve({ 'Content-Type': 'multipart/form-data' })
-          }
+    const getHeaders = ((form) => new Promise((resolve, reject) => {
+      if (params.zip) {
+        if (params.zip.buffer) {
+          form.getLength((err, length) => {
+            if (err) reject(err)
+            const headers = { 'Content-Length': length, ...form.getHeaders() }
+            resolve(headers)
+          })
         } else {
-          resolve({ 'Content-Type': 'application/json' })
+          resolve({ 'Content-Type': 'multipart/form-data' })
         }
-      })
+      } else {
+        resolve({ 'Content-Type': 'application/json' })
+      }
+    })
     )
     return getHeaders(data)
-      .then(headers => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
+      .then((headers) => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
         .catch((error) => {
           throw error.response.data
         }))

@@ -2,7 +2,7 @@ const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const webhookMethods = bucket_config => ({
+const webhookMethods = (bucket_config) => ({
   getWebhooks: () => {
     const endpoint = `${URI}/${bucket_config.slug}/webhooks`
     return requestHandler(HTTP_METHODS.GET, endpoint)

@@ -2,7 +2,7 @@ const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const objectMethods = bucket_config => ({
+const objectMethods = (bucket_config) => ({
   getObjects: (params) => {
     let endpoint = `${URI}/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
     if (params && params.limit) {
@@ -163,7 +163,7 @@ const objectMethods = bucket_config => ({
   },
   deleteObject: (params) => {
     const endpoint = `${URI}/${bucket_config.slug}/objects/${params.slug}`
-    const bucket_data = Object.assign({}, bucket_config)
+    const bucket_data = { ...bucket_config }
     const data = Object.assign(bucket_data, params)
     return requestHandler(HTTP_METHODS.DELETE, endpoint, data)
   }

@@ -3,7 +3,7 @@ const { URI, UPLOAD_API_URL, API_VERSION } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const mediaMethods = bucket_config => ({
+const mediaMethods = (bucket_config) => ({
   addMedia: (params) => {
     const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/${bucket_config.slug}/media`
     const data = new FormData()
@@ -21,21 +21,20 @@ const mediaMethods = bucket_config => ({
     if (params.metadata) {
       data.append('metadata', JSON.stringify(params.metadata))
     }
-    const getHeaders = (form =>
-      new Promise((resolve, reject) => {
-        if (params.media.buffer) {
-          form.getLength((err, length) => {
-            if (err) reject(err)
-            const headers = Object.assign({ 'Content-Length': length }, form.getHeaders())
-            resolve(headers)
-          })
-        } else {
-          resolve({ 'Content-Type': 'multipart/form-data' })
-        }
-      })
+    const getHeaders = ((form) => new Promise((resolve, reject) => {
+      if (params.media.buffer) {
+        form.getLength((err, length) => {
+          if (err) reject(err)
+          const headers = { 'Content-Length': length, ...form.getHeaders() }
+          resolve(headers)
+        })
+      } else {
+        resolve({ 'Content-Type': 'multipart/form-data' })
+      }
+    })
     )
     return getHeaders(data)
-      .then(headers => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
+      .then((headers) => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
         .catch((error) => {
           throw error.response.data
         }))

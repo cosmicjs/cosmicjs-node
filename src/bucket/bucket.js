@@ -2,7 +2,7 @@ const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const bucketMethods = bucket_config => ({
+const bucketMethods = (bucket_config) => ({
   getBucket: (params) => {
     let endpoint = `${URI}/${bucket_config.slug}/?read_key=${bucket_config.read_key}`
     if (params && params.show_options) {

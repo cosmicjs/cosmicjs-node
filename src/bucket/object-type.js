@@ -2,7 +2,7 @@ const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
-const objectTypeMethods = bucket_config => ({
+const objectTypeMethods = (bucket_config) => ({
   getObjectTypes: (params) => {
     let endpoint = `${URI}/${bucket_config.slug}/object-types?read_key=${bucket_config.read_key}`
     if (params && params.limit) {
