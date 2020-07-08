@@ -1,6 +1,6 @@
-const { init } = require('./src/helpers/request_handler')
-const mainMethods = require('./src/main')
-const bucketMethods = require('./src/bucket')
+const { init } = require('./helpers/request_handler')
+const mainMethods = require('./main')
+const bucketMethods = require('./bucket')
 
 const Cosmic = (config) => {
   init(config)
