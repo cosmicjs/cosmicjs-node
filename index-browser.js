@@ -1,3 +1,3 @@
-import Cosmic from './index'
+import Cosmic from './src/index'
 
 window.Cosmic = Cosmic
