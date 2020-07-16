@@ -2,17 +2,18 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = rewire('../../index')
+const CosmicLib = rewire('../../dist/index')
 
 const TOKEN = 'a-token-from-prior-auth-request'
 const Cosmic = CosmicLib({
   token: TOKEN
 })
-const URI = CosmicLib.__get__('URI') /* ensure we are stubbing same URI as file is using */
+const { URI } = rewire('../../dist/helpers/constants') /* ensure we are stubbing same URI as file is using */
 
 suite('Test Main Methods.', function() {
   const expectedAuthHeader = {
     reqheaders: {
+      'Accept-Encoding': 'gzip, deflate',
       'Authorization': TOKEN
     }
   }
@@ -43,8 +44,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.addBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -63,8 +64,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.getBuckets()
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -86,8 +87,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.deleteBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -114,8 +115,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.importBucket(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)
@@ -139,8 +140,8 @@ suite('Test Main Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     Cosmic.deployApp(params)
     .then(data => {
-        expect(data.success).to.be.true() /* response was as expected */
-        expect(reqNock.isDone()).to.be.true() /* we hit the stub */
+        expect(data.success).to.be.true /* response was as expected */
+        expect(reqNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)

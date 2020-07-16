@@ -2,7 +2,7 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = require('../../index')
+const CosmicLib = require('../../dist/index')
 
 const Cosmic = CosmicLib()
 // const URI = CosmicLib.__get__('URI') /* ensure we are stubbing same URI as file is using */
@@ -458,7 +458,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.addObjectType(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -484,7 +484,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.editObjectType(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -506,7 +506,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.deleteObjectType(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -530,7 +530,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.addObject(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -554,7 +554,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.editObject(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -576,7 +576,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.deleteObject(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -608,7 +608,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.addMedia(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -650,7 +650,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.deleteMedia(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -673,7 +673,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.addWebhook(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -695,7 +695,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.deleteWebhook(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -728,7 +728,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.addExtension(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)
@@ -751,7 +751,7 @@ suite('Test Bucket Methods.', function() {
     /* send the request and expect the returned body to contain the token our stub sends */
     cosmicBucket.deleteExtension(params)
     .then(data => {
-        expect(data.success).to.be.true()
+        expect(data.success).to.be.true
         done()
     }).catch(err => {
         done(err)

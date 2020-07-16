@@ -1,4 +1,4 @@
-const Cosmic = require('../../index')()
+const Cosmic = require('../../dist/index')()
 
 const express = require('express')
 const app = express()

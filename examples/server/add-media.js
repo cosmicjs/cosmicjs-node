@@ -1,9 +1,9 @@
-// const Cosmic = require('../../index')()
+// const Cosmic = require('../../dist/index')()
 
 const express = require('express')
 const app = express()
 var multer  = require('multer')
-const Cosmic  = require('../../index')
+const Cosmic  = require('../../dist/index')
 
 const api = Cosmic()
 const bucket = api.bucket({

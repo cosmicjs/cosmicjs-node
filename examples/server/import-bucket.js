@@ -1,8 +1,8 @@
-// const Cosmic = require('../../index')()
+// const Cosmic = require('../../dist/index')()
 
 const express = require('express')
 const app = express()
-const Cosmic  = require('../../index')({
+const Cosmic  = require('../../dist/index')({
   token: "token-here"
 })
 

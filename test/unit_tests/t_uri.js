@@ -10,9 +10,7 @@ suite('Test URI Construction.', function() {
     process.env.COSMIC_API_URL = TEST_API_URL
     process.env.COSMIC_API_VERSION = TEST_API_VERSION
 
-    /* use rewire to be able to access global variables in the file and check URI is created correctly */
-    const CosmicLib = rewire('../../index')
-    const createdUrl = CosmicLib.__get__('URI')
+    const { URI: createdUrl  } = rewire('../../dist/helpers/constants')
 
     try {
       expect(createdUrl).to.equal(`${TEST_API_URL}/${TEST_API_VERSION}`)
@@ -27,8 +25,7 @@ suite('Test URI Construction.', function() {
     delete process.env.COSMIC_API_VERSION
 
     /* use rewire to be able to access global variables in the file and check URI is created correctly */
-    const CosmicLib = rewire('../../index')
-    const createdUrl = CosmicLib.__get__('URI')
+    const { URI: createdUrl  } = rewire('../../dist/helpers/constants')
 
     try {
       expect(createdUrl).to.equal('https://api.cosmicjs.com/v1')

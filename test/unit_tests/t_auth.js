@@ -2,9 +2,9 @@ const nock = require('nock')
 const rewire = require('rewire')
 const expect = require('chai').expect
 
-const CosmicLib = rewire('../../index')
+const CosmicLib = rewire('../../dist/index')
 const Cosmic = CosmicLib()
-const URI = CosmicLib.__get__('URI')
+const { URI } = rewire('../../dist/helpers/constants')
 
 suite('Test Authenticate.', function() {
   setup(function(done) {
@@ -39,7 +39,7 @@ suite('Test Authenticate.', function() {
       password
     }).then(data => {
         expect(data.token).to.equal(token) /* response was as expected */
-        expect(authNock.isDone()).to.be.true() /* we hit the stub */
+        expect(authNock.isDone()).to.be.true /* we hit the stub */
         done()
     }).catch(err => {
         done(err)

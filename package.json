@@ -1,61 +1,62 @@
 {
   "name": "cosmicjs",
-  "version": "3.2.47",
+  "version": "3.3.0-next-1",
   "description": "The official client module for Cosmic JS. This module helps you easily add dynamic content to your website or application.",
-  "main": "dist/index.js",
-  "scripts": {
-    "lint": "eslint index.js",
-    "dev": "nodemon test.js && eslint test.js",
-    "clean": "rm -f ./cosmicjs.browser.min.js",
-    "build": "npm run clean; webpack -p; babel index.js --out-dir dist",
-    "test": "./node_modules/.bin/mocha --reporter spec",
-    "prepublish": "npm run build"
-  },
-  "engines": {
-    "node": ">=6.0"
-  },
-  "dependencies": {
-    "axios": "^0.18.1",
-    "babel-cli": "^6.26.0",
-    "blanket": "^1.2.3",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "form-data": "^2.3.2",
-    "multer": "^1.3.0"
-  },
-  "devDependencies": {
-    "archiver": "^2.1.1",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "chai": "^4.1.2",
-    "dirty-chai": "^2.0.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-import": "^2.11.0",
-    "mocha": "^5.1.0",
-    "nock": "^9.2.5",
-    "nodemon": "^1.19.3",
-    "nyc": "^11.7.0",
-    "rewire": "^3.0.2",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^3.8.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cosmicjs/cosmicjs-node.git"
-  },
   "keywords": [
     "cms",
     "node",
     "content",
     "api"
   ],
-  "author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
-  "license": "MIT",
+  "homepage": "https://github.com/cosmicjs/cosmicjs-node#readme",
   "bugs": {
     "url": "https://github.com/cosmicjs/cosmicjs-node/issues"
   },
-  "homepage": "https://github.com/cosmicjs/cosmicjs-node#readme"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmicjs/cosmicjs-node.git"
+  },
+  "license": "MIT",
+  "author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run clean; webpack -p; babel src --out-dir dist --source-maps inline --copy-files",
+    "clean": "rm -f ./cosmicjs.browser.min.js; rm -rf dist/*",
+    "dev": "nodemon test.js && eslint test.js",
+    "lint": "eslint src",
+    "prepublish": "npm run build",
+    "test": "mocha -u tdd test/**/*.js --reporter spec"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "form-data": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "archiver": "^4.0.1",
+    "babel-loader": "^8.1.0",
+    "blanket": "^1.2.3",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "express": "^4.16.3",
+    "mocha": "^8.0.1",
+    "multer": "^1.3.0",
+    "nock": "^13.0.2",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "rewire": "^5.0.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "engines": {
+    "node": ">=6.0"
+  }
 }
