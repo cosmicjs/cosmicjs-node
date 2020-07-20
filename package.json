@@ -24,7 +24,6 @@
     "clean": "rm -f ./cosmicjs.browser.min.js; rm -rf dist/*",
     "dev": "nodemon test.js && eslint test.js",
     "lint": "eslint src",
-    "prepublish": "npm run build",
     "test": "mocha -u tdd test/**/*.js --reporter spec"
   },
   "dependencies": {
