@@ -3,6 +3,7 @@ const HTTP_METHODS = {
   GET: 'get',
   FETCH: 'fetch',
   PUT: 'put',
+	PATCH: 'patch',
   DELETE: 'delete'
 }
 
