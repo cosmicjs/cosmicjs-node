@@ -48,7 +48,7 @@ const Cosmic = require('cosmicjs')()
 const bucket = Cosmic.bucket({
   slug: 'your-bucket-slug',
   read_key: 'your-bucket-read-key',
-  write_key: 'your-bucket-write-key'
+  write_key: 'your-bucket-write-key' // Include only if doing write operations.
 })
 ```
 
