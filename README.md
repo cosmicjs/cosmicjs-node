@@ -17,7 +17,7 @@ This is the official JavaScript client for [Cosmic](https://www.cosmicjs.com) [h
 Cosmic is a headless CMS, meaning we provide a web dashboard to manage content and an API toolkit to deliver content to any website or app.
 
 ## Why use a Headless CMS?
-Teams use Cosmic instead of a legacy installed CMS to help them save time and trouble on CMS infrastructure maintenace. They use our service (either with a paid plan, or generous free plan) and can focus on application business logic and content development instead of CMS infrastructure.
+Teams use Cosmic instead of a legacy installed CMS to help them save time and trouble on CMS infrastructure maintenance. They use our service (either with a paid plan, or generous free plan) and can focus on application business logic and content development instead of CMS infrastructure.
 
 ## How to use this NPM module
 Use this NPM module to connect to your Cosmic Buckets and deliver content to any JavaScript enabled website or app.  Advanced features are available including logging into your Cosmic account, managing Buckets, CRUD data management, file uploads, and user management. Use it in the browser or in server-side environments like Node.js.
