@@ -59,7 +59,7 @@ const params = {
   type: 'posts',
   limit: 5,
   props: 'slug,title,content', // get only what you need
-  sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
+  sort: '-created_at', // optional, defaults to order in dashboard
   locale: 'en' // optional, if localization set on Objects
 }
 bucket.getObjects(params).then(data => {
