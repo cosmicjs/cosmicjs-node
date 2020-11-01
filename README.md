@@ -20,7 +20,7 @@ Cosmic is a headless CMS, meaning we provide a web dashboard to manage content a
 Teams use Cosmic instead of a legacy installed CMS to help them save time and trouble on CMS infrastructure maintenace. They use our service (either with a paid plan, or generous free plan) and can focus on application business logic and content development instead of CMS infrastructure.
 
 ## How to use this NPM module
-Use this NPM module to connect to your Cosmic Buckets and deliver content to any JavaScript enabled website or app.  Advanced features are available include logging into your Cosmic account, managing Buckets, CRUD data management, file uploads, and user management. Use it in the browser or in server-side environments like Node.js.
+Use this NPM module to connect to your Cosmic Buckets and deliver content to any JavaScript enabled website or app.  Advanced features are available including logging into your Cosmic account, managing Buckets, CRUD data management, file uploads, and user management. Use it in the browser or in server-side environments like Node.js.
 
 ## Getting started
 Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
@@ -41,7 +41,7 @@ npm install cosmicjs
 ## Basic Usage
 
 #### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#connect-to-bucket)]
-Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https:/www.cosmicjs.com/login).
+Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https://www.cosmicjs.com/login).
 ```javascript
 // Use the Cosmic.bucket method to connect to your Bucket.
 const Cosmic = require('cosmicjs')()
