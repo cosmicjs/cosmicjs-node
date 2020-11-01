@@ -58,11 +58,9 @@ Get Objects from an Object Type. Uses `getObjects` method with additional `type`
 const params = {
   type: 'posts',
   limit: 5,
-  skip: 0,
   props: 'slug,title,content', // get only what you need
   sort: '-created_at', // optional, if sort is needed. (use one option from 'created_at,-created_at,modified_at,-modified_at,random')
   locale: 'en' // optional, if localization set on Objects
-  status: 'all' // optional, if need to get draft Objects
 }
 bucket.getObjects(params).then(data => {
   console.log(data)
