@@ -84,7 +84,7 @@ bucket.getObject({
 })
 ```
 ## Further Documentation
-See the [API reference](API) and [full documentation](https://docs.cosmicjs.com/rest-api/objects.html#get-object) for more requests and capabilities.
+See the [API reference](API.md) and [full documentation](https://docs.cosmicjs.com/rest-api/objects.html#get-object) for more requests and capabilities.
 
 ## License
 This project is published under the [MIT](LICENSE) license.
