@@ -291,6 +291,22 @@ bucket.getObjects(params).then(data => {
 })
 ```
 
+### Get Merge Request Objects [[View Blog Announcement](https://www.cosmicjs.com/blog/introducing-merge-requests)]
+Get Objects included in a [Merge Request](https://www.cosmicjs.com/blog/introducing-merge-requests). Same query params options available as `getObjects`.
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'target-bucket-slug',
+  read_key: 'target-bucket-read-key'
+})
+const data = await bucket.getMergeRequestObjects({
+  id: 'merge-request-id-found-in-dashboard',
+  props: 'slug,title,content' // use props to limit response payload
+})
+```
+Use these Objects to then overright Objects from the target Bucket response based on unique `slug` and `locale` identifiers. An example of this logic can be found in the [Next Merge template](https://github.com/cosmicjs/next-merge/blob/master/lib/merge.js#L19).
+
 #### Get Single Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-object)]
 Returns a single Object from your Bucket.
 ```javascript

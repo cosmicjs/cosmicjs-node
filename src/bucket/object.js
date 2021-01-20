@@ -133,6 +133,70 @@ const objectMethods = (bucket_config) => ({
     }
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
+  getMergeRequestObjects: (params) => {
+    let endpoint = `${URI}/${bucket_config.slug}/merge-requests/${params.id}/objects?read_key=${bucket_config.read_key}`
+    if (params && params.limit) {
+      endpoint += `&limit=${params.limit}`
+    }
+    if (params && params.skip) {
+      endpoint += `&skip=${params.skip}`
+    }
+    if (params && params.locale) {
+      endpoint += `&locale=${params.locale}`
+    }
+    if (params && params.status) {
+      endpoint += `&status=${params.status}`
+    }
+    if (params && params.sort) {
+      endpoint += `&sort=${params.sort}`
+    }
+    // Type param
+    if (params && params.type) {
+      endpoint += `&type=${params.type}`
+    }
+    // Search params
+    if (params && params.q) {
+      endpoint += `&q=${params.q}`
+    }
+    if (params && params.metafield_key) {
+      endpoint += `&metafield_key=${params.metafield_key}`
+    }
+    if (params && params.metafield_value) {
+      endpoint += `&metafield_value=${params.metafield_value}`
+    }
+    if (params && params.metafield_object_id) {
+      endpoint += `&metafield_object_id=${params.metafield_object_id}`
+    }
+    if (params && params.hide_metafields) {
+      endpoint += `&hide_metafields=${params.hide_metafields}`
+    }
+    if (params && params.pretty) {
+      endpoint += `&pretty=${params.pretty}`
+    }
+    if (params && params.filters) {
+      Object.keys(params.filters).forEach((key) => {
+        endpoint += `&filters[${key}]=${params.filters[key]}`
+      })
+    }
+    if (params && params.metadata) {
+      Object.keys(params.metadata).forEach((key) => {
+        endpoint += `&metadata[${key}]=${params.metadata[key]}`
+      })
+    }
+    if (params && params.props) {
+      endpoint += `&props=${params.props}`
+    }
+    if (params && typeof params.created_by !== 'undefined') {
+      endpoint += `&created_by=${params.created_by}`
+    }
+    if (params && typeof params.depth !== 'undefined') {
+      endpoint += `&depth=${params.depth}`
+    }
+    if (params && params.query) {
+      endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
+    }
+    return requestHandler(HTTP_METHODS.GET, endpoint)
+  },
   addObject: (params) => {
     const endpoint = `${URI}/${bucket_config.slug}/add-object`
     if (bucket_config.write_key) {
