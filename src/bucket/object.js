@@ -65,6 +65,9 @@ const objectMethods = (bucket_config) => ({
     if (params && params.query) {
       endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
     }
+    if (params && params.use_cache) {
+      endpoint += `&use_cache=${params.use_cache}`
+    }
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   getObject: (params) => {
@@ -86,6 +89,9 @@ const objectMethods = (bucket_config) => ({
     }
     if (params && typeof params.depth !== 'undefined') {
       endpoint += `&depth=${params.depth}`
+    }
+    if (params && params.use_cache) {
+      endpoint += `&use_cache=${params.use_cache}`
     }
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
