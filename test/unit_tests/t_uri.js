@@ -28,7 +28,7 @@ suite('Test URI Construction.', function() {
     const { URI: createdUrl  } = rewire('../../dist/helpers/constants')
 
     try {
-      expect(createdUrl).to.equal('https://api.cosmicjs.com/v1')
+      expect(createdUrl).to.equal('https://api.cosmicjs.com/v2')
       done()
     } catch(e) {
       done(e)
