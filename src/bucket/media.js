@@ -33,6 +33,7 @@ const mediaMethods = (bucket_config) => ({
       }
     })
     )
+    headers["Authorization"] = `Bearer ${bucket_config.write_key}`;
     return getHeaders(data)
       .then((headers) => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
         .catch((error) => {
@@ -40,15 +41,12 @@ const mediaMethods = (bucket_config) => ({
         }))
   },
   getMedia: (params) => {
-    let endpoint = `${URI}/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
+    let endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
     if (params && params.limit) {
       endpoint += `&limit=${params.limit}`
     }
     if (params && params.skip) {
       endpoint += `&skip=${params.skip}`
-    }
-    if (params && params.locale) {
-      endpoint += `&locale=${params.locale}`
     }
     if (params && params.status) {
       endpoint += `&status=${params.status}`
@@ -61,9 +59,22 @@ const mediaMethods = (bucket_config) => ({
     }
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
+  getSingleMedia: (params) => {
+    let endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}?read_key=${bucket_config.read_key}`
+    if (params && params.props) {
+      endpoint += `&props=${params.props}`
+    }
+    return requestHandler(HTTP_METHODS.GET, endpoint)
+  },
   deleteMedia: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/media/${params.id}`
-    return requestHandler(HTTP_METHODS.DELETE, endpoint, bucket_config)
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}`
+    let headers;
+    if (bucket_config.write_key) {
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   }
 })
 

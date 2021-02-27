@@ -28,7 +28,7 @@
     "test": "mocha -u tdd test/**/*.js --reporter spec"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "form-data": "^3.0.0"
   },
   "devDependencies": {

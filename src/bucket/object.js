@@ -1,66 +1,34 @@
 const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
+let headers;
 
 const objectMethods = (bucket_config) => ({
   getObjects: (params) => {
-    let endpoint = `${URI}/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
+    let endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
     if (params && params.limit) {
       endpoint += `&limit=${params.limit}`
     }
     if (params && params.skip) {
       endpoint += `&skip=${params.skip}`
     }
-    if (params && params.locale) {
-      endpoint += `&locale=${params.locale}`
-    }
     if (params && params.status) {
       endpoint += `&status=${params.status}`
+    }
+    if (params && params.after) {
+      endpoint += `&after=${params.after}`
     }
     if (params && params.sort) {
       endpoint += `&sort=${params.sort}`
     }
-    // Type param
-    if (params && params.type) {
-      endpoint += `&type=${params.type}`
-    }
-    // Search params
-    if (params && params.q) {
-      endpoint += `&q=${params.q}`
-    }
-    if (params && params.metafield_key) {
-      endpoint += `&metafield_key=${params.metafield_key}`
-    }
-    if (params && params.metafield_value) {
-      endpoint += `&metafield_value=${params.metafield_value}`
-    }
-    if (params && params.metafield_object_id) {
-      endpoint += `&metafield_object_id=${params.metafield_object_id}`
-    }
-    if (params && params.hide_metafields) {
-      endpoint += `&hide_metafields=${params.hide_metafields}`
+    if (params && params.show_metafields) {
+      endpoint += `&show_metafields=${params.show_metafields}`
     }
     if (params && params.pretty) {
       endpoint += `&pretty=${params.pretty}`
     }
-    if (params && params.filters) {
-      Object.keys(params.filters).forEach((key) => {
-        endpoint += `&filters[${key}]=${params.filters[key]}`
-      })
-    }
-    if (params && params.metadata) {
-      Object.keys(params.metadata).forEach((key) => {
-        endpoint += `&metadata[${key}]=${params.metadata[key]}`
-      })
-    }
     if (params && params.props) {
       endpoint += `&props=${params.props}`
-    }
-    if (params && typeof params.created_by !== 'undefined') {
-      endpoint += `&created_by=${params.created_by}`
-    }
-    if (params && typeof params.depth !== 'undefined') {
-      endpoint += `&depth=${params.depth}`
     }
     if (params && params.query) {
       endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
@@ -72,23 +40,14 @@ const objectMethods = (bucket_config) => ({
   },
   getObject: (params) => {
     if (!params) {
-      throw new Error('Must supply params object with object slug')
+      throw new Error('Must supply params object with object id')
     }
-    let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}?read_key=${bucket_config.read_key}`
-    if (params && params.locale) {
-      endpoint += `&locale=${params.locale}`
-    }
+    let endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}?read_key=${bucket_config.read_key}`
     if (params && params.status) {
       endpoint += `&status=${params.status}`
     }
-    if (params && params.revision) {
-      endpoint += `&revision=${params.revision}`
-    }
     if (params && params.props) {
       endpoint += `&props=${params.props}`
-    }
-    if (params && typeof params.depth !== 'undefined') {
-      endpoint += `&depth=${params.depth}`
     }
     if (params && typeof params.use_cache !== 'undefined') {
       endpoint += `&use_cache=${params.use_cache}`
@@ -96,146 +55,123 @@ const objectMethods = (bucket_config) => ({
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   getObjectRevisions: (params) => {
-    let endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}/revisions?read_key=${bucket_config.read_key}`
+    let endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/revisions?read_key=${bucket_config.read_key}`
     if (params && params.limit) {
       endpoint += `&limit=${params.limit}`
     }
     if (params && params.skip) {
       endpoint += `&skip=${params.skip}`
     }
-    if (params && params.locale) {
-      endpoint += `&locale=${params.locale}`
-    }
     if (params && params.status) {
       endpoint += `&status=${params.status}`
+    }
+    if (params && params.after) {
+      endpoint += `&after=${params.after}`
     }
     if (params && params.sort) {
       endpoint += `&sort=${params.sort}`
     }
-    if (params && params.hide_metafields) {
-      endpoint += `&hide_metafields=${params.hide_metafields}`
+    if (params && params.show_metafields) {
+      endpoint += `&show_metafields=${params.show_metafields}`
     }
     if (params && params.pretty) {
       endpoint += `&pretty=${params.pretty}`
     }
-    if (params && params.filters) {
-      Object.keys(params.filters).forEach((key) => {
-        endpoint += `&filters[${key}]=${params.filters[key]}`
-      })
-    }
-    if (params && params.metadata) {
-      Object.keys(params.metadata).forEach((key) => {
-        endpoint += `&metadata[${key}]=${params.metadata[key]}`
-      })
-    }
     if (params && params.props) {
       endpoint += `&props=${params.props}`
-    }
-    if (params && typeof params.created_by !== 'undefined') {
-      endpoint += `&created_by=${params.created_by}`
-    }
-    if (params && typeof params.depth !== 'undefined') {
-      endpoint += `&depth=${params.depth}`
-    }
-    return requestHandler(HTTP_METHODS.GET, endpoint)
-  },
-  getMergeRequestObjects: (params) => {
-    let endpoint = `${URI}/${bucket_config.slug}/merge-requests/${params.id}/objects?read_key=${bucket_config.read_key}`
-    if (params && params.limit) {
-      endpoint += `&limit=${params.limit}`
-    }
-    if (params && params.skip) {
-      endpoint += `&skip=${params.skip}`
-    }
-    if (params && params.locale) {
-      endpoint += `&locale=${params.locale}`
-    }
-    if (params && params.status) {
-      endpoint += `&status=${params.status}`
-    }
-    if (params && params.sort) {
-      endpoint += `&sort=${params.sort}`
-    }
-    // Type param
-    if (params && params.type) {
-      endpoint += `&type=${params.type}`
-    }
-    // Search params
-    if (params && params.q) {
-      endpoint += `&q=${params.q}`
-    }
-    if (params && params.metafield_key) {
-      endpoint += `&metafield_key=${params.metafield_key}`
-    }
-    if (params && params.metafield_value) {
-      endpoint += `&metafield_value=${params.metafield_value}`
-    }
-    if (params && params.metafield_object_id) {
-      endpoint += `&metafield_object_id=${params.metafield_object_id}`
-    }
-    if (params && params.hide_metafields) {
-      endpoint += `&hide_metafields=${params.hide_metafields}`
-    }
-    if (params && params.pretty) {
-      endpoint += `&pretty=${params.pretty}`
-    }
-    if (params && params.filters) {
-      Object.keys(params.filters).forEach((key) => {
-        endpoint += `&filters[${key}]=${params.filters[key]}`
-      })
-    }
-    if (params && params.metadata) {
-      Object.keys(params.metadata).forEach((key) => {
-        endpoint += `&metadata[${key}]=${params.metadata[key]}`
-      })
-    }
-    if (params && params.props) {
-      endpoint += `&props=${params.props}`
-    }
-    if (params && typeof params.created_by !== 'undefined') {
-      endpoint += `&created_by=${params.created_by}`
-    }
-    if (params && typeof params.depth !== 'undefined') {
-      endpoint += `&depth=${params.depth}`
     }
     if (params && params.query) {
       endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
     }
+    if (params && typeof params.use_cache !== 'undefined') {
+      endpoint += `&use_cache=${params.use_cache}`
+    }
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
+  // TODO in REST v2
+  // getMergeRequestObjects: (params) => {
+  //   let endpoint = `${URI}/buckets/${bucket_config.slug}/merge-requests/${params.id}/objects?read_key=${bucket_config.read_key}`
+  //   if (params && params.limit) {
+  //     endpoint += `&limit=${params.limit}`
+  //   }
+  //   if (params && params.skip) {
+  //     endpoint += `&skip=${params.skip}`
+  //   }
+  //   if (params && params.status) {
+  //     endpoint += `&status=${params.status}`
+  //   }
+  //   if (params && params.after) {
+  //     endpoint += `&after=${params.after}`
+  //   }
+  //   if (params && params.sort) {
+  //     endpoint += `&sort=${params.sort}`
+  //   }
+  //   if (params && params.show_metafields) {
+  //     endpoint += `&show_metafields=${params.show_metafields}`
+  //   }
+  //   if (params && params.pretty) {
+  //     endpoint += `&pretty=${params.pretty}`
+  //   }
+  //   if (params && params.props) {
+  //     endpoint += `&props=${params.props}`
+  //   }
+  //   if (params && params.query) {
+  //     endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
+  //   }
+  //   if (params && typeof params.use_cache !== 'undefined') {
+  //     endpoint += `&use_cache=${params.use_cache}`
+  //   }
+  //   return requestHandler(HTTP_METHODS.GET, endpoint)
+  // },
   addObject: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/add-object`
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
     if (bucket_config.write_key) {
-      params.write_key = bucket_config.write_key
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
     }
-    return requestHandler(HTTP_METHODS.POST, endpoint, params)
+    return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
   },
-  addObjectRevision: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/object/${params.slug}/revisions`
-    if (bucket_config.write_key) {
-      params.write_key = bucket_config.write_key
-    }
-    return requestHandler(HTTP_METHODS.POST, endpoint, params)
-  },
+  // TODO in REST v2
+  // addObjectRevision: (params) => {
+  //   const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/revisions`
+  //   if (bucket_config.write_key) {
+  //     headers = {
+  //       "Authorization": `Bearer ${bucket_config.write_key}`
+  //     }
+  //   }
+  //   return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
+  // },
   editObject: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/edit-object`
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
     if (bucket_config.write_key) {
-      params.write_key = bucket_config.write_key
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
     }
-    return requestHandler(HTTP_METHODS.PUT, endpoint, params)
+    // Remove id
+    delete params.id;
+    return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   editObjectMetafields: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/edit-object-metafields`
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields`
     if (bucket_config.write_key) {
-      params.write_key = bucket_config.write_key
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
     }
-    return requestHandler(HTTP_METHODS.PATCH, endpoint, params)
+    // Remove id
+    delete params.id;
+    return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   deleteObject: (params) => {
-    const endpoint = `${URI}/${bucket_config.slug}/objects/${params.slug}`
-    const bucket_data = { ...bucket_config }
-    const data = Object.assign(bucket_data, params)
-    return requestHandler(HTTP_METHODS.DELETE, endpoint, data)
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    if (bucket_config.write_key) {
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   }
 })
 
