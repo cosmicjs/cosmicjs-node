@@ -11,6 +11,10 @@ const mainMethods = {
     const endpoint = `${URI}/buckets`
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
+  getBucket: (params) => {
+    const endpoint = `${URI}/buckets/${params.slug}`
+    return requestHandler(HTTP_METHODS.GET, endpoint)
+  },
   addBucket: (params) => {
     const endpoint = `${URI}/buckets`
     return requestHandler(HTTP_METHODS.POST, endpoint, params)
