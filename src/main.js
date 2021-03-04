@@ -20,7 +20,7 @@ const mainMethods = {
     return requestHandler(HTTP_METHODS.POST, endpoint, params)
   },
   deleteBucket: (params) => {
-    const endpoint = `${URI}/buckets/${params.id}`
+    const endpoint = `${URI}/buckets/${params.slug}`
     return requestHandler(HTTP_METHODS.DELETE, endpoint, params)
   },
 }

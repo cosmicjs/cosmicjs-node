@@ -5,7 +5,7 @@ const { requestHandler } = require('../helpers/request_handler')
 
 const mediaMethods = (bucket_config) => ({
   addMedia: (params) => {
-    const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/${bucket_config.slug}/media`
+    const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/buckets/${bucket_config.slug}/media`
     const data = new FormData()
     if (params.media.buffer) {
       data.append('media', params.media.buffer, params.media.originalname)
@@ -33,12 +33,13 @@ const mediaMethods = (bucket_config) => ({
       }
     })
     )
-    headers["Authorization"] = `Bearer ${bucket_config.write_key}`;
     return getHeaders(data)
-      .then((headers) => requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
-        .catch((error) => {
+      .then((headers) => {
+        headers["Authorization"] = `Bearer ${bucket_config.write_key}`;
+        return requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
+      }).catch((error) => {
           throw error.response.data
-        }))
+      })
   },
   getMedia: (params) => {
     let endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}`
