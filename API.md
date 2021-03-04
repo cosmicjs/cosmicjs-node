@@ -58,16 +58,19 @@ const bucket = Cosmic.bucket({
 })
 ```
 #### Get Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#get-bucket)]
-Returns the entire Bucket including Object Types, Objects, Media and more.
+Returns the basic Bucket information.
 ```javascript
-bucket.getBucket().then(data => {
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
+Cosmic.getBucket({ slug: 'your-bucket-slug'}).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
 })
 ```
 #### Delete Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#delete-bucket)]
-Deletes the Bucket
+Deletes the Bucket.
 ```javascript
 const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // required
@@ -486,7 +489,7 @@ const bucket = Cosmic.bucket({
 })
 bucket.addMedia({
   media: '<FILE_DATA>',
-  folder: 'your-folder-slug',
+  folder: 'your-folder-slug', // Optional
   metadata: {
     caption: 'Beautiful picture of the beach',
     credit: 'Tyler Jackson'
