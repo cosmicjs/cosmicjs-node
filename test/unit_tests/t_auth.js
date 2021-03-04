@@ -1,16 +1,12 @@
-const envPath = __dirname + `/../../.env`
 const expect = require('chai').expect
 const Cosmic = require('../../src/index')
-require('dotenv').config({ path: envPath })
-const { EMAIL, PASSWORD } = process.env
-const email = EMAIL
-const password = PASSWORD
+const { EMAIL, PASSWORD } = require('../constants')
 
 suite('Test Authenticate.', function() {
   test('authenticate hits expected url and returns data from request', function(done) {
     Cosmic().authenticate({
-      email,
-      password
+      email: EMAIL,
+      password: PASSWORD
     }).then(data => {
       expect(data.token).to.be.a('string') /* response was as expected */
       done()

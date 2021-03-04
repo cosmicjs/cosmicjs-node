@@ -1,19 +1,15 @@
-const envPath = __dirname + `/../../.env`
 const fs = require('fs')
 const expect = require('chai').expect
 const Cosmic = require('../../src/index')
-require('dotenv').config({ path: envPath })
-const { EMAIL, PASSWORD } = process.env
-const email = EMAIL
-const password = PASSWORD
+const { EMAIL, PASSWORD } = require('../constants')
 
 suite('Test Bucket Methods.', function() {
   let config = {};
   let CosmicBucket = {};
   setup(function(done) {
     Cosmic().authenticate({
-      email,
-      password
+      email: EMAIL,
+      password: PASSWORD
     }).then(data => {
       config.token = data.token;
       done()
