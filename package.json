@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
     "form-data": "^3.0.0"
   },
   "devDependencies": {
@@ -42,6 +41,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "dirty-chai": "^2.0.1",
+    "dotenv": "^8.2.0",
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-loader": "^4.0.2",
