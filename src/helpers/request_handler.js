@@ -17,8 +17,11 @@ const requestHandler = (method, url, data, headers) => {
     data,
     headers
   }
-  return axios(config).then((response) => response.data)
-    .catch((error) => (error.response ? error.response.data : error.response))
+  return axios(config).then((response) => {
+    return response.data
+  }).catch((error) => { 
+    throw (error.response ? error.response.data : error.response)
+  })
 }
 
 module.exports = {
