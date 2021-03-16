@@ -56,11 +56,13 @@ const bucket = Cosmic.bucket({
 Get Objects from an Object Type. Uses `getObjects` method with additional `type` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/rest-api/objects.html#get-objects) including powerful [Advanced Queries](https://docs.cosmicjs.com/rest-api/objects.html#advanced-queries-beta).
 ```javascript
 const params = {
-  type: 'posts',
+  query: {
+    type: 'posts',
+    locale: 'en' // optional, if localization set on Objects
+  },
   limit: 5,
-  props: 'slug,title,content', // get only what you need
-  sort: '-created_at', // optional, defaults to order in dashboard
-  locale: 'en' // optional, if localization set on Objects
+  props: 'id,slug,title,content', // get only what you need
+  sort: '-created_at' // optional, defaults to order in dashboard
 }
 bucket.getObjects(params).then(data => {
   console.log(data)
@@ -71,9 +73,30 @@ bucket.getObjects(params).then(data => {
 
 ### Get Single Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-object)]
 Returns a single Object from your Bucket.
+
+**By Id**
+
 ```javascript
 bucket.getObject({
-  slug: 'home',
+  id: '6038150ead9d8a0ee8ebe290', // Object ID
+  props: 'slug,title,content' // get only what you need
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+**By Slug**
+
+Use the `getObjects` method and `query` param.
+```javascript
+bucket.getObjects({
+  query: {
+    type: 'pages',
+    slug: 'home', // slugs are unique per locale
+    locale: 'en'  // optional, if localization set on Objects
+  },
   props: 'slug,title,content' // get only what you need
 }).then(data => {
   console.log(data)
@@ -82,7 +105,7 @@ bucket.getObject({
 })
 ```
 ## Further Documentation
-See the [API reference](API.md) and [full documentation](https://docs.cosmicjs.com/rest-api/objects.html#get-object) for more requests and capabilities.
+See the [API reference](API.md) and [full documentation](https://docs-v2.cosmicjs.com/api-reference/objects) for more requests and capabilities.
 
 ## License
 This project is published under the [MIT](LICENSE) license.

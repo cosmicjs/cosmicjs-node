@@ -11,22 +11,18 @@ const mainMethods = {
     const endpoint = `${URI}/buckets`
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
+  getBucket: (params) => {
+    const endpoint = `${URI}/buckets/${params.slug}`
+    return requestHandler(HTTP_METHODS.GET, endpoint)
+  },
   addBucket: (params) => {
     const endpoint = `${URI}/buckets`
     return requestHandler(HTTP_METHODS.POST, endpoint, params)
   },
   deleteBucket: (params) => {
-    const endpoint = `${URI}/buckets/${params.id}`
+    const endpoint = `${URI}/buckets/${params.slug}`
     return requestHandler(HTTP_METHODS.DELETE, endpoint, params)
   },
-  importBucket: (params) => {
-    const endpoint = `${URI}/buckets/${params.id}/import`
-    return requestHandler(HTTP_METHODS.POST, endpoint, params)
-  },
-  deployApp: (params) => {
-    const endpoint = `${URI}/buckets/${params.id}/deploy`
-    return requestHandler(HTTP_METHODS.POST, endpoint, params)
-  }
 }
 
 module.exports = mainMethods
