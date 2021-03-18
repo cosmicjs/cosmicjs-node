@@ -4,10 +4,10 @@ const Cosmic = require('../../src/index')
 const { EMAIL, PASSWORD } = require('../constants')
 
 suite('Test Bucket Methods.', function() {
+  this.timeout(10000);
   let config = {};
   let CosmicBucket = {};
   setup(function(done) {
-    this.timeout(10000);
     Cosmic().authenticate({
       email: EMAIL,
       password: PASSWORD
@@ -20,7 +20,6 @@ suite('Test Bucket Methods.', function() {
     })
   })
   test('getBuckets', function(done) {
-    this.timeout(10000);
     Cosmic({ token: config.token }).getBuckets()
     .then(data => {
       expect(data.buckets).to.be.an('array')
@@ -31,7 +30,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('addBucket', function(done) {
-    this.timeout(10000);
     Cosmic({ token: config.token }).addBucket({
       title: "My Super Awesome Bucket"
     })
@@ -46,7 +44,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('addObjectType', function(done) {
-    this.timeout(10000);
     CosmicBucket = Cosmic().bucket({
       slug: config.bucket.slug,
       read_key: config.bucket.api_access.read_key,
@@ -71,7 +68,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('editObjectType', function(done) {
-    this.timeout(10000);
     CosmicBucket.editObjectType({
       slug: config.object_type.slug,
       title: 'Posts EDITED',
@@ -91,7 +87,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('addObject', function(done) {
-    this.timeout(10000);
     CosmicBucket.addObject({
       type: config.object_type.slug,
       title: 'My New Awesome Post',
@@ -112,7 +107,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('editObject', function(done) {
-    this.timeout(10000);
     CosmicBucket.editObject({
       id: config.object.id,
       title: 'EDITED My New Awesome Post'
@@ -126,7 +120,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('deleteObject', function(done) {
-    this.timeout(10000);
     CosmicBucket.deleteObject({
       id: config.object.id
     })
@@ -139,7 +132,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('deleteObjectType', function(done) {
-    this.timeout(10000);
     CosmicBucket.deleteObjectType({
       slug: config.object_type.slug
     })
@@ -152,7 +144,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('addMedia', function(done) {
-    this.timeout(10000);
     const media_object = {
       originalname: 'logo.jpg',
       buffer: fs.createReadStream('./test/logo.jpg')
@@ -170,7 +161,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('deleteMedia', function(done) {
-    this.timeout(10000);
     CosmicBucket.deleteMedia({
       id: config.media.id
     })
@@ -184,7 +174,6 @@ suite('Test Bucket Methods.', function() {
   })
 
   test('deleteBucket', function(done) {
-    this.timeout(10000);
     Cosmic({ token: config.token }).deleteBucket({
       slug: config.bucket.slug
     })
