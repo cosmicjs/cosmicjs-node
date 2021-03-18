@@ -40,8 +40,8 @@ npm install cosmicjs
 
 ## Basic Usage
 
-#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/rest-api/buckets.html#connect-to-bucket)]
-Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https://www.cosmicjs.com/login).
+#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/api-reference/getting-started/introduction#api-access-keys)]
+Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https://app.cosmicjs.com/login).
 ```javascript
 // Use the Cosmic.bucket method to connect to your Bucket.
 const Cosmic = require('cosmicjs')()
@@ -52,8 +52,8 @@ const bucket = Cosmic.bucket({
 })
 ```
 
-### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-objects)]
-Get Objects from an Object Type. Uses `getObjects` method with additional `type` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/rest-api/objects.html#get-objects) including powerful [Advanced Queries](https://docs.cosmicjs.com/rest-api/objects.html#advanced-queries-beta).
+### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/api-reference/objects)]
+Get Objects from an Object Type. Uses `getObjects` method with additional `type` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/api-reference/objects) including powerful [queries and logic](https://docs.cosmicjs.com/api-reference/queries).
 ```javascript
 const params = {
   query: {
@@ -71,7 +71,7 @@ bucket.getObjects(params).then(data => {
 })
 ```
 
-### Get Single Object [[View Docs](https://docs.cosmicjs.com/rest-api/objects.html#get-object)]
+### Get Single Object [[View Docs](https://docs.cosmicjs.com/api-reference/objects#get-object)]
 Returns a single Object from your Bucket.
 
 **By Id**
@@ -105,7 +105,7 @@ bucket.getObjects({
 })
 ```
 ## Further Documentation
-See the [API reference](API.md) and [full documentation](https://docs-v2.cosmicjs.com/api-reference/objects) for more requests and capabilities.
+See the [API reference](API.md) and [full documentation](https://docs.cosmicjs.com) for more requests and capabilities.
 
 ## License
 This project is published under the [MIT](LICENSE) license.
