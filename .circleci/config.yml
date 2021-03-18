@@ -30,4 +30,3 @@ jobs:
 
       # run tests!
       - run: npm test
-          timeout: 10000
