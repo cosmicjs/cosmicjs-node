@@ -4,6 +4,7 @@ const { EMAIL, PASSWORD } = require('../constants')
 
 suite('Test Authenticate.', function() {
   test('authenticate hits expected url and returns data from request', function(done) {
+    this.timeout(10000);
     Cosmic().authenticate({
       email: EMAIL,
       password: PASSWORD
