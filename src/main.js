@@ -7,6 +7,10 @@ const mainMethods = {
     const endpoint = `${URI}/authenticate`
     return requestHandler(HTTP_METHODS.POST, endpoint, params)
   },
+  getUser: (params) => {
+    const endpoint = `${URI}/user`
+    return requestHandler(HTTP_METHODS.GET, endpoint)
+  },
   getBuckets: () => {
     const endpoint = `${URI}/buckets`
     return requestHandler(HTTP_METHODS.GET, endpoint)

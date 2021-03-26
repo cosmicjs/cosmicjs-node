@@ -15,6 +15,19 @@ Cosmic.authenticate({
 })
 ```
 
+### Get User
+Get user information using an authentication token.
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
+Cosmic.getUser(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
 ### Buckets
 
 #### Add Bucket [[View Docs](https://docs.cosmicjs.com/api-reference/buckets#add-bucket)]
