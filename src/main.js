@@ -7,7 +7,7 @@ const mainMethods = {
     const endpoint = `${URI}/authenticate`
     return requestHandler(HTTP_METHODS.POST, endpoint, params)
   },
-  getUser: (params) => {
+  getUser: () => {
     const endpoint = `${URI}/user`
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
