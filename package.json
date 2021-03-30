@@ -24,6 +24,7 @@
     "build": "npm run clean; webpack -p; babel src --out-dir dist --source-maps inline --copy-files",
     "clean": "rm -f ./cosmicjs.browser.min.js; rm -rf dist/*",
     "dev": "nodemon test.js && eslint test.js",
+    "prepublish": "npm run build",
     "lint": "eslint src",
     "test": "mocha -u tdd test/**/*.js --reporter spec"
   },
