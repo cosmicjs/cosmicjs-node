@@ -106,6 +106,65 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('getObject', function(done) {
+    CosmicBucket.getObject({
+      id: config.object.id,
+      props: 'title,slug'
+    })
+    .then(data => {
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('getObjects', function(done) {
+    CosmicBucket.getObjects({
+      type: config.object.type,
+      props: 'title,slug'
+    })
+    .then(data => {
+      expect(data.objects).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('addObjectRevision', function(done) {
+    CosmicBucket.addObjectRevision({
+      id: config.object.id,
+      type: config.object_type.slug,
+      title: 'My New Awesome Post REVISION',
+      metafields: [{
+        type: 'text',
+        title: 'Headline',
+        key: 'headline',
+        value: 'This is AMAZING!'
+      }]
+    })
+    .then(data => {
+      expect(data.revision).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+  // NEEDS FURTHER DEVELOPMENT (addMergeRequest, etc)
+  // test('getMergeRequestObjects', function(done) {
+  //   MergeCosmicBucket.getMergeRequestObjects({
+  //     id: 'merge-request-id',
+  //     props: 'title'
+  //   })
+  //   .then(data => {
+  //     expect(data.objects).to.be.an('array')
+  //     done()
+  //   }).catch(err => {
+  //     done(err)
+  //   })
+  // })
+
   test('editObject', function(done) {
     CosmicBucket.editObject({
       id: config.object.id,
