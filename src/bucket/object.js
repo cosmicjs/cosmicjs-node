@@ -67,7 +67,6 @@ const objectMethods = (bucket_config) => ({
   getMergeRequestObjects: (params) => {
     let endpoint = `${URI}/buckets/${bucket_config.slug}/merge-requests/${params.id}/objects?read_key=${bucket_config.read_key}`
     endpoint = addParamsToObjectsEndpoint(endpoint, params)
-    console.log(endpoint)
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   addObject: (params) => {
