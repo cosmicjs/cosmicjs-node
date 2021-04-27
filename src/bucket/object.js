@@ -100,6 +100,11 @@ const objectMethods = (bucket_config) => ({
     delete params.id;
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
+  getObjectMetafields: (params) => {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields?read_key=${bucket_config.read_key}`
+    return requestHandler(HTTP_METHODS.GET, endpoint);
+  },
+  /// DEPRECATED
   editObjectMetafields: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields`
     if (bucket_config.write_key) {
@@ -109,6 +114,18 @@ const objectMethods = (bucket_config) => ({
     }
     // Remove id
     delete params.id;
+    return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
+  },
+  editObjectMetafield: (params) => {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields/${params.key}`
+    if (bucket_config.write_key) {
+      headers = {
+        "Authorization": `Bearer ${bucket_config.write_key}`
+      }
+    }
+    // Remove id
+    delete params.id;
+    delete params.key;
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   deleteObject: (params) => {

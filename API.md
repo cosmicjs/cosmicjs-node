@@ -400,8 +400,25 @@ bucket.editObject({
 })
 ```
 
-#### Edit Object Metafields [[View Docs](https://docs.cosmicjs.com/api-reference/object-metafields#edit-object-metafield)]
-You can edit an existing Object's Metafields by using the following method. This method allows you to edit specific Metafields identified by `key`, without affecting other Metafields.
+#### Get Object Metafields [[View Docs](https://docs.cosmicjs.com/api-reference/object-metafields#edit-object-metafield)]
+Get an Object's Metafields.
+```javascript
+const bucket = Cosmic.bucket({
+  slug: 'your-bucket-slug',
+  read_key: 'your-bucket-read-key',
+  write_key: 'your-bucket-write-key'
+})
+bucket.getObjectMetafields(params)
+.then(data => {
+  console.log(data)
+})
+.catch(err => {
+  console.log(err)
+})
+```
+
+#### Edit Object Metafield [[View Docs](https://docs.cosmicjs.com/api-reference/object-metafields#edit-object-metafield)]
+You can edit an existing Object's Metafield by using the following method. This method allows you to edit specific Metafields identified by `key`, without affecting other Metafields.
 ```javascript
 const bucket = Cosmic.bucket({
   slug: 'your-bucket-slug',
@@ -410,22 +427,10 @@ const bucket = Cosmic.bucket({
 })
 const params = {
   id: '6038150ead9d8a0ee8ebe290',
-  metafields: [
-    {
-      title: 'Headline',
-      key: 'headline',
-      type: 'text',
-      value: 'What I Learned Today'
-    },
-    {
-      title: 'Subheadline',
-      key: 'subheadline',
-      type: 'text',
-      value: 'Something different'
-    }
-  ]
+  key: 'headline',
+  value: 'New Headline'
 }
-bucket.editObjectMetafields(params)
+bucket.editObjectMetafield(params)
 .then(data => {
   console.log(data)
 })

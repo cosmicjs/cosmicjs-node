@@ -250,6 +250,32 @@ suite('Test Bucket Methods.', function() {
   //   })
   // })
 
+  test('getObjectMetafields', function(done) {
+    CosmicBucket.getObjectMetafields({
+      id: config.object.id
+    })
+    .then(data => {
+      expect(data.metafields).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('editObjectMetafield', function(done) {
+    CosmicBucket.editObjectMetafield({
+      id: config.object.id,
+      key: 'headline',
+      value: 'New Metafield Value'
+    })
+    .then(data => {
+      expect(data.metafield).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('editObject', function(done) {
     CosmicBucket.editObject({
       id: config.object.id,
