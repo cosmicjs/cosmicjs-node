@@ -408,6 +408,9 @@ const bucket = Cosmic.bucket({
   read_key: 'your-bucket-read-key',
   write_key: 'your-bucket-write-key'
 })
+const params = {
+  id: '6038150ead9d8a0ee8ebe290'
+}
 bucket.getObjectMetafields(params)
 .then(data => {
   console.log(data)
