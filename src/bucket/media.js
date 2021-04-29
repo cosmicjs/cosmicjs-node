@@ -49,15 +49,13 @@ const mediaMethods = (bucket_config) => ({
     if (params && params.skip) {
       endpoint += `&skip=${params.skip}`
     }
-    if (params && params.status) {
-      endpoint += `&status=${params.status}`
-    }
-    if (params && params.folder) {
-      endpoint += `&folder=${params.folder}`
+    if (params && params.query) {
+      endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
     }
     if (params && params.props) {
       endpoint += `&props=${params.props}`
     }
+    console.log(endpoint)
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   getSingleMedia: (params) => {

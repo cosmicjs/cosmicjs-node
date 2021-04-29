@@ -330,6 +330,18 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('getMedia', function(done) {
+    CosmicBucket.getMedia({
+      limit: 2
+    })
+    .then(data => {
+      expect(data.media).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('deleteMedia', function(done) {
     CosmicBucket.deleteMedia({
       id: config.media.id
