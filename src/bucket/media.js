@@ -55,7 +55,6 @@ const mediaMethods = (bucket_config) => ({
     if (params && params.props) {
       endpoint += `&props=${params.props}`
     }
-    console.log(endpoint)
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   getSingleMedia: (params) => {
