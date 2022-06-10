@@ -345,7 +345,7 @@ bucket.getObjects(params).then(data => {
 })
 ```
 
-### TODO Get Merge Request Objects [[View Blog Announcement](https://www.cosmicjs.com/blog/introducing-merge-requests)]
+### Get Merge Request Objects [[View Docs](https://docs.cosmicjs.com/api-reference/objects#get-merge-request-objects)]
 Get Objects included in a [Merge Request](https://www.cosmicjs.com/blog/introducing-merge-requests). Same query params options available as `getObjects`.
 ```javascript
 const Cosmic = require('cosmicjs')
