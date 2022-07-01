@@ -26,7 +26,11 @@ Use this NPM module to connect to your Cosmic Buckets and deliver content to any
 Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
 
 ## Install
-```
+```bash
+pnpm install cosmicjs
+# or
+yarn add cosmicjs
+# or
 npm install cosmicjs
 ```
 ### Or include in an HTML file
@@ -40,7 +44,7 @@ npm install cosmicjs
 
 ## Basic Usage
 
-#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/api-reference/getting-started/introduction#api-access-keys)]
+#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/api-reference/introduction)]
 Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https://app.cosmicjs.com/login).
 ```javascript
 // Use the Cosmic.bucket method to connect to your Bucket.
@@ -53,7 +57,7 @@ const bucket = Cosmic.bucket({
 ```
 
 ### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/api-reference/objects)]
-Get Objects from an Object Type. Uses `getObjects` method with additional `type` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/api-reference/objects) including powerful [queries and logic](https://docs.cosmicjs.com/api-reference/queries).
+Get Objects from an Object Type. Uses `getObjects` method with a `query` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/api-reference/objects) including powerful [queries and logic](https://docs.cosmicjs.com/api-reference/queries).
 ```javascript
 const params = {
   query: {
@@ -61,7 +65,7 @@ const params = {
     locale: 'en' // optional, if localization set on Objects
   },
   limit: 5,
-  props: 'id,slug,title,content', // get only what you need
+  props: 'id,slug,title,content', // response properties
   sort: '-created_at' // optional, defaults to order in dashboard
 }
 bucket.getObjects(params).then(data => {
@@ -74,19 +78,6 @@ bucket.getObjects(params).then(data => {
 ### Get Single Object [[View Docs](https://docs.cosmicjs.com/api-reference/objects#get-object)]
 Returns a single Object from your Bucket.
 
-**By Id**
-
-```javascript
-bucket.getObject({
-  id: '6038150ead9d8a0ee8ebe290', // Object ID
-  props: 'slug,title,content' // get only what you need
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-```
-
 **By Slug**
 
 Use the `getObjects` method and `query` param.
@@ -97,7 +88,20 @@ bucket.getObjects({
     slug: 'home', // slugs are unique per locale
     locale: 'en'  // optional, if localization set on Objects
   },
-  props: 'slug,title,content' // get only what you need
+  props: 'slug,title,content' // response properties
+}).then(data => {
+  console.log(data[0]) // Returns array
+}).catch(err => {
+  console.log(err)
+})
+```
+
+**By Id**
+
+```javascript
+bucket.getObject({
+  id: '6038150ead9d8a0ee8ebe290', // Object ID
+  props: 'slug,title,content' // response properties
 }).then(data => {
   console.log(data)
 }).catch(err => {
