@@ -9,7 +9,7 @@
 		"content",
 		"api"
 	],
-	"homepage": "https://docs.cosmicjs.com",
+	"homepage": "https://www.cosmicjs.com",
 	"bugs": {
 		"url": "https://github.com/cosmicjs/cosmicjs-node/issues"
 	},
@@ -18,7 +18,7 @@
 		"url": "git+https://github.com/cosmicjs/cosmicjs-node.git"
 	},
 	"license": "MIT",
-	"author": "Tony Spiro <tspiro@tonyspiro.com> (http://tonyspiro.com/)",
+	"author": "Tony Spiro <tony@cosmicjs.com>",
 	"main": "dist/index.js",
 	"types": "lib/cosmic.d.ts",
 	"scripts": {
