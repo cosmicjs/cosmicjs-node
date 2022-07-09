@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.cosmicjs.com"><img src="https://imgix.cosmicjs.com/560cf820-ffa5-11ec-965a-abec43f7da6e-header-big.png?w=1000&auto=format" alt="Cosmic" width="100%"></a>
+  <a href="https://www.cosmicjs.com"><img src="https://imgix.cosmicjs.com/b811fa50-ffa7-11ec-965a-abec43f7da6e-header-big.png?w=1000&auto=format" alt="Cosmic" width="100%"></a>
 </p>
 <p align="center">
 	<a href="https://www.npmjs.com/package/cosmicjs"><img src="https://badge.fury.io/js/cosmicjs.svg" alt="npm version"></a>
