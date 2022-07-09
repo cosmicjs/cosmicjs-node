@@ -84,13 +84,13 @@ Uses the `getObjects` method and `query` param.
 const params = {
   query: {
     type: "pages",
-    slug: "home", // slugs are unique per locale
+    slug: "home",
     locale: "en", // optional, if localization set on Objects
   },
   props: "title,slug,metadata",
 };
 const data = await bucket.getObjects(params);
-const home = data[0]; // Returns array
+const home = data[0]; // returns array
 ```
 
 ### More examples
