@@ -16,16 +16,11 @@ Avoid the pain of building, configuring, and maintaining your own CMS infrastruc
 
 ### **Features include**
 
-🛠️ Powerful content modeling
-
-🔍 Flexible queries
-
-⚡ Customized API response
-
-🌎 Localization
-
-🎨 Image optimization
-
+🛠️&nbsp;&nbsp;Powerful content modeling<br>
+🔍&nbsp;&nbsp;Flexible queries<br>
+⚡&nbsp;&nbsp;Customized API response<br>
+🌎&nbsp;&nbsp;Localization<br>
+🎨&nbsp;&nbsp;Image optimization<br>
 …and more! [See more features →](https://www.cosmicjs.com/features)
 
 ## Get started
