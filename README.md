@@ -1,115 +1,119 @@
 <p align="center">
-  <a href="https://www.cosmicjs.com"><img src="https://cdn.cosmicjs.com/3cf62ab0-8e13-11ea-9b8f-cd0254a8c979-cosmic-dark.svg" alt="Cosmic" width="400"></a>
-</p>
-<p align="center">
-  📖 <a href="https://docs.cosmicjs.com">View Docs</a>
+  <a href="https://www.cosmicjs.com"><img src="https://imgix.cosmicjs.com/b811fa50-ffa7-11ec-965a-abec43f7da6e-header-big.png?w=1000&auto=format" alt="Cosmic" width="100%"></a>
 </p>
 <p align="center">
 	<a href="https://www.npmjs.com/package/cosmicjs"><img src="https://badge.fury.io/js/cosmicjs.svg" alt="npm version"></a>
 	<a href="https://circleci.com/gh/cosmicjs/cosmicjs-node"><img src="https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield" alt="CircleCI"></a>
 </p>
 
-# Cosmic JavaScript Client
+## Content management made simple, fast, and secure.
 
-This is the official JavaScript client for [Cosmic](https://www.cosmicjs.com) [headless CMS](https://www.cosmicjs.com/headless-cms).
+[Cosmic](https://www.cosmicjs.com/) is a [headless CMS](https://www.cosmicjs.com/headless-cms) (content management service) that provides a web dashboard to create content and an API toolkit to deliver content to any website or application. Build nearly any type of content model using our admin dashboard then deliver your content powered by our [reliable infrastructure](https://cosmicjs.statuspage.io/) and global CDN.
 
-## What is Cosmic?
-Cosmic is a headless CMS, meaning we provide a web dashboard to manage content and an API toolkit to deliver content to any website or app.
+### Save time and launch faster
 
-## Why use a Headless CMS?
-Teams use Cosmic instead of a legacy installed CMS to help them save time and trouble on CMS infrastructure maintenance. They use our service (either with a paid plan, or generous free plan) and can focus on application business logic and content development instead of CMS infrastructure.
+Avoid the pain of building, configuring, and maintaining your own CMS infrastructure. Cosmic has all of the features you need out of the box optimized and ready. Plug into Cosmic, save time, and launch your content-powered apps faster.
 
-## How to use this NPM module
-Use this NPM module to connect to your Cosmic Buckets and deliver content to any JavaScript enabled website or app.  Advanced features are available including logging into your Cosmic account, managing Buckets, CRUD data management, file uploads, and user management. Use it in the browser or in server-side environments like Node.js.
+### **Features include**
 
-## Getting started
-Go to [https://www.cosmicjs.com](https://www.cosmicjs.com), create an account and set up a Bucket.
+🛠️&nbsp;&nbsp;Powerful content modeling<br>
+🔍&nbsp;&nbsp;Flexible queries<br>
+⚡&nbsp;&nbsp;Customized API response<br>
+🌎&nbsp;&nbsp;Localization<br>
+🎨&nbsp;&nbsp;Image optimization<br>
+…and more! [See more features →](https://www.cosmicjs.com/features)
+
+## Get started
+
+Start by going to [https://www.cosmicjs.com](https://www.cosmicjs.com/), create your **free account** and set up a project. You can get started from scratch, or start with a [pre-built template](https://www.cosmicjs.com/apps). Then follow the steps below to use this NPM package.
 
 ## Install
+
+Install the Cosmic NPM module:
+
 ```bash
 pnpm install cosmicjs
-# or
+# OR
 yarn add cosmicjs
-# or
+# OR
 npm install cosmicjs
 ```
-### Or include in an HTML file
-```html
-<script src="https://unpkg.com/cosmicjs@latest/cosmicjs.browser.min.js"></script>
-<script>
-// Exposes the global variable Cosmic
-// Never expose your private keys or credentials in any public website's client-side code
-</script>
+
+## Import
+
+Import Cosmic into your app:
+
+```jsx
+const Cosmic = require("cosmicjs");
+const api = Cosmic();
 ```
 
-## Basic Usage
+## Connect
 
-#### Connect to Bucket [[View Docs](https://docs.cosmicjs.com/api-reference/introduction)]
-Use the `Cosmic.bucket` method to connect to your Bucket. Get your Bucket slug located in <i>Your Bucket > Basic Settings > API Access</i> in your [Cosmic Dashboard](https://app.cosmicjs.com/login).
-```javascript
-// Use the Cosmic.bucket method to connect to your Bucket.
-const Cosmic = require('cosmicjs')()
-const bucket = Cosmic.bucket({
-  slug: 'your-bucket-slug',
-  read_key: 'your-bucket-read-key',
-  write_key: 'your-bucket-write-key' // Include only if doing write operations.
-})
+In your [Cosmic admin dashboard](https://app.cosmicjs.com/login) go to _Your Bucket > Settings > API Access_ and get your Bucket slug and read key then set the variables in your app to connect to your Bucket:
+
+```jsx
+const bucket = api.bucket({
+  slug: "YOUR_BUCKET_SLUG",
+  read_key: "YOUR_BUCKET_READ_KEY",
+});
 ```
 
-### Get Objects by Type [[View Docs](https://docs.cosmicjs.com/api-reference/objects)]
-Get Objects from an Object Type. Uses `getObjects` method with a `query` param. Additional options noted below. [See docs for more options](https://docs.cosmicjs.com/api-reference/objects) including powerful [queries and logic](https://docs.cosmicjs.com/api-reference/queries).
-```javascript
+## Get content
+
+Delivering content to your app is simple by using the `getObjects` method.
+
+**Get multiple Objects**
+
+Uses `getObjects` method with a `query` param. Additional options noted below.
+
+```jsx
+const params = {
+  query: { type: "products" },
+  props: "title,slug,metadata", // response properties
+  limit: 10, // number of Objects returned
+};
+const data = await bucket.getObjects(params);
+```
+
+**Get single Object by slug**
+
+Uses the `getObjects` method and `query` param.
+
+```jsx
 const params = {
   query: {
-    type: 'posts',
-    locale: 'en' // optional, if localization set on Objects
+    type: "pages",
+    slug: "home",
+    locale: "en", // optional, if localization set on Objects
   },
-  limit: 5,
-  props: 'id,slug,title,content', // response properties
-  sort: '-created_at' // optional, defaults to order in dashboard
-}
-bucket.getObjects(params).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
+  props: "title,slug,metadata",
+};
+const data = await bucket.getObjects(params);
+const home = data[0]; // returns array
 ```
 
-### Get Single Object [[View Docs](https://docs.cosmicjs.com/api-reference/objects#get-object)]
-Returns a single Object from your Bucket.
+### More examples
 
-**By Slug**
+For more in-depth guides on getting Cosmic data into your app, you can view these [basic query examples](https://docs.cosmicjs.com/examples/basic-queries). When you are ready to level up, check out [advanced query examples](https://docs.cosmicjs.com/examples/advanced-queries).
 
-Use the `getObjects` method and `query` param.
-```javascript
-bucket.getObjects({
-  query: {
-    type: 'pages',
-    slug: 'home', // slugs are unique per locale
-    locale: 'en'  // optional, if localization set on Objects
-  },
-  props: 'slug,title,content' // response properties
-}).then(data => {
-  console.log(data[0]) // Returns array
-}).catch(err => {
-  console.log(err)
-})
-```
+## Add content
 
-**By Id**
+The Cosmic API is fully CRUD (create, read, update, delete) capable, enabling user-generated content and file uploads. Check out the [add Object](https://docs.cosmicjs.com/examples/add-object) and [add media](https://docs.cosmicjs.com/examples/add-media) examples in the documentation.
 
-```javascript
-bucket.getObject({
-  id: '6038150ead9d8a0ee8ebe290', // Object ID
-  props: 'slug,title,content' // response properties
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-```
-## Further Documentation
-See the [API reference](API.md) and [full documentation](https://docs.cosmicjs.com) for more requests and capabilities.
+## Further documentation
+
+See the [API reference](https://github.com/cosmicjs/cosmicjs-node/blob/HEAD/API.md) and [full documentation](https://docs.cosmicjs.com/) for more requests and capabilities.
+
+## Community support
+
+For general help, please refer to [the official Cosmic documentation](https://docs.cosmicjs.com). For additional help, you can use one of these channels to ask a question:
+
+- [Slack](https://www.cosmicjs.com/community) (For live discussions with the Cosmic community and team)
+- [GitHub](https://github.com/cosmicjs/cosmicjs-node) (Bug reports, contributions)
+- [Twitter](https://twitter.com/cosmicjs) (Get the latest news about Cosmic features and notifications)
+- [YouTube](https://www.youtube.com/cosmicjs) (Learn from video tutorials)
 
 ## License
-This project is published under the [MIT](LICENSE) license.
+
+This project is published under the [MIT](https://github.com/cosmicjs/cosmicjs-node/blob/HEAD/LICENSE) license.
