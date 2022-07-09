@@ -7,7 +7,12 @@
 		"cms",
 		"node",
 		"content",
-		"api"
+		"api",
+		"react",
+		"reactjs",
+		"vue",
+		"vuejs",
+		"nextjs"
 	],
 	"homepage": "https://www.cosmicjs.com",
 	"bugs": {
