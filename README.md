@@ -105,6 +105,15 @@ The Cosmic API is fully CRUD (create, read, update, delete) capable, enabling us
 
 See the [API reference](https://github.com/cosmicjs/cosmicjs-node/blob/HEAD/API.md) and [full documentation](https://docs.cosmicjs.com/) for more requests and capabilities.
 
+## Community support
+
+For general help, please refer to [the official Cosmic documentation](https://docs.cosmicjs.com). For additional help, you can use one of these channels to ask a question:
+
+- [Slack](https://www.cosmicjs.com/community) (For live discussions with the Cosmic community and team)
+- [GitHub](https://github.com/cosmicjs/cosmicjs-node) (Bug reports, contributions)
+- [Twitter](https://twitter.com/cosmicjs) (Get the latest news about Cosmic features and notifications)
+- [YouTube](https://www.youtube.com/cosmicjs) (Learn from video tutorials)
+
 ## License
 
 This project is published under the [MIT](https://github.com/cosmicjs/cosmicjs-node/blob/HEAD/LICENSE) license.
