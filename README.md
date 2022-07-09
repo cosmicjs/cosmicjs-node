@@ -77,6 +77,7 @@ const data = await bucket.getObjects(params);
 ```
 
 **Get single Object by slug**
+
 Uses the `getObjects` method and `query` param.
 
 ```jsx
