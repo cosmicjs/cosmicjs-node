@@ -95,7 +95,7 @@ const home = data[0]; // returns array
 
 ### More examples
 
-For more in-depth guides on getting Cosmic data into your app, you can view these [basic query examples](https://docs.cosmicjs.com/examples/basic-queries). When you are ready to level-up, check out [advanced query examples](https://docs.cosmicjs.com/examples/advanced-queries).
+For more in-depth guides on getting Cosmic data into your app, you can view these [basic query examples](https://docs.cosmicjs.com/examples/basic-queries). When you are ready to level up, check out [advanced query examples](https://docs.cosmicjs.com/examples/advanced-queries).
 
 ### Add content
 
