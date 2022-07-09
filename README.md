@@ -97,7 +97,7 @@ const home = data[0]; // returns array
 
 For more in-depth guides on getting Cosmic data into your app, you can view these [basic query examples](https://docs.cosmicjs.com/examples/basic-queries). When you are ready to level up, check out [advanced query examples](https://docs.cosmicjs.com/examples/advanced-queries).
 
-### Add content
+## Add content
 
 The Cosmic API is fully CRUD (create, read, update, delete) capable, enabling user-generated content and file uploads. Check out the [add Object](https://docs.cosmicjs.com/examples/add-object) and [add media](https://docs.cosmicjs.com/examples/add-media) examples in the documentation.
 
