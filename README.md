@@ -103,7 +103,7 @@ The Cosmic API is fully CRUD (create, read, update, delete) capable, enabling us
 
 ## Further documentation
 
-See the [API reference](https://github.com/cosmicjs/cosmicjs-node/blob/HEAD/API.md) and [full documentation](https://docs.cosmicjs.com/) for more requests and capabilities.
+See the [full documentation](https://docs.cosmicjs.com/) for more requests and capabilities.
 
 ## Community support
 
