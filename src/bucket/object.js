@@ -37,7 +37,35 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
   return endpoint
 }
 
+const findObjectsChain = (bucket_config) => {
+  return {
+    find: function (query) {
+      this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}&query=${encodeURI(JSON.stringify(query))}`
+      return this
+    },
+    props: function (props) {
+      this.endpoint += `&props=${props}`
+      return this
+    },
+    sort: function (sort) {
+      this.endpoint += `&sort=${sort}`
+      return this
+    },
+    limit: function (limit) {
+      this.endpoint += `&limit=${limit}`
+      return this
+    },
+    toArray: async function () {
+      return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).objects
+    },
+    done: async function () {
+      return requestHandler(HTTP_METHODS.GET, this.endpoint)
+    }
+  }
+}
+
 const objectMethods = (bucket_config) => ({
+  objects: findObjectsChain(bucket_config),
   getObjects: (params) => {
     let endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
     endpoint = addParamsToObjectsEndpoint(endpoint, params)
