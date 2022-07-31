@@ -69,7 +69,7 @@ Uses `getObjects` method with a `query` param. Additional options noted below.
 
 ```jsx
 const params = {
-  query: { type: "products" },
+  query: { type: "products" }, // Object Type slug
   props: "title,slug,metadata", // response properties
   limit: 10, // number of Objects returned
 };
@@ -83,8 +83,8 @@ Uses the `getObjects` method and `query` param.
 ```jsx
 const params = {
   query: {
-    type: "pages",
-    slug: "home",
+    type: "pages", // Object Type slug
+    slug: "home", // Object slug
     locale: "en", // optional, if localization set on Objects
   },
   props: "title,slug,metadata",
