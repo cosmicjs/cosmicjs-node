@@ -69,11 +69,11 @@ Uses `objects.find` method. Additional options noted below.
 
 ```jsx
 const data = await bucket.objects.find({
-    type: "products" // Object Type slug
-  })
-  .props("title,slug,metadata") // response properties
-  .limit(10) // number of Objects returned
-  .toArray()
+  type: "products" // Object Type slug
+})
+.props("title,slug,metadata") // response properties
+.limit(10) // number of Objects returned
+.toArray()
 ```
 
 **Get single Object by slug**
@@ -82,13 +82,13 @@ Uses the `objects.find` method.
 
 ```jsx
 const data = await bucket.objects.find({
-    type: "pages" // Object Type slug
-    slug: "home", // Object slug
-    locale: "en", // optional, if localization set on Objects
-  })
-  .props("title,slug,metadata") // response properties
-  .limit(10) // number of Objects returned
-  .toArray()
+  type: "pages" // Object Type slug
+  slug: "home", // Object slug
+  locale: "en", // optional, if localization set on Objects
+})
+.props("title,slug,metadata") // response properties
+.limit(10) // number of Objects returned
+.toArray()
 const home = data[0]; // returns array
 ```
 
