@@ -65,31 +65,30 @@ Delivering content to your app is simple by using the `getObjects` method.
 
 **Get multiple Objects**
 
-Uses `getObjects` method with a `query` param. Additional options noted below.
+Uses `objects.find` method. Additional options noted below.
 
 ```jsx
-const params = {
-  query: { type: "products" }, // Object Type slug
-  props: "title,slug,metadata", // response properties
-  limit: 10, // number of Objects returned
-};
-const data = await bucket.getObjects(params);
+const data = await bucket.objects.find({
+    type: "products" // Object Type slug
+  })
+  .props("title,slug,metadata") // response properties
+  .limit(10) // number of Objects returned
+  .toArray()
 ```
 
 **Get single Object by slug**
 
-Uses the `getObjects` method and `query` param.
+Uses the `objects.find` method.
 
 ```jsx
-const params = {
-  query: {
-    type: "pages", // Object Type slug
+const data = await bucket.objects.find({
+    type: "pages" // Object Type slug
     slug: "home", // Object slug
     locale: "en", // optional, if localization set on Objects
-  },
-  props: "title,slug,metadata",
-};
-const data = await bucket.getObjects(params);
+  })
+  .props("title,slug,metadata") // response properties
+  .limit(10) // number of Objects returned
+  .toArray()
 const home = data[0]; // returns array
 ```
 
