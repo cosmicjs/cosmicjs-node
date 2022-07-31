@@ -37,11 +37,43 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
   return endpoint
 }
 
-const findObjectsChain = (bucket_config) => {
+const objectsChainMethods = (bucket_config) => {
   return {
+    // Get
     find: function (query) {
       this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}&query=${encodeURI(JSON.stringify(query))}`
       return this
+    },
+    // Add
+    insertOne: async function (params) {
+      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
+      if (bucket_config.write_key) {
+        headers = {
+          "Authorization": `Bearer ${bucket_config.write_key}`
+        }
+      }
+      return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers)).object
+    },
+    // Edit
+    updateOne: async function (params, set) {
+      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+      const updates = set["$set"];
+      if (bucket_config.write_key) {
+        headers = {
+          "Authorization": `Bearer ${bucket_config.write_key}`
+        }
+      }
+      return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers)).object
+    },
+    // Delete
+    deleteOne: async function (params) {
+      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+      if (bucket_config.write_key) {
+        headers = {
+          "Authorization": `Bearer ${bucket_config.write_key}`
+        }
+      }
+      return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
     },
     props: function (props) {
       this.endpoint += `&props=${props}`
@@ -69,7 +101,7 @@ const findObjectsChain = (bucket_config) => {
 }
 
 const objectMethods = (bucket_config) => ({
-  objects: findObjectsChain(bucket_config),
+  objects: objectsChainMethods(bucket_config),
   getObjects: (params) => {
     let endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
     endpoint = addParamsToObjectsEndpoint(endpoint, params)
