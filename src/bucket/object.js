@@ -55,6 +55,10 @@ const findObjectsChain = (bucket_config) => {
       this.endpoint += `&limit=${limit}`
       return this
     },
+    skip: function (skip) {
+      this.endpoint += `&skip=${skip}`
+      return this
+    },
     toArray: async function () {
       return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).objects
     },
