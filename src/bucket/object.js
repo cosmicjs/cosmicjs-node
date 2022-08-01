@@ -1,7 +1,8 @@
 const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
-let headers;
+
+let headers
 
 const addParamsToObjectsEndpoint = (endpoint, params) => {
   if (params && params.limit) {
@@ -37,68 +38,66 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
   return endpoint
 }
 
-const objectsChainMethods = (bucket_config) => {
-  return {
-    // Get
-    find: function (query) {
-      this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}&query=${encodeURI(JSON.stringify(query))}`
-      return this
-    },
-    // Add
-    insertOne: async function (params) {
-      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
-      if (bucket_config.write_key) {
-        headers = {
-          "Authorization": `Bearer ${bucket_config.write_key}`
-        }
+const objectsChainMethods = (bucket_config) => ({
+  // Get
+  find(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}&query=${encodeURI(JSON.stringify(query))}`
+    return this
+  },
+  // Add
+  async insertOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
-      return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers)).object
-    },
-    // Edit
-    updateOne: async function (params, set) {
-      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
-      const updates = set["$set"];
-      if (bucket_config.write_key) {
-        headers = {
-          "Authorization": `Bearer ${bucket_config.write_key}`
-        }
-      }
-      return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers)).object
-    },
-    // Delete
-    deleteOne: async function (params) {
-      const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
-      if (bucket_config.write_key) {
-        headers = {
-          "Authorization": `Bearer ${bucket_config.write_key}`
-        }
-      }
-      return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
-    },
-    props: function (props) {
-      this.endpoint += `&props=${props}`
-      return this
-    },
-    sort: function (sort) {
-      this.endpoint += `&sort=${sort}`
-      return this
-    },
-    limit: function (limit) {
-      this.endpoint += `&limit=${limit}`
-      return this
-    },
-    skip: function (skip) {
-      this.endpoint += `&skip=${skip}`
-      return this
-    },
-    toArray: async function () {
-      return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).objects
-    },
-    done: async function () {
-      return requestHandler(HTTP_METHODS.GET, this.endpoint)
     }
+    return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers)).object
+  },
+  // Edit
+  async updateOne(params, set) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    const updates = set.$set
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers)).object
+  },
+  // Delete
+  async deleteOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
+  },
+  props(props) {
+    this.endpoint += `&props=${props}`
+    return this
+  },
+  sort(sort) {
+    this.endpoint += `&sort=${sort}`
+    return this
+  },
+  limit(limit) {
+    this.endpoint += `&limit=${limit}`
+    return this
+  },
+  skip(skip) {
+    this.endpoint += `&skip=${skip}`
+    return this
+  },
+  async toArray() {
+    return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).objects
+  },
+  async done() {
+    return requestHandler(HTTP_METHODS.GET, this.endpoint)
   }
-}
+})
 
 const objectMethods = (bucket_config) => ({
   objects: objectsChainMethods(bucket_config),
@@ -137,7 +136,7 @@ const objectMethods = (bucket_config) => ({
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
@@ -148,7 +147,7 @@ const objectMethods = (bucket_config) => ({
     delete params.type
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
@@ -157,46 +156,46 @@ const objectMethods = (bucket_config) => ({
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
+    delete params.id
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   getObjectMetafields: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields?read_key=${bucket_config.read_key}`
-    return requestHandler(HTTP_METHODS.GET, endpoint);
+    return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   /// DEPRECATED
   editObjectMetafields: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
+    delete params.id
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   editObjectMetafield: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields/${params.key}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
-    delete params.key;
+    delete params.id
+    delete params.key
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   deleteObject: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
