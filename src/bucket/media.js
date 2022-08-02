@@ -22,7 +22,7 @@ const mediaMethods = (bucket_config) => ({
       data.append('metadata', JSON.stringify(params.metadata))
     }
     if (params.trigger_webhook) {
-      data.append('trigger_webhook', params.trigger_webhook)
+      data.append('trigger_webhook', params.trigger_webhook.toString())
     }
     const getHeaders = ((form) => new Promise((resolve, reject) => {
       if (params.media.buffer) {
