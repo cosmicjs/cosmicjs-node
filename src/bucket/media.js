@@ -21,6 +21,9 @@ const mediaMethods = (bucket_config) => ({
     if (params.metadata) {
       data.append('metadata', JSON.stringify(params.metadata))
     }
+    if (params.trigger_webhook) {
+      data.append('trigger_webhook', params.trigger_webhook)
+    }
     const getHeaders = ((form) => new Promise((resolve, reject) => {
       if (params.media.buffer) {
         form.getLength((err, length) => {
@@ -35,10 +38,10 @@ const mediaMethods = (bucket_config) => ({
     )
     return getHeaders(data)
       .then((headers) => {
-        headers["Authorization"] = `Bearer ${bucket_config.write_key}`;
+        headers.Authorization = `Bearer ${bucket_config.write_key}`
         return requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
       }).catch((error) => {
-          throw error.response.data
+        throw error.response.data
       })
   },
   getMedia: (params) => {
@@ -65,11 +68,11 @@ const mediaMethods = (bucket_config) => ({
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   deleteMedia: (params) => {
-    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}`
-    let headers;
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
+    let headers
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
