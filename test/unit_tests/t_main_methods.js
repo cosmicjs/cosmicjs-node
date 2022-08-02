@@ -51,19 +51,19 @@ suite('Test Project Methods.', function() {
       done(err)
     })
   })
-  test('editProject', function(done) {
-    Cosmic({ token: config.token }).editProject({ 
-      id: config.project.id,
-      title: 'New Project Edit'
-    })
-    .then(data => {
-      expect(data.project).to.be.an('object')
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
+  // test('editProject', function(done) {
+  //   Cosmic({ token: config.token }).editProject({ 
+  //     id: config.project.id,
+  //     title: 'New Project Edit'
+  //   })
+  //   .then(data => {
+  //     expect(data.project).to.be.an('object')
+  //     done()
+  //   }).catch(err => {
+  //     console.log(err)
+  //     done(err)
+  //   })
+  // })
   test('deleteProject', function(done) {
     Cosmic({ token: config.token }).deleteProject({ id: config.project.id })
     .then(data => {
