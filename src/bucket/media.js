@@ -68,18 +68,14 @@ const mediaMethods = (bucket_config) => ({
     return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   deleteMedia: (params) => {
-    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}`
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
     let headers
     if (bucket_config.write_key) {
       headers = {
         Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
-    let data
-    if (params.trigger_webhook) {
-      data.trigger_webhook = params.trigger_webhook
-    }
-    return requestHandler(HTTP_METHODS.DELETE, endpoint, data, headers)
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   }
 })
 
