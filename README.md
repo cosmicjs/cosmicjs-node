@@ -82,7 +82,7 @@ Uses the `objects.find` method.
 
 ```jsx
 const data = await bucket.objects.find({
-  type: "pages" // Object Type slug
+  type: "pages", // Object Type slug
   slug: "home", // Object slug
   locale: "en", // optional, if localization set on Objects
 })
