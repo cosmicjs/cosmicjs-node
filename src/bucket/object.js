@@ -41,7 +41,7 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
 const objectsChainMethods = (bucket_config) => ({
   // Get
   find(query) {
-    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}&query=${encodeURI(JSON.stringify(query))}`
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
     return this
   },
   // Add
