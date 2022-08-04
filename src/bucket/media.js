@@ -3,7 +3,48 @@ const { URI, UPLOAD_API_URL, API_VERSION } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
 
+const mediaChainMethods = (bucket_config) => ({
+  // Get
+  find(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
+    return this
+  },
+  // Delete
+  async deleteOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
+  },
+  props(props) {
+    this.endpoint += `&props=${props}`
+    return this
+  },
+  sort(sort) {
+    this.endpoint += `&sort=${sort}`
+    return this
+  },
+  limit(limit) {
+    this.endpoint += `&limit=${limit}`
+    return this
+  },
+  skip(skip) {
+    this.endpoint += `&skip=${skip}`
+    return this
+  },
+  async toArray() {
+    return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).media
+  },
+  async done() {
+    return requestHandler(HTTP_METHODS.GET, this.endpoint)
+  }
+})
+
 const mediaMethods = (bucket_config) => ({
+  media: mediaChainMethods(bucket_config),
   addMedia: (params) => {
     const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/buckets/${bucket_config.slug}/media`
     const data = new FormData()
