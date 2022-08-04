@@ -67,7 +67,7 @@ const objectsChainMethods = (bucket_config) => ({
   },
   // Delete
   async deleteOne(params) {
-    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
     if (bucket_config.write_key) {
       headers = {
         Authorization: `Bearer ${bucket_config.write_key}`
