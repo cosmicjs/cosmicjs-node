@@ -44,6 +44,29 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
     return this
   },
+  props(props) {
+    this.endpoint += `&props=${props}`
+    return this
+  },
+  sort(sort) {
+    this.endpoint += `&sort=${sort}`
+    return this
+  },
+  limit(limit) {
+    this.endpoint += `&limit=${limit}`
+    return this
+  },
+  skip(skip) {
+    this.endpoint += `&skip=${skip}`
+    return this
+  },
+  async then(resolve, reject) {
+    resolve(
+      new Promise((res, rej) => {
+        res(requestHandler(HTTP_METHODS.GET, this.endpoint))
+      })
+    )
+  },
   // Add
   async insertOne(params) {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
@@ -74,28 +97,6 @@ const objectsChainMethods = (bucket_config) => ({
       }
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
-  },
-  props(props) {
-    this.endpoint += `&props=${props}`
-    return this
-  },
-  sort(sort) {
-    this.endpoint += `&sort=${sort}`
-    return this
-  },
-  limit(limit) {
-    this.endpoint += `&limit=${limit}`
-    return this
-  },
-  skip(skip) {
-    this.endpoint += `&skip=${skip}`
-    return this
-  },
-  async toArray() {
-    return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).objects
-  },
-  async done() {
-    return requestHandler(HTTP_METHODS.GET, this.endpoint)
   }
 })
 
