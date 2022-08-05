@@ -72,7 +72,7 @@ const data = await bucket.objects.find({
   type: "products" // Object Type slug
 })
 .props("title,slug,metadata") // response properties
-.limit(10) // number of Objects returned
+.limit(10) // number of Objects to be returned
 ```
 
 **Get single Object by slug**
@@ -86,8 +86,7 @@ const data = await bucket.objects.find({
   locale: "en", // optional, if localization set on Objects
 })
 .props("title,slug,metadata") // response properties
-.limit(10) // number of Objects returned
-const home = data[0]; // returns array
+.limit(10)  // number of Objects to be returned
 ```
 
 ### More examples
