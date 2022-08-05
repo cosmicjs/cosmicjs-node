@@ -73,7 +73,6 @@ const data = await bucket.objects.find({
 })
 .props("title,slug,metadata") // response properties
 .limit(10) // number of Objects returned
-.toArray()
 ```
 
 **Get single Object by slug**
@@ -88,7 +87,6 @@ const data = await bucket.objects.find({
 })
 .props("title,slug,metadata") // response properties
 .limit(10) // number of Objects returned
-.toArray()
 const home = data[0]; // returns array
 ```
 
