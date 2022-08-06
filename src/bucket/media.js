@@ -35,12 +35,13 @@ const mediaChainMethods = (bucket_config) => ({
     this.endpoint += `&skip=${skip}`
     return this
   },
-  async toArray() {
-    return (await requestHandler(HTTP_METHODS.GET, this.endpoint)).media
+  async then(resolve, reject) {
+    resolve(
+      new Promise((res, rej) => {
+        res(requestHandler(HTTP_METHODS.GET, this.endpoint))
+      })
+    )
   },
-  async done() {
-    return requestHandler(HTTP_METHODS.GET, this.endpoint)
-  }
 })
 
 const mediaMethods = (bucket_config) => ({
