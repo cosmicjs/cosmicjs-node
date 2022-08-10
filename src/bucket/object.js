@@ -60,6 +60,22 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint += `&skip=${skip}`
     return this
   },
+  status(status) {
+    this.endpoint += `&status=${status}`
+    return this
+  },
+  after(after) {
+    this.endpoint += `&after=${after}`
+    return this
+  },
+  show_metafields(show_metafields) {
+    this.endpoint += `&show_metafields=${show_metafields}`
+    return this
+  },
+  use_cache(use_cache) {
+    this.endpoint += `&use_cache=${use_cache}`
+    return this
+  },
   async then(resolve) {
     resolve(
       new Promise((res) => {
