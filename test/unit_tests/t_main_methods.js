@@ -217,6 +217,20 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('objects.find', function(done) {
+    CosmicBucket.objects.find({
+      type: config.object.type
+    })
+    .props('title,slug')
+    .then(async res => {
+      const data = await res;
+      expect(data.objects).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('addObjectRevision', function(done) {
     CosmicBucket.addObjectRevision({
       id: config.object.id,
@@ -335,6 +349,18 @@ suite('Test Bucket Methods.', function() {
       limit: 2
     })
     .then(data => {
+      expect(data.media).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('media.find', function(done) {
+    CosmicBucket.media.find()
+    .limit(2)
+    .then(async res => {
+      const data = await res;
       expect(data.media).to.be.an('array')
       done()
     }).catch(err => {

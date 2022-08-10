@@ -60,9 +60,9 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint += `&skip=${skip}`
     return this
   },
-  async then(resolve, reject) {
+  async then(resolve) {
     resolve(
-      new Promise((res, rej) => {
+      new Promise((res) => {
         res(requestHandler(HTTP_METHODS.GET, this.endpoint))
       })
     )
