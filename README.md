@@ -44,8 +44,8 @@ npm install cosmicjs
 Import Cosmic into your app:
 
 ```jsx
-const Cosmic = require("cosmicjs");
-const api = Cosmic();
+const Cosmic = require("cosmicjs")
+const api = Cosmic()
 ```
 
 ## Connect
@@ -56,7 +56,7 @@ In your [Cosmic admin dashboard](https://app.cosmicjs.com/login) go to _Your Buc
 const bucket = api.bucket({
   slug: "YOUR_BUCKET_SLUG",
   read_key: "YOUR_BUCKET_READ_KEY",
-});
+})
 ```
 
 ## Get content
