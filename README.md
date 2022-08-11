@@ -65,7 +65,7 @@ Delivering content to your app is simple using the `objects.find` method.
 
 **Get multiple Objects**
 
-Use the `objects.find` method and set the `type` property (Object Type slug). Additional options noted below.
+Use the `objects.find` method and set the `type` property to any Object Type slug. Additional options noted below.
 
 ```jsx
 const data = await bucket.objects.find({
@@ -77,7 +77,7 @@ const data = await bucket.objects.find({
 
 **Get single Object by slug**
 
-Use the `objects.find` method and set the `slug` property (Object slug).
+Use the `objects.find` method and set the `slug` property to any Object slug.
 
 ```jsx
 const data = await bucket.objects.find({
