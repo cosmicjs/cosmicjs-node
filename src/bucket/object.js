@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime'
+require('regenerator-runtime/runtime')
 
 const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')

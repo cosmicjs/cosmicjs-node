@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime'
+require('regenerator-runtime/runtime')
 
 const FormData = require('form-data')
 const { URI, UPLOAD_API_URL, API_VERSION } = require('../helpers/constants')
