@@ -91,7 +91,7 @@ const objectsChainMethods = (bucket_config) => ({
         Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
-    return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers)).object
+    return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers))
   },
   // Edit
   async updateOne(params, set) {
@@ -102,7 +102,7 @@ const objectsChainMethods = (bucket_config) => ({
         Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
-    return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers)).object
+    return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers))
   },
   // Delete
   async deleteOne(params) {

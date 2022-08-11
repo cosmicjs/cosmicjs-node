@@ -191,6 +191,27 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('objects.insertOne', function(done) {
+    CosmicBucket.objects.insertOne({
+      type: config.object_type.slug,
+      title: 'My New Awesome Post',
+      metafields: [{
+        type: 'text',
+        title: 'Headline',
+        key: 'headline',
+        value: 'This is AMAZING!'
+      }]
+    })
+    .then(async res => {
+      const data = await res;
+      config.object2 = data.object
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('getObject', function(done) {
     CosmicBucket.getObject({
       id: config.object.id,
@@ -219,7 +240,7 @@ suite('Test Bucket Methods.', function() {
 
   test('objects.find', function(done) {
     CosmicBucket.objects.find({
-      type: config.object.type
+      type: config.object2.type
     })
     .props('title,slug')
     .then(async res => {
@@ -303,11 +324,41 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('objects.updateOne', function(done) {
+    CosmicBucket.objects.updateOne({
+      id: config.object2.id
+    }, {
+      $set: {
+        title: 'UPDATE ONE My New Awesome Post'
+      }
+    })
+    .then(async res => {
+      const data = await res;
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('deleteObject', function(done) {
     CosmicBucket.deleteObject({
       id: config.object.id
     })
     .then(data => {
+      expect(data.message).to.be.a('string')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('objects.deleteOne', function(done) {
+    CosmicBucket.objects.deleteOne({
+      id: config.object2.id
+    })
+    .then(async res => {
+      const data = await res;
       expect(data.message).to.be.a('string')
       done()
     }).catch(err => {
