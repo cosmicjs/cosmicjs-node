@@ -61,7 +61,7 @@ const bucket = api.bucket({
 
 ## Get content
 
-Delivering content to your app is simple by using the `objects.find` method.
+Delivering content to your app is simple using the `objects.find` method.
 
 **Get multiple Objects**
 
