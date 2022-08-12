@@ -11,16 +11,6 @@ const mediaChainMethods = (bucket_config) => ({
     this.endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
     return this
   },
-  // Delete
-  async deleteOne(params) {
-    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
-    if (bucket_config.write_key) {
-      headers = {
-        Authorization: `Bearer ${bucket_config.write_key}`
-      }
-    }
-    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
-  },
   props(props) {
     this.endpoint += `&props=${props}`
     return this
@@ -36,6 +26,58 @@ const mediaChainMethods = (bucket_config) => ({
   skip(skip) {
     this.endpoint += `&skip=${skip}`
     return this
+  },
+  // insertOne
+  async insertOne(params) {
+    const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/buckets/${bucket_config.slug}/media`
+    const data = new FormData()
+    if (params.media.buffer) {
+      data.append('media', params.media.buffer, params.media.originalname)
+    } else {
+      data.append('media', params.media, params.media.name)
+    }
+    if (bucket_config.write_key) {
+      data.append('write_key', bucket_config.write_key)
+    }
+    if (params.folder) {
+      data.append('folder', params.folder)
+    }
+    if (params.metadata) {
+      data.append('metadata', JSON.stringify(params.metadata))
+    }
+    if (params.trigger_webhook) {
+      data.append('trigger_webhook', params.trigger_webhook.toString())
+    }
+    const getHeaders = ((form) => new Promise((resolve, reject) => {
+      if (params.media.buffer) {
+        form.getLength((err, length) => {
+          if (err) reject(err)
+          const headers = { 'Content-Length': length, ...form.getHeaders() }
+          resolve(headers)
+        })
+      } else {
+        resolve({ 'Content-Type': 'multipart/form-data' })
+      }
+    })
+    )
+    return getHeaders(data)
+      .then((headers) => {
+        headers.Authorization = `Bearer ${bucket_config.write_key}`
+        return requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
+      }).catch((error) => {
+        throw error.response.data
+      })
+  },
+  // Delete
+  async deleteOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
+    let headers
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   },
   async then(resolve) {
     resolve(

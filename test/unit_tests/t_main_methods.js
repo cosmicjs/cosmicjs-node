@@ -395,6 +395,24 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('media.insertOne', function(done) {
+    const media_object = {
+      originalname: 'logo.jpg',
+      buffer: fs.createReadStream('./test/logo.jpg')
+    };
+    CosmicBucket.media.insertOne({
+      media: media_object
+    })
+    .then(async res => {
+      const data = await res;
+      config.media2 = data.media
+      expect(data.media).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('getMedia', function(done) {
     CosmicBucket.getMedia({
       limit: 2
@@ -424,6 +442,20 @@ suite('Test Bucket Methods.', function() {
       id: config.media.id
     })
     .then(data => {
+      expect(data.message).to.be.a('string')
+      done()
+    }).catch(err => {
+      console.log(err)
+      done(err)
+    })
+  })
+
+  test('media.deleteOne', function(done) {
+    CosmicBucket.media.deleteOne({
+      id: config.media2.id
+    })
+    .then(async res => {
+      const data = await res;
       expect(data.message).to.be.a('string')
       done()
     }).catch(err => {
