@@ -46,6 +46,11 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
     return this
   },
+  // findOne
+  findOne(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${query.id}?read_key=${bucket_config.read_key}`
+    return this
+  },
   props(props) {
     this.endpoint += `&props=${props}`
     return this

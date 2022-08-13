@@ -252,6 +252,20 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('objects.findOne', function(done) {
+    CosmicBucket.objects.findOne({
+      id: config.object2.id
+    })
+    .props('title,slug')
+    .then(async res => {
+      const data = await res;
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('addObjectRevision', function(done) {
     CosmicBucket.addObjectRevision({
       id: config.object.id,
