@@ -451,6 +451,20 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('media.findOne', function(done) {
+    CosmicBucket.media.findOne({
+      id: config.media2.id
+    })
+    .limit(2)
+    .then(async res => {
+      const data = await res;
+      expect(data.media).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('deleteMedia', function(done) {
     CosmicBucket.deleteMedia({
       id: config.media.id

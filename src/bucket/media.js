@@ -11,6 +11,11 @@ const mediaChainMethods = (bucket_config) => ({
     this.endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
     return this
   },
+  // findOne
+  findOne(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/media/${query.id}?read_key=${bucket_config.read_key}`
+    return this
+  },
   props(props) {
     this.endpoint += `&props=${props}`
     return this
