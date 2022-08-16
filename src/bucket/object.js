@@ -3,6 +3,7 @@ require('regenerator-runtime/runtime')
 const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
+const promiser = require('../helpers/promiser')
 
 let headers
 
@@ -83,12 +84,8 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint += `&use_cache=${use_cache}`
     return this
   },
-  async then(resolve) {
-    resolve(
-      new Promise((res) => {
-        res(requestHandler(HTTP_METHODS.GET, this.endpoint))
-      })
-    )
+  async then(cb) {
+    promiser(this.endpoint).then((res) => cb(res))
   },
   // Add
   async insertOne(params) {

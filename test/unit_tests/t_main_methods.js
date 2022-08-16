@@ -202,8 +202,7 @@ suite('Test Bucket Methods.', function() {
         value: 'This is AMAZING!'
       }]
     })
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       config.object2 = data.object
       expect(data.object).to.be.an('object')
       done()
@@ -243,8 +242,7 @@ suite('Test Bucket Methods.', function() {
       type: config.object2.type
     })
     .props('title,slug')
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.objects).to.be.an('array')
       done()
     }).catch(err => {
@@ -257,8 +255,7 @@ suite('Test Bucket Methods.', function() {
       id: config.object2.id
     })
     .props('title,slug')
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.object).to.be.an('object')
       done()
     }).catch(err => {
@@ -346,8 +343,7 @@ suite('Test Bucket Methods.', function() {
         title: 'UPDATE ONE My New Awesome Post'
       }
     })
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.object).to.be.an('object')
       done()
     }).catch(err => {
@@ -371,8 +367,7 @@ suite('Test Bucket Methods.', function() {
     CosmicBucket.objects.deleteOne({
       id: config.object2.id
     })
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.message).to.be.a('string')
       done()
     }).catch(err => {
@@ -417,8 +412,7 @@ suite('Test Bucket Methods.', function() {
     CosmicBucket.media.insertOne({
       media: media_object
     })
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       config.media2 = data.media
       expect(data.media).to.be.an('object')
       done()
@@ -442,8 +436,7 @@ suite('Test Bucket Methods.', function() {
   test('media.find', function(done) {
     CosmicBucket.media.find()
     .limit(2)
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.media).to.be.an('array')
       done()
     }).catch(err => {
@@ -456,8 +449,7 @@ suite('Test Bucket Methods.', function() {
       id: config.media2.id
     })
     .limit(2)
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.media).to.be.an('object')
       done()
     }).catch(err => {
@@ -482,8 +474,7 @@ suite('Test Bucket Methods.', function() {
     CosmicBucket.media.deleteOne({
       id: config.media2.id
     })
-    .then(async res => {
-      const data = await res;
+    .then(data => {
       expect(data.message).to.be.a('string')
       done()
     }).catch(err => {

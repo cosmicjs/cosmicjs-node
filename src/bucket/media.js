@@ -4,6 +4,7 @@ const FormData = require('form-data')
 const { URI, UPLOAD_API_URL, API_VERSION } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
+const promiser = require('../helpers/promiser')
 
 const mediaChainMethods = (bucket_config) => ({
   // Get
@@ -84,12 +85,8 @@ const mediaChainMethods = (bucket_config) => ({
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   },
-  async then(resolve) {
-    resolve(
-      new Promise((res) => {
-        res(requestHandler(HTTP_METHODS.GET, this.endpoint))
-      })
-    )
+  async then(cb) {
+    promiser(this.endpoint).then((res) => cb(res))
   }
 })
 
