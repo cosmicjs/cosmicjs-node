@@ -84,8 +84,14 @@ const objectsChainMethods = (bucket_config) => ({
     this.endpoint += `&use_cache=${use_cache}`
     return this
   },
-  async then(cb) {
-    promiser(this.endpoint).then((res) => cb(res))
+  async then(resolve, reject) {
+    promiser(this.endpoint).then((res) => resolve(res, null)).catch((err) => {
+      if (typeof reject === 'function') {
+        reject(err)
+      } else {
+        resolve(null, err)
+      }
+    })
   },
   // Add
   async insertOne(params) {

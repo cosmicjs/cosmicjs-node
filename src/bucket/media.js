@@ -85,8 +85,14 @@ const mediaChainMethods = (bucket_config) => ({
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
   },
-  async then(cb) {
-    promiser(this.endpoint).then((res) => cb(res))
+  async then(resolve, reject) {
+    promiser(this.endpoint).then((res) => resolve(res, null)).catch((err) => {
+      if (typeof reject === 'function') {
+        reject(err)
+      } else {
+        resolve(null, err)
+      }
+    })
   }
 })
 
