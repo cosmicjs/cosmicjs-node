@@ -86,7 +86,7 @@ const data = await bucket.objects.find({
   locale: "en", // optional, if localization set on Objects
 })
 .props("title,slug,metadata") // response properties
-.limit(10)  // number of Objects to be returned
+.limit(1)  // number of Objects to be returned
 ```
 
 ### More examples
