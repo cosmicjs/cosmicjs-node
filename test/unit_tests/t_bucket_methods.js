@@ -4,81 +4,9 @@ const Cosmic = require('../../src/index')
 const { EMAIL, PASSWORD } = require('../constants')
 
 let config = {};
-suite('Test Project Methods.', function() {
-  this.timeout(10000);
-  setup(function(done) {
-    Cosmic().authenticate({
-      email: EMAIL,
-      password: PASSWORD
-    }).then(data => {
-      config.token = data.token;
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-  test('addProject', function(done) {
-    Cosmic({ token: config.token }).addProject({
-      title: 'My New Project'
-    })
-    .then(data => {
-      expect(data.project).to.be.an('object')
-      config.project = data.project;
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-  test('getProjects', function(done) {
-    Cosmic({ token: config.token }).getProjects()
-    .then(data => {
-      expect(data.projects).to.be.an('array')
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-  test('getProject', function(done) {
-    Cosmic({ token: config.token }).getProject({ id: config.project.id })
-    .then(data => {
-      expect(data.project).to.be.an('object')
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-  test('editProject', function(done) {
-    Cosmic({ token: config.token }).editProject({ 
-      id: config.project.id,
-      title: 'New Project Edit'
-    })
-    .then(data => {
-      expect(data.project).to.be.an('object')
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-  test('deleteProject', function(done) {
-    Cosmic({ token: config.token }).deleteProject({ id: config.project.id })
-    .then(data => {
-      expect(data.message).to.be.a('string')
-      done()
-    }).catch(err => {
-      console.log(err)
-      done(err)
-    })
-  })
-})
-
+let CosmicBucket = {};
 suite('Test Bucket Methods.', function() {
   this.timeout(10000);
-  let CosmicBucket = {};
   setup(function(done) {
     Cosmic().authenticate({
       email: EMAIL,
@@ -170,7 +98,9 @@ suite('Test Bucket Methods.', function() {
       done(err)
     })
   })
+})
 
+suite('Test Object Methods.', function() {
   test('addObject', function(done) {
     CosmicBucket.addObject({
       type: config.object_type.slug,
@@ -184,6 +114,26 @@ suite('Test Bucket Methods.', function() {
     })
     .then(data => {
       config.object = data.object
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('objects.insertOne', function(done) {
+    CosmicBucket.objects.insertOne({
+      type: config.object_type.slug,
+      title: 'My New Awesome Post',
+      metafields: [{
+        type: 'text',
+        title: 'Headline',
+        key: 'headline',
+        value: 'This is AMAZING!'
+      }]
+    })
+    .then(data => {
+      config.object2 = data.object
       expect(data.object).to.be.an('object')
       done()
     }).catch(err => {
@@ -211,6 +161,32 @@ suite('Test Bucket Methods.', function() {
     })
     .then(data => {
       expect(data.objects).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('objects.find', function(done) {
+    CosmicBucket.objects.find({
+      type: config.object2.type
+    })
+    .props('title,slug')
+    .then(data => {
+      expect(data.objects).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('objects.findOne', function(done) {
+    CosmicBucket.objects.findOne({
+      id: config.object2.id
+    })
+    .props('title,slug')
+    .then(data => {
+      expect(data.object).to.be.an('object')
       done()
     }).catch(err => {
       done(err)
@@ -289,9 +265,37 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('objects.updateOne', function(done) {
+    CosmicBucket.objects.updateOne({
+      id: config.object2.id
+    }, {
+      $set: {
+        title: 'UPDATE ONE My New Awesome Post'
+      }
+    })
+    .then(data => {
+      expect(data.object).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('deleteObject', function(done) {
     CosmicBucket.deleteObject({
       id: config.object.id
+    })
+    .then(data => {
+      expect(data.message).to.be.a('string')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('objects.deleteOne', function(done) {
+    CosmicBucket.objects.deleteOne({
+      id: config.object2.id
     })
     .then(data => {
       expect(data.message).to.be.a('string')
@@ -312,7 +316,9 @@ suite('Test Bucket Methods.', function() {
       done(err)
     })
   })
+})
 
+suite('Test Media Methods.', function() {
   test('addMedia', function(done) {
     const media_object = {
       originalname: 'logo.jpg',
@@ -323,6 +329,23 @@ suite('Test Bucket Methods.', function() {
     })
     .then(data => {
       config.media = data.media
+      expect(data.media).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('media.insertOne', function(done) {
+    const media_object = {
+      originalname: 'logo.jpg',
+      buffer: fs.createReadStream('./test/logo.jpg')
+    };
+    CosmicBucket.media.insertOne({
+      media: media_object
+    })
+    .then(data => {
+      config.media2 = data.media
       expect(data.media).to.be.an('object')
       done()
     }).catch(err => {
@@ -342,6 +365,30 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('media.find', function(done) {
+    CosmicBucket.media.find()
+    .limit(2)
+    .then(data => {
+      expect(data.media).to.be.an('array')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
+  test('media.findOne', function(done) {
+    CosmicBucket.media.findOne({
+      id: config.media2.id
+    })
+    .limit(2)
+    .then(data => {
+      expect(data.media).to.be.an('object')
+      done()
+    }).catch(err => {
+      done(err)
+    })
+  })
+
   test('deleteMedia', function(done) {
     CosmicBucket.deleteMedia({
       id: config.media.id
@@ -355,6 +402,21 @@ suite('Test Bucket Methods.', function() {
     })
   })
 
+  test('media.deleteOne', function(done) {
+    CosmicBucket.media.deleteOne({
+      id: config.media2.id
+    })
+    .then(data => {
+      expect(data.message).to.be.a('string')
+      done()
+    }).catch(err => {
+      console.log(err)
+      done(err)
+    })
+  })
+})
+
+suite('Delete Bucket.', function() {
   test('deleteBucket', function(done) {
     Cosmic({ token: config.token }).deleteBucket({
       slug: config.bucket.slug

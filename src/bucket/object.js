@@ -1,7 +1,11 @@
+require('regenerator-runtime/runtime')
+
 const { URI } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
-let headers;
+const promiser = require('../helpers/promiser')
+
+let headers
 
 const addParamsToObjectsEndpoint = (endpoint, params) => {
   if (params && params.limit) {
@@ -37,7 +41,93 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
   return endpoint
 }
 
+const objectsChainMethods = (bucket_config) => ({
+  // Get
+  find(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
+    return this
+  },
+  // findOne
+  findOne(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${query.id}?read_key=${bucket_config.read_key}`
+    return this
+  },
+  props(props) {
+    this.endpoint += `&props=${props}`
+    return this
+  },
+  sort(sort) {
+    this.endpoint += `&sort=${sort}`
+    return this
+  },
+  limit(limit) {
+    this.endpoint += `&limit=${limit}`
+    return this
+  },
+  skip(skip) {
+    this.endpoint += `&skip=${skip}`
+    return this
+  },
+  status(status) {
+    this.endpoint += `&status=${status}`
+    return this
+  },
+  after(after) {
+    this.endpoint += `&after=${after}`
+    return this
+  },
+  showMetafields(show_metafields) {
+    this.endpoint += `&show_metafields=${show_metafields}`
+    return this
+  },
+  useCache(use_cache) {
+    this.endpoint += `&use_cache=${use_cache}`
+    return this
+  },
+  async then(resolve, reject) {
+    promiser(this.endpoint).then((res) => resolve(res, null)).catch((err) => {
+      if (typeof reject === 'function') {
+        reject(err)
+      } else {
+        resolve(null, err)
+      }
+    })
+  },
+  // Add
+  async insertOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers))
+  },
+  // Edit
+  async updateOne(params, set) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
+    const updates = set.$set
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers))
+  },
+  // Delete
+  async deleteOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
+  }
+})
+
 const objectMethods = (bucket_config) => ({
+  objects: objectsChainMethods(bucket_config),
   getObjects: (params) => {
     let endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}`
     endpoint = addParamsToObjectsEndpoint(endpoint, params)
@@ -73,7 +163,7 @@ const objectMethods = (bucket_config) => ({
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
@@ -84,7 +174,7 @@ const objectMethods = (bucket_config) => ({
     delete params.type
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
@@ -93,46 +183,46 @@ const objectMethods = (bucket_config) => ({
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
+    delete params.id
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   getObjectMetafields: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields?read_key=${bucket_config.read_key}`
-    return requestHandler(HTTP_METHODS.GET, endpoint);
+    return requestHandler(HTTP_METHODS.GET, endpoint)
   },
   /// DEPRECATED
   editObjectMetafields: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
+    delete params.id
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   editObjectMetafield: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}/metafields/${params.key}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     // Remove id
-    delete params.id;
-    delete params.key;
+    delete params.id
+    delete params.key
     return requestHandler(HTTP_METHODS.PATCH, endpoint, params, headers)
   },
   deleteObject: (params) => {
     const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${params.id}`
     if (bucket_config.write_key) {
       headers = {
-        "Authorization": `Bearer ${bucket_config.write_key}`
+        Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
     return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)

@@ -1,6 +1,6 @@
 {
 	"name": "cosmicjs",
-	"version": "4.1.19",
+	"version": "4.2.4",
 	"description": "The official client module for Cosmic. This module helps you easily add dynamic content to your website or application using the Cosmic headless CMS.",
 	"keywords": [
 		"headlesscms",
@@ -37,6 +37,7 @@
 	"dependencies": {
 		"axios": "^0.21.1",
 		"form-data": "^3.0.0",
+		"regenerator-runtime": "^0.13.9",
 		"typescript": "^4.6.3"
 	},
 	"devDependencies": {

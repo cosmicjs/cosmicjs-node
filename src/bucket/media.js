@@ -1,9 +1,103 @@
+require('regenerator-runtime/runtime')
+
 const FormData = require('form-data')
 const { URI, UPLOAD_API_URL, API_VERSION } = require('../helpers/constants')
 const HTTP_METHODS = require('../helpers/http_methods')
 const { requestHandler } = require('../helpers/request_handler')
+const promiser = require('../helpers/promiser')
+
+const mediaChainMethods = (bucket_config) => ({
+  // Get
+  find(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/media?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
+    return this
+  },
+  // findOne
+  findOne(query) {
+    this.endpoint = `${URI}/buckets/${bucket_config.slug}/media/${query.id}?read_key=${bucket_config.read_key}`
+    return this
+  },
+  props(props) {
+    this.endpoint += `&props=${props}`
+    return this
+  },
+  sort(sort) {
+    this.endpoint += `&sort=${sort}`
+    return this
+  },
+  limit(limit) {
+    this.endpoint += `&limit=${limit}`
+    return this
+  },
+  skip(skip) {
+    this.endpoint += `&skip=${skip}`
+    return this
+  },
+  // insertOne
+  async insertOne(params) {
+    const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/buckets/${bucket_config.slug}/media`
+    const data = new FormData()
+    if (params.media.buffer) {
+      data.append('media', params.media.buffer, params.media.originalname)
+    } else {
+      data.append('media', params.media, params.media.name)
+    }
+    if (bucket_config.write_key) {
+      data.append('write_key', bucket_config.write_key)
+    }
+    if (params.folder) {
+      data.append('folder', params.folder)
+    }
+    if (params.metadata) {
+      data.append('metadata', JSON.stringify(params.metadata))
+    }
+    if (params.trigger_webhook) {
+      data.append('trigger_webhook', params.trigger_webhook.toString())
+    }
+    const getHeaders = ((form) => new Promise((resolve, reject) => {
+      if (params.media.buffer) {
+        form.getLength((err, length) => {
+          if (err) reject(err)
+          const headers = { 'Content-Length': length, ...form.getHeaders() }
+          resolve(headers)
+        })
+      } else {
+        resolve({ 'Content-Type': 'multipart/form-data' })
+      }
+    })
+    )
+    return getHeaders(data)
+      .then((headers) => {
+        headers.Authorization = `Bearer ${bucket_config.write_key}`
+        return requestHandler(HTTP_METHODS.POST, endpoint, data, headers)
+      }).catch((error) => {
+        throw error.response.data
+      })
+  },
+  // Delete
+  async deleteOne(params) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/media/${params.id}${params.trigger_webhook ? '?trigger_webhook=true' : ''}`
+    let headers
+    if (bucket_config.write_key) {
+      headers = {
+        Authorization: `Bearer ${bucket_config.write_key}`
+      }
+    }
+    return requestHandler(HTTP_METHODS.DELETE, endpoint, null, headers)
+  },
+  async then(resolve, reject) {
+    promiser(this.endpoint).then((res) => resolve(res, null)).catch((err) => {
+      if (typeof reject === 'function') {
+        reject(err)
+      } else {
+        resolve(null, err)
+      }
+    })
+  }
+})
 
 const mediaMethods = (bucket_config) => ({
+  media: mediaChainMethods(bucket_config),
   addMedia: (params) => {
     const endpoint = `${UPLOAD_API_URL}/${API_VERSION}/buckets/${bucket_config.slug}/media`
     const data = new FormData()

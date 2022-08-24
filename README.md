@@ -44,8 +44,8 @@ npm install cosmicjs
 Import Cosmic into your app:
 
 ```jsx
-const Cosmic = require("cosmicjs");
-const api = Cosmic();
+const Cosmic = require("cosmicjs")
+const api = Cosmic()
 ```
 
 ## Connect
@@ -56,41 +56,36 @@ In your [Cosmic admin dashboard](https://app.cosmicjs.com/login) go to _Your Buc
 const bucket = api.bucket({
   slug: "YOUR_BUCKET_SLUG",
   read_key: "YOUR_BUCKET_READ_KEY",
-});
+})
 ```
 
 ## Get content
 
-Delivering content to your app is simple by using the `getObjects` method.
+Delivering content to your app is simple using the `objects.find` method.
 
 **Get multiple Objects**
 
-Uses `getObjects` method with a `query` param. Additional options noted below.
+Use the `objects.find` method and set the `type` property to any Object Type slug. Additional options noted below.
 
 ```jsx
-const params = {
-  query: { type: "products" }, // Object Type slug
-  props: "title,slug,metadata", // response properties
-  limit: 10, // number of Objects returned
-};
-const data = await bucket.getObjects(params);
+const data = await bucket.objects.find({
+  type: "products" // Object Type slug
+})
+.props("title,slug,metadata") // response properties
+.limit(10) // number of Objects to be returned
 ```
 
 **Get single Object by slug**
 
-Uses the `getObjects` method and `query` param.
+Use the `objects.find` method and set the `slug` property to any Object slug.
 
 ```jsx
-const params = {
-  query: {
-    type: "pages", // Object Type slug
-    slug: "home", // Object slug
-    locale: "en", // optional, if localization set on Objects
-  },
-  props: "title,slug,metadata",
-};
-const data = await bucket.getObjects(params);
-const home = data[0]; // returns array
+const data = await bucket.objects.find({
+  type: "pages", // Object Type slug
+  slug: "home", // Object slug
+  locale: "en", // optional, if localization set on Objects
+})
+.props("title,slug,metadata") // response properties
 ```
 
 ### More examples
