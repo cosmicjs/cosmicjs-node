@@ -8,82 +8,85 @@ const promiser = require('../helpers/promiser')
 let headers
 
 const addParamsToObjectsEndpoint = (endpoint, params) => {
+  let ep = endpoint
   if (params && params.limit) {
-    endpoint += `&limit=${params.limit}`
+    ep += `&limit=${params.limit}`
   }
   if (params && params.skip) {
-    endpoint += `&skip=${params.skip}`
+    ep += `&skip=${params.skip}`
   }
   if (params && params.status) {
-    endpoint += `&status=${params.status}`
+    ep += `&status=${params.status}`
   }
   if (params && params.after) {
-    endpoint += `&after=${params.after}`
+    ep += `&after=${params.after}`
   }
   if (params && params.sort) {
-    endpoint += `&sort=${params.sort}`
+    ep += `&sort=${params.sort}`
   }
   if (params && params.show_metafields) {
-    endpoint += `&show_metafields=${params.show_metafields}`
+    ep += `&show_metafields=${params.show_metafields}`
   }
   if (params && params.pretty) {
-    endpoint += `&pretty=${params.pretty}`
+    ep += `&pretty=${params.pretty}`
   }
   if (params && params.props) {
-    endpoint += `&props=${params.props}`
+    ep += `&props=${params.props}`
   }
   if (params && params.query) {
-    endpoint += `&query=${encodeURI(JSON.stringify(params.query))}`
+    ep += `&query=${encodeURI(JSON.stringify(params.query))}`
   }
   if (params && typeof params.use_cache !== 'undefined') {
-    endpoint += `&use_cache=${params.use_cache}`
+    ep += `&use_cache=${params.use_cache}`
   }
-  return endpoint
+  return ep
 }
 
-const objectsChainMethods = (bucket_config) => ({
-  // Get
-  find(query) {
-    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
-    return this
-  },
-  // findOne
-  findOne(query) {
-    this.endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${query.id}?read_key=${bucket_config.read_key}`
-    return this
-  },
+class FindChaining {
+  constructor(endpoint) {
+    this.endpoint = endpoint
+  }
+
   props(props) {
     this.endpoint += `&props=${props}`
     return this
-  },
+  }
+
   sort(sort) {
     this.endpoint += `&sort=${sort}`
     return this
-  },
+  }
+
   limit(limit) {
     this.endpoint += `&limit=${limit}`
     return this
-  },
+  }
+
   skip(skip) {
     this.endpoint += `&skip=${skip}`
     return this
-  },
+  }
+
   status(status) {
     this.endpoint += `&status=${status}`
     return this
-  },
+  }
+
   after(after) {
     this.endpoint += `&after=${after}`
     return this
-  },
+  }
+
   showMetafields(show_metafields) {
     this.endpoint += `&show_metafields=${show_metafields}`
     return this
-  },
+  }
+
   useCache(use_cache) {
     this.endpoint += `&use_cache=${use_cache}`
     return this
-  },
+  }
+
   async then(resolve, reject) {
     promiser(this.endpoint).then((res) => resolve(res, null)).catch((err) => {
       if (typeof reject === 'function') {
@@ -92,6 +95,19 @@ const objectsChainMethods = (bucket_config) => ({
         resolve(null, err)
       }
     })
+  }
+}
+
+const objectsChainMethods = (bucket_config) => ({
+  // Get
+  find(query) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects?read_key=${bucket_config.read_key}${query ? `&query=${encodeURI(JSON.stringify(query))}` : ''}`
+    return new FindChaining(endpoint)
+  },
+  // findOne
+  findOne(query) {
+    const endpoint = `${URI}/buckets/${bucket_config.slug}/objects/${query.id}?read_key=${bucket_config.read_key}`
+    return new FindChaining(endpoint)
   },
   // Add
   async insertOne(params) {
@@ -101,7 +117,7 @@ const objectsChainMethods = (bucket_config) => ({
         Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
-    return (await requestHandler(HTTP_METHODS.POST, endpoint, params, headers))
+    return requestHandler(HTTP_METHODS.POST, endpoint, params, headers)
   },
   // Edit
   async updateOne(params, set) {
@@ -112,7 +128,7 @@ const objectsChainMethods = (bucket_config) => ({
         Authorization: `Bearer ${bucket_config.write_key}`
       }
     }
-    return (await requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers))
+    return requestHandler(HTTP_METHODS.PATCH, endpoint, updates, headers)
   },
   // Delete
   async deleteOne(params) {
