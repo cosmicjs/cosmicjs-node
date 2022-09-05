@@ -9,7 +9,7 @@ const bucket_methods = (bucket_config) => ({
   ...objectMethods(bucket_config),
   ...objectTypeMethods((bucket_config)),
   ...mediaMethods((bucket_config)),
-  ...userMethods(bucket_config),
+  ...userMethods(bucket_config)
   // ...webhookMethods(bucket_config), // TODO
   // ...extensionMethods(bucket_config) // TODO
 })

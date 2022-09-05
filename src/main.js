@@ -52,7 +52,7 @@ const mainMethods = {
   deleteBucket: (params) => {
     const endpoint = `${URI}/buckets/${params.slug}`
     return requestHandler(HTTP_METHODS.DELETE, endpoint, params)
-  },
+  }
 }
 
 module.exports = mainMethods
