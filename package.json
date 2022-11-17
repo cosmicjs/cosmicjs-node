@@ -32,7 +32,7 @@
 		"dev": "nodemon test.js && eslint test.js",
 		"prepublish": "npm run build",
 		"lint": "eslint src",
-		"test": "mocha -u tdd test/**/*.js --reporter spec"
+		"test": "mocha -u tdd test/**/*.js --reporter spec --timeout 5000"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
