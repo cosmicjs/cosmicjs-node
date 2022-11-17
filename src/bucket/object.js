@@ -52,6 +52,11 @@ class FindChaining {
     return this
   }
 
+  depth(depth) {
+    this.endpoint += `&depth=${depth}`
+    return this
+  }
+
   sort(sort) {
     this.endpoint += `&sort=${sort}`
     return this
