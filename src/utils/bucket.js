@@ -9,8 +9,8 @@ const userMethods = require('./user');
  * @param _bucketConfig - The bucket configuration object.
  * @returns An object containing all the methods for the given bucket.
  */
-const bucketMethods = (apiVersion) => (_bucketConfig) => {
-  const ver = apiVersion || API_VERSION;
+const bucketMethods = (config) => (_bucketConfig) => {
+  const ver = config.version || API_VERSION;
   const uploadURI =
     process?.env?.UPLOAD_API_URL ||
     (ver === 'v3'
@@ -18,7 +18,7 @@ const bucketMethods = (apiVersion) => (_bucketConfig) => {
       : 'https://upload.cosmicjs.com');
   const bucketConfig = {
     ..._bucketConfig,
-    uri: `${API_URL}/${ver}`,
+    uri: `${config.apiUrl || API_URL}/${ver}`,
     uploadUri: `${uploadURI}/${ver}`,
   };
 

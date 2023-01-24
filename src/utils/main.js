@@ -5,8 +5,8 @@ const { API_URL, API_VERSION } = require('../constants/env.constants');
 /**
  * The list of main methods
  */
-const mainMethods = (apiVersion) => {
-  const URI = `${API_URL}/${apiVersion || API_VERSION}`;
+const mainMethods = (config) => {
+  const URI = `${config.apiUrl || API_URL}/${config.apiVersion || API_VERSION}`;
 
   return {
     /**
