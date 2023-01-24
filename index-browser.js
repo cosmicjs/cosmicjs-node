@@ -1,3 +1,8 @@
-import Cosmic from './src/index'
+/**
+ * The main entry point for the Cosmic extension.
+ * @returns None
+ */
+const Cosmic = require('./src/index');
 
-window.Cosmic = Cosmic
+// eslint-disable-next-line no-undef
+window.Cosmic = Cosmic;

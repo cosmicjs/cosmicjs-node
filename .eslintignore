@@ -1,5 +1,2 @@
-# Ignore everything
-/**
-
-# Except index.js
-!src
+dist
+cosmicjs.browser.*

@@ -1,6 +1,6 @@
 {
 	"name": "cosmicjs",
-	"version": "4.3.0",
+	"version": "4.3.1",
 	"description": "The official client module for Cosmic. This module helps you easily add dynamic content to your website or application using the Cosmic headless CMS.",
 	"keywords": [
 		"headlesscms",
@@ -27,46 +27,45 @@
 	"main": "dist/index.js",
 	"types": "lib/cosmic.d.ts",
 	"scripts": {
-		"build": "npm run clean; webpack -p; babel src --out-dir dist --source-maps inline --copy-files",
+		"build": "npm run clean; babel src --out-dir dist --source-maps inline --copy-files; webpack",
 		"clean": "rm -f ./cosmicjs.browser.min.js; rm -rf dist/*",
 		"dev": "nodemon test.js && eslint test.js",
 		"prepublish": "npm run build",
-		"lint": "eslint src",
-		"test": "mocha -u tdd test/**/*.js --reporter spec --timeout 5000"
+		"lint": "eslint --fix 'index.js' 'index-browser.js' 'src/**/*.js'",
+		"test": "mocha -u tdd test/**/*.js --reporter spec --timeout 5000",
+		"prepare": "husky install"
 	},
 	"dependencies": {
-		"axios": "^0.21.1",
-		"form-data": "^3.0.0",
-		"regenerator-runtime": "^0.13.9",
-		"typescript": "^4.6.3"
+		"axios": "^1.2.3",
+		"form-data": "^4.0.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.10.4",
-		"@babel/core": "^7.10.4",
-		"@babel/preset-env": "^7.10.4",
-		"archiver": "^4.0.1",
-		"babel-loader": "^8.1.0",
-		"blanket": "^1.2.3",
-		"body-parser": "^1.18.2",
-		"chai": "^4.1.2",
-		"dirty-chai": "^2.0.1",
-		"dotenv": "^8.2.0",
-		"eslint": "^7.3.1",
-		"eslint-config-airbnb-base": "^14.2.0",
-		"eslint-loader": "^4.0.2",
-		"eslint-plugin-import": "^2.22.0",
-		"express": "^4.16.3",
-		"mocha": "^8.0.1",
-		"multer": "^1.3.0",
-		"nock": "^13.0.2",
-		"nodemon": "^2.0.4",
-		"nyc": "^15.1.0",
-		"rewire": "^5.0.0",
-		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.12",
-		"webpack-dev-server": "^3.11.0"
+		"@babel/cli": "^7.20.7",
+		"@babel/core": "^7.20.12",
+		"@babel/eslint-parser": "^7.19.1",
+		"@babel/preset-env": "^7.20.2",
+		"babel-loader": "^9.1.2",
+		"dotenv": "^16.0.3",
+		"eslint": "^8.32.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-node": "^4.1.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-webpack-plugin": "^3.2.0",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1",
+		"webpack": "^5.75.0",
+		"webpack-cli": "^5.0.1"
 	},
 	"engines": {
-		"node": ">=6.0"
+		"node": ">=16.18.1"
+	},
+	"lint-staged": {
+		"**/*.js": [
+			"npx prettier --write",
+			"npx eslint --fix"
+		]
 	}
 }

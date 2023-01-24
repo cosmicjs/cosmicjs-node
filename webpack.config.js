@@ -1,27 +1,23 @@
+// eslint-disable-next-line node/no-unpublished-require
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 module.exports = {
-    entry: {
-        browser: './index-browser.js',
-    },
-    output: {
-        path: __dirname,
-        filename: 'cosmicjs.browser.min.js',
-    },
-    module: {
-        rules: [{
-            enforce: 'pre',
-            test: /\index.js?$/,
-            exclude: /node_modules/,
-            loader: "eslint-loader"
-        },
-        {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-                presets: [
-                    '@babel/preset-env',
-                ],
-            }
-        }]
-    },
-}
+  mode: 'production',
+  plugins: [new ESLintPlugin()],
+  entry: {
+    browser: './index-browser.js',
+  },
+  output: {
+    path: __dirname,
+    filename: 'cosmicjs.browser.min.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
+};

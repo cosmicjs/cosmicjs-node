@@ -1,0 +1,43 @@
+"use strict";
+
+const axios = require('axios');
+
+/**
+ * Initialize the API with the given config.
+ * @param config - The config object.
+ * @returns None
+ */
+const init = config => {
+  // Accept Encoding in Node
+  if (typeof window === 'undefined') {
+    axios.defaults.headers.common['Accept-Encoding'] = 'gzip, deflate';
+  }
+  if (config && config.token) {
+    axios.defaults.headers.common.Authorization = config.token;
+  }
+};
+
+/**
+ * A wrapper around axios that handles the request and response.
+ * @param method - The HTTP method to use.
+ * @param url - The URL to send the request to.
+ * @param data - The data to send with the request.
+ * @param headers - The headers to send with the request.
+ * @returns The response from the server.
+ */
+const requestHandler = (method, url, data, headers) => {
+  const config = {
+    method,
+    url,
+    data,
+    headers
+  };
+  return axios(config).then(response => response.data).catch(error => {
+    throw error.response ? error.response.data : error.response;
+  });
+};
+module.exports = {
+  init,
+  requestHandler
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJheGlvcyIsInJlcXVpcmUiLCJpbml0IiwiY29uZmlnIiwid2luZG93IiwiZGVmYXVsdHMiLCJoZWFkZXJzIiwiY29tbW9uIiwidG9rZW4iLCJBdXRob3JpemF0aW9uIiwicmVxdWVzdEhhbmRsZXIiLCJtZXRob2QiLCJ1cmwiLCJkYXRhIiwidGhlbiIsInJlc3BvbnNlIiwiY2F0Y2giLCJlcnJvciIsIm1vZHVsZSIsImV4cG9ydHMiXSwic291cmNlcyI6WyIuLi8uLi9zcmMvaGVscGVycy9yZXF1ZXN0SGFuZGxlci5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBheGlvcyA9IHJlcXVpcmUoJ2F4aW9zJyk7XG5cbi8qKlxuICogSW5pdGlhbGl6ZSB0aGUgQVBJIHdpdGggdGhlIGdpdmVuIGNvbmZpZy5cbiAqIEBwYXJhbSBjb25maWcgLSBUaGUgY29uZmlnIG9iamVjdC5cbiAqIEByZXR1cm5zIE5vbmVcbiAqL1xuY29uc3QgaW5pdCA9IChjb25maWcpID0+IHtcbiAgLy8gQWNjZXB0IEVuY29kaW5nIGluIE5vZGVcbiAgaWYgKHR5cGVvZiB3aW5kb3cgPT09ICd1bmRlZmluZWQnKSB7XG4gICAgYXhpb3MuZGVmYXVsdHMuaGVhZGVycy5jb21tb25bJ0FjY2VwdC1FbmNvZGluZyddID0gJ2d6aXAsIGRlZmxhdGUnO1xuICB9XG4gIGlmIChjb25maWcgJiYgY29uZmlnLnRva2VuKSB7XG4gICAgYXhpb3MuZGVmYXVsdHMuaGVhZGVycy5jb21tb24uQXV0aG9yaXphdGlvbiA9IGNvbmZpZy50b2tlbjtcbiAgfVxufTtcblxuLyoqXG4gKiBBIHdyYXBwZXIgYXJvdW5kIGF4aW9zIHRoYXQgaGFuZGxlcyB0aGUgcmVxdWVzdCBhbmQgcmVzcG9uc2UuXG4gKiBAcGFyYW0gbWV0aG9kIC0gVGhlIEhUVFAgbWV0aG9kIHRvIHVzZS5cbiAqIEBwYXJhbSB1cmwgLSBUaGUgVVJMIHRvIHNlbmQgdGhlIHJlcXVlc3QgdG8uXG4gKiBAcGFyYW0gZGF0YSAtIFRoZSBkYXRhIHRvIHNlbmQgd2l0aCB0aGUgcmVxdWVzdC5cbiAqIEBwYXJhbSBoZWFkZXJzIC0gVGhlIGhlYWRlcnMgdG8gc2VuZCB3aXRoIHRoZSByZXF1ZXN0LlxuICogQHJldHVybnMgVGhlIHJlc3BvbnNlIGZyb20gdGhlIHNlcnZlci5cbiAqL1xuY29uc3QgcmVxdWVzdEhhbmRsZXIgPSAobWV0aG9kLCB1cmwsIGRhdGEsIGhlYWRlcnMpID0+IHtcbiAgY29uc3QgY29uZmlnID0ge1xuICAgIG1ldGhvZCxcbiAgICB1cmwsXG4gICAgZGF0YSxcbiAgICBoZWFkZXJzLFxuICB9O1xuICByZXR1cm4gYXhpb3MoY29uZmlnKVxuICAgIC50aGVuKChyZXNwb25zZSkgPT4gcmVzcG9uc2UuZGF0YSlcbiAgICAuY2F0Y2goKGVycm9yKSA9PiB7XG4gICAgICB0aHJvdyBlcnJvci5yZXNwb25zZSA/IGVycm9yLnJlc3BvbnNlLmRhdGEgOiBlcnJvci5yZXNwb25zZTtcbiAgICB9KTtcbn07XG5cbm1vZHVsZS5leHBvcnRzID0ge1xuICBpbml0LFxuICByZXF1ZXN0SGFuZGxlcixcbn07XG4iXSwibWFwcGluZ3MiOiI7O0FBQUEsTUFBTUEsS0FBSyxHQUFHQyxPQUFPLENBQUMsT0FBTyxDQUFDOztBQUU5QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsTUFBTUMsSUFBSSxHQUFJQyxNQUFNLElBQUs7RUFDdkI7RUFDQSxJQUFJLE9BQU9DLE1BQU0sS0FBSyxXQUFXLEVBQUU7SUFDakNKLEtBQUssQ0FBQ0ssUUFBUSxDQUFDQyxPQUFPLENBQUNDLE1BQU0sQ0FBQyxpQkFBaUIsQ0FBQyxHQUFHLGVBQWU7RUFDcEU7RUFDQSxJQUFJSixNQUFNLElBQUlBLE1BQU0sQ0FBQ0ssS0FBSyxFQUFFO0lBQzFCUixLQUFLLENBQUNLLFFBQVEsQ0FBQ0MsT0FBTyxDQUFDQyxNQUFNLENBQUNFLGFBQWEsR0FBR04sTUFBTSxDQUFDSyxLQUFLO0VBQzVEO0FBQ0YsQ0FBQzs7QUFFRDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsTUFBTUUsY0FBYyxHQUFHLENBQUNDLE1BQU0sRUFBRUMsR0FBRyxFQUFFQyxJQUFJLEVBQUVQLE9BQU8sS0FBSztFQUNyRCxNQUFNSCxNQUFNLEdBQUc7SUFDYlEsTUFBTTtJQUNOQyxHQUFHO0lBQ0hDLElBQUk7SUFDSlA7RUFDRixDQUFDO0VBQ0QsT0FBT04sS0FBSyxDQUFDRyxNQUFNLENBQUMsQ0FDakJXLElBQUksQ0FBRUMsUUFBUSxJQUFLQSxRQUFRLENBQUNGLElBQUksQ0FBQyxDQUNqQ0csS0FBSyxDQUFFQyxLQUFLLElBQUs7SUFDaEIsTUFBTUEsS0FBSyxDQUFDRixRQUFRLEdBQUdFLEtBQUssQ0FBQ0YsUUFBUSxDQUFDRixJQUFJLEdBQUdJLEtBQUssQ0FBQ0YsUUFBUTtFQUM3RCxDQUFDLENBQUM7QUFDTixDQUFDO0FBRURHLE1BQU0sQ0FBQ0MsT0FBTyxHQUFHO0VBQ2ZqQixJQUFJO0VBQ0pRO0FBQ0YsQ0FBQyJ9

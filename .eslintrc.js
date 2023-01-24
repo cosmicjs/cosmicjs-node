@@ -1,20 +1,22 @@
 module.exports = {
-  "extends": "airbnb-base",
-  "rules": {
-    // enable additional rules
-    "no-tabs": "off",
-    "semi": ["error", "never"],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-
-    // override default options for rules from base configurations
-    "comma-dangle": ["error", "never"],
-    "no-cond-assign": ["error", "always"],
-    "no-param-reassign": [2, { "props": false }],
-
-    // disable rules from base configurations
-    "no-console": "off",
-    "camelcase": "off",
-    "indent": ["error", 2]
-  }
+  extends: ['airbnb-base', 'prettier', 'plugin:node/recommended'],
+  plugins: ['prettier'],
+  parser: '@babel/eslint-parser',
+  rules: {
+    'prettier/prettier': 'error',
+    'no-unused-vars': 'warn',
+    'no-console': 'off',
+    'func-names': 'off',
+    'no-process-exit': 'off',
+    'object-shorthand': 'off',
+    'class-methods-use-this': 'off',
+    'no-async-promise-executor': 'off',
+    'no-param-reassign': 'off',
+    'no-underscore-dangle': 'off',
+    'no-restricted-syntax': 'off',
+    'no-await-in-loop': 'off',
+    'node/no-missing-import': 'off',
+    'node/no-extraneous-require': 'off',
+    'import/no-extraneous-dependencies': 'off',
+  },
 };

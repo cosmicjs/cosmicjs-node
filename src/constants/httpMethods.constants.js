@@ -4,7 +4,7 @@ const HTTP_METHODS = {
   FETCH: 'fetch',
   PUT: 'put',
   PATCH: 'patch',
-  DELETE: 'delete'
-}
+  DELETE: 'delete',
+};
 
-module.exports = HTTP_METHODS
+module.exports = HTTP_METHODS;
