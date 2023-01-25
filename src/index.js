@@ -9,7 +9,7 @@ const bucketMethods = require('./utils/bucket');
  */
 const Cosmic = (_config) => {
   const config = {
-    apiUrl: 'https://api.cosmic-staging.com',
+    apiUrl: 'https://api.cosmicjs.com',
     version: 'v3',
     ..._config,
   };
