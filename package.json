@@ -59,9 +59,6 @@
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1"
 	},
-	"engines": {
-		"node": ">=16.18.1"
-	},
 	"lint-staged": {
 		"**/*.js": [
 			"npx prettier --write",
