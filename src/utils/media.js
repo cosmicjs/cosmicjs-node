@@ -1,3 +1,5 @@
+require('regenerator-runtime/runtime');
+
 const FormData = require('form-data');
 const HTTP_METHODS = require('../constants/httpMethods.constants');
 const { requestHandler } = require('../helpers/requestHandler');

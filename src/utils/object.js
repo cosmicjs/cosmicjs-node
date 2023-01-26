@@ -1,3 +1,5 @@
+require('regenerator-runtime/runtime');
+
 const HTTP_METHODS = require('../constants/httpMethods.constants');
 const { requestHandler } = require('../helpers/requestHandler');
 const {
