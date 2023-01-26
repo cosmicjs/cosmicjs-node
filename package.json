@@ -36,7 +36,7 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"axios": "^1.2.3",
+		"axios": "^1.2.5",
 		"form-data": "^4.0.0"
 	},
 	"devDependencies": {
