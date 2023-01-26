@@ -1,5 +1,6 @@
 // eslint-disable-next-line node/no-unpublished-require
 const ESLintPlugin = require('eslint-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -18,6 +19,13 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
     ],
   },
 };
