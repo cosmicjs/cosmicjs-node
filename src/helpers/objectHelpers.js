@@ -14,35 +14,48 @@ const addParamsToObjectsEndpoint = (endpoint, params) => {
    * @param params - The parameters object.
    * @returns None
    */
-  if (params && params.limit) {
-    ep += `&limit=${params.limit}`;
-  }
-  if (params && params.skip) {
-    ep += `&skip=${params.skip}`;
-  }
-  if (params && params.status) {
-    ep += `&status=${params.status}`;
-  }
-  if (params && params.after) {
-    ep += `&after=${params.after}`;
-  }
-  if (params && params.sort) {
-    ep += `&sort=${params.sort}`;
-  }
-  if (params && params.show_metafields) {
-    ep += `&show_metafields=${params.show_metafields}`;
-  }
-  if (params && params.pretty) {
-    ep += `&pretty=${params.pretty}`;
-  }
-  if (params && params.props) {
-    ep += `&props=${params.props}`;
-  }
-  if (params && params.query) {
-    ep += `&query=${encodeURI(JSON.stringify(params.query))}`;
-  }
-  if (params && typeof params.use_cache !== 'undefined') {
-    ep += `&use_cache=${params.use_cache}`;
+  if (params) {
+    if (params.limit) {
+      ep += `&limit=${params.limit}`;
+    }
+    if (params.skip) {
+      ep += `&skip=${params.skip}`;
+    }
+    if (params.status) {
+      ep += `&status=${params.status}`;
+    }
+    if (params.after) {
+      ep += `&after=${params.after}`;
+    }
+    if (params.sort) {
+      ep += `&sort=${params.sort}`;
+    }
+    if (params.show_metafields) {
+      ep += `&show_metafields=${params.show_metafields}`;
+    }
+    if (params.pretty) {
+      ep += `&pretty=${params.pretty}`;
+    }
+    if (params.props) {
+      let propStr = params.props;
+      if (Array.isArray(propStr)) {
+        propStr = propStr
+          .filter((prop) => typeof prop === 'string')
+          .map((prop) => prop.trim())
+          .filter((prop) => !!prop)
+          .toString();
+      }
+      ep += `&props=${propStr}`;
+    }
+    if (params.query) {
+      ep += `&query=${encodeURI(JSON.stringify(params.query))}`;
+    }
+    if (typeof params.use_cache !== 'undefined') {
+      ep += `&use_cache=${params.use_cache}`;
+    }
+    if (params.depth && typeof params.depth === 'number') {
+      ep += `&depth=${params.depth}`;
+    }
   }
   return ep;
 };
@@ -63,7 +76,15 @@ class FindChaining {
 
   /** Properties for the FindChaining class */
   props(props) {
-    this.endpoint += `&props=${props}`;
+    let propStr = props;
+    if (Array.isArray(propStr)) {
+      propStr = propStr
+        .filter((prop) => typeof prop === 'string')
+        .map((prop) => prop.trim())
+        .filter((prop) => !!prop)
+        .toString();
+    }
+    this.endpoint += `&props=${propStr}`;
     return this;
   }
 

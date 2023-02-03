@@ -1,12 +1,11 @@
 const HTTP_METHODS = require('../constants/httpMethods.constants');
 const { requestHandler } = require('../helpers/requestHandler');
-const { API_URL, API_VERSION } = require('../constants/env.constants');
 
 /**
  * The list of main methods
  */
-const mainMethods = (config) => {
-  const URI = `${config.apiUrl || API_URL}/${config.apiVersion || API_VERSION}`;
+const mainMethods = (apiConfig) => {
+  const URI = apiConfig.apiUrl;
 
   return {
     /**
