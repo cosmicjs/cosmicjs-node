@@ -9,7 +9,7 @@
 </p>
 
 ## IMPORTANT
-Use this package to connect to projects on the old Cosmic dashboard and API v2 only. To connect to projects on the [new Cosmic dashboard](https://beta.cosmicjs.com/signup) and API v3 use the [Cosmic JavaScript SDK](https://www.npmjs.com/package/@cosmicjs/sdk).
+This package connects to projects on the old Cosmic dashboard and API v2 only. To connect to projects on the [new Cosmic dashboard](https://beta.cosmicjs.com/signup) and API v3 use the [Cosmic JavaScript SDK](https://www.npmjs.com/package/@cosmicjs/sdk).
 
 
 ## Content management made simple, fast, and secure.
