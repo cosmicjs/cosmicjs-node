@@ -4,7 +4,7 @@ This package connects to projects on the old Cosmic dashboard and API v2 only. T
 
 ## Content management made simple, fast, and secure.
 
-[Cosmic](https://www.cosmicjs.com/) is a [headless CMS](https://www.cosmicjs.com/headless-cms) (content management service) that provides a web dashboard to create content and an API toolkit to deliver content to any website or application. Build nearly any type of content model using our admin dashboard then deliver your content powered by our [reliable infrastructure](https://cosmicjs.statuspage.io/) and global CDN.
+[Cosmic](https://www.cosmicjs.com/) is a [headless CMS](https://www.cosmicjs.com/headless-cms) (content management system) that provides a web dashboard to create content and an API toolkit to deliver content to any website or application. Build nearly any type of content model using our admin dashboard then deliver your content powered by our [reliable infrastructure](https://cosmicjs.statuspage.io/) and global CDN.
 
 ### Save time and launch faster
 
