@@ -1,10 +1,16 @@
 <p align="center">
-  <a href="https://www.cosmicjs.com"><img src="https://imgix.cosmicjs.com/b811fa50-ffa7-11ec-965a-abec43f7da6e-header-big.png?w=1000&auto=format" alt="Cosmic" width="100%"></a>
+  <a href="https://www.cosmicjs.com">
+    <img src="https://imgix.cosmicjs.com/ca74e2f0-c8e4-11ed-b01d-23d7b265c299-cosmic-dashboard-dark.png?w=2000&auto=format" alt="Cosmic dashboard darkmode" />
+  </a>
 </p>
 <p align="center">
 	<a href="https://www.npmjs.com/package/cosmicjs"><img src="https://badge.fury.io/js/cosmicjs.svg" alt="npm version"></a>
 	<a href="https://circleci.com/gh/cosmicjs/cosmicjs-node"><img src="https://circleci.com/gh/cosmicjs/cosmicjs-node.svg?style=shield" alt="CircleCI"></a>
 </p>
+
+## IMPORTANT
+Use this package to connect to projects on the old Cosmic dashboard and API v2 only. To connect to projects on the [new Cosmic dashboard](https://beta.cosmicjs.com/signup) and API v3 use the [Cosmic JavaScript SDK](https://www.npmjs.com/package/@cosmicjs/sdk).
+
 
 ## Content management made simple, fast, and secure.
 
